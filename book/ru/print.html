@@ -1,0 +1,1804 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js bondi">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title></title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="chapter-item expanded "><a href="start.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="chapter-item expanded "><a href="project.html"><strong aria-hidden="true">3.</strong> Проекты</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="create_project.html"><strong aria-hidden="true">3.1.</strong> Создание проекта</a></li><li class="chapter-item expanded "><a href="bug_trackers.html"><strong aria-hidden="true">3.2.</strong> Интеграция проекта с трекерами задач</a></li><li class="chapter-item expanded "><a href="delete_project.html"><strong aria-hidden="true">3.3.</strong> Удаление проекта</a></li></ol></li><li class="chapter-item expanded "><a href="fuzzer.html"><strong aria-hidden="true">4.</strong> Фаззеры</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="create_fuzzer.html"><strong aria-hidden="true">4.1.</strong> Создание фаззера</a></li><li class="chapter-item expanded "><a href="create_config.html"><strong aria-hidden="true">4.2.</strong> Создание конфигурационного файла</a></li><li class="chapter-item expanded "><a href="upload_fuzzer.html"><strong aria-hidden="true">4.3.</strong> Загрузка фаззера в BondiFuzz</a></li><li class="chapter-item expanded "><a href="process.html"><strong aria-hidden="true">4.4.</strong> Работа с фаззинг-тестами в BondiFuzz</a></li><li class="chapter-item expanded "><a href="fuzzer_example.html"><strong aria-hidden="true">4.5.</strong> Пример фаззера</a></li><li class="chapter-item expanded "><a href="delete_fuzzer.html"><strong aria-hidden="true">4.6.</strong> Удаление фаззера</a></li></ol></li><li class="chapter-item expanded "><a href="CLI_user_manual.html"><strong aria-hidden="true">5.</strong> CLI</a></li><li class="chapter-item expanded "><a href="appendix.html"><strong aria-hidden="true">6.</strong> Приложения</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cpp_fuzzing.html"><strong aria-hidden="true">6.1.</strong> Пример фаззинг-теста для C++</a></li><li class="chapter-item expanded "><a href="rust_fuzzing.html"><strong aria-hidden="true">6.2.</strong> Пример фаззинг-теста для Rust</a></li><li class="chapter-item expanded "><a href="go_fuzzing.html"><strong aria-hidden="true">6.3.</strong> Пример фаззинг-теста для Go</a></li><li class="chapter-item expanded "><a href="python_fuzzing.html"><strong aria-hidden="true">6.4.</strong> Пример фаззинг-теста для Python</a></li><li class="chapter-item expanded "><a href="java_fuzzing.html"><strong aria-hidden="true">6.5.</strong> Пример фаззинг-теста для Java (JVM-based)</a></li><li class="chapter-item expanded "><a href="JQF.html"><strong aria-hidden="true">6.6.</strong> Пример фаззинг-теста для Java с JQF</a></li><li class="chapter-item expanded "><a href="js_fuzzing.html"><strong aria-hidden="true">6.7.</strong> Пример фаззинг-теста для JS</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="О-bondifuzz"><a class="header" href="#О-bondifuzz">О BondiFuzz</a></h1>
+<blockquote>
+<p>BondiFuzz - DAST platform</p>
+</blockquote>
+<p>BondiFuzz — это платформа динамического стресс-тестирования продуктов методом фаззинга, путем быстрой интеграции в существующий CI.</p>
+<h2 id="Какие-проблемы-решает-bondifuzz"><a class="header" href="#Какие-проблемы-решает-bondifuzz">Какие проблемы решает BondiFuzz?</a></h2>
+<ul>
+<li>Автоматизированный поиск и раннее обнаружение ошибок ПО, в т.ч. уязвимостей​.</li>
+<li>Улучшение надежности кода продукта на выходе.</li>
+<li>Помощь в автоматизации покрытия кода тестами для облегчения и удешевления процесса разработки​.</li>
+<li>Быстрый старт процесса фаззинга:
+<ul>
+<li>автоматическая оценка технической критичности уязвимости;</li>
+<li>автоматический менеджмент ресурсов для различных фаззинг решений.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Почему-bondifuzz"><a class="header" href="#Почему-bondifuzz">Почему BondiFuzz?</a></h2>
+<p>Динамическое тестирование методом фаззинга все популярнее, но для многих это видится трудозатратным, так как некоторые инструменты до сих пор выглядят больше как хакерские утилиты​. Наша команда активно проводила и проводит аудит безопасности различных продуктов и реализовала свой опыт в предоставляемой платформе.</p>
+<h2 id="Интеграция-в-процесс-разработки"><a class="header" href="#Интеграция-в-процесс-разработки">Интеграция в процесс разработки</a></h2>
+<p>Интеграция данного решения в процесс разработки позволит существенно увеличить надежность продукта, так как постоянное тестирование методом фаззинга с достаточным уровнем покрытия кода разработчиками имеет накопительный эффект.</p>
+<h2 id="Решение-для-разных-отделов"><a class="header" href="#Решение-для-разных-отделов">Решение для разных отделов</a></h2>
+<p>BondiFuzz может использоваться разными командами, не только ИБ, но и разработки или QA:</p>
+<ul>
+<li>
+<p>Разработка — более быстрое и самостоятельное обнаружение ошибок и готовые данные для юнит-тестов. Разработчику приходит уведомление, он исправляет ошибку и запускает тест для исправленного кода;</p>
+</li>
+<li>
+<p>QA — ещё один шаг к повышению производительности, заключается в автоматическом создании юнит-тестов из полученных результатов фаззинга и дополнительному виду тестированию;</p>
+</li>
+<li>
+<p>ИБ — автоматический анализ критичности обнаруживаемых ошибок и автоматический менеджмент ресурсов для различных фаззинг решений.</p>
+</li>
+</ul>
+<p>*Сообщения о возникающих проблемах в работе с BondiFuzz, а также предложения и идеи по улучшению, присылайте по адресу <code>support@bondifuzz.com</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Начало-работы"><a class="header" href="#Начало-работы">Начало работы</a></h1>
+<p>Перед началом работы необходимо пройти аутентификацию. Для этого необходимо ввести логин пользователя и его пароль, полученные от администратора BondiFuzz, затем пароль можно изменить в настройках аккаунта. После успешной аутентификации пользователь будет перенаправлен на страницу с фаззерами.</p>
+<h2 id="Рабочие-вкладки"><a class="header" href="#Рабочие-вкладки">Рабочие вкладки</a></h2>
+<p>В веб-интерфейсе BondiFuzz есть следующие вкладки:</p>
+<p><strong>Projects</strong> — созданные пользователем проекты и проект <code>default</code>, который создается по-умолчанию при создании пользователя.</p>
+<p><strong>Fuzzers</strong> — созданные пользователем фаззеры. Пользователь загружает фаззинг-тесты, может запускать и останавливать их, добавлять новые версии, удалять.</p>
+<p><strong>FAQ</strong> — часто задаваемые вопросы.</p>
+<p><strong>Documentation</strong> — документация по работе с BondiFuzz.</p>
+<p><strong>Trash</strong> — корзина, куда перемещаются удаленные фаззинг-тесты.</p>
+<p>Во вкладке <strong>Fuzzers</strong> есть следующие вкладки:</p>
+<p><strong>Versions</strong> — после каждого внесения изменения в фаззинг-тест пользователь может создавать новую версию, затем можно сравнить работу разных версий одного фаззинг-теста, а также эта возможность поможет вернуться к предыдущей версии, если изменения оказались неудачными.</p>
+<p><strong>Crashes</strong> — крэши, обнаруженные фаззинг-тестами, с возможностью сортировки по версии.</p>
+<p><strong>Statistics</strong> — статистика, собираемая на основе работы фаззинг-тестов. Показывает метрики фаззинг-тестов, по которым оценивается эффективность их работы. Есть возможность выбора версии фаззинг-теста и временного промежутка, за который необходима статистика.</p>
+<p>Для фаззинга понадобятся следующие файлы:</p>
+<p><strong>Binaries</strong> — бинарный файл фаззинг-теста. </p>
+<p><strong>Seeds</strong> — директория с файлами, содержимое которых должно быть валидным с точки зрения целевой программы или функции. Сиды будут подвергаться многочисленным мутациям в процессе фаззинга и приводить к росту покрытия кода. В процессе фаззинга сиды трансформируются в корпус. Корпус (corpus) — это набор тест-кейсов, которые привели к росту покрытия кода во время фаззинга целевой программы или функции. В корпусе сначала содержатся сиды, потом — их мутации, затем — мутации мутаций и т.д.</p>
+<p><strong>Options and environment</strong> — дополнительные опции.</p>
+<p><strong>Image</strong> — докер-образ агента. Агент — это программа, которая запускается первой при запуске контейнера и запускает сам фаззинг-тест. Агент собирает результаты фаззинга и статистику. На данный момент этот файл загружается администраторами BondiFuzz.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Проекты"><a class="header" href="#Проекты">Проекты</a></h1>
+<p>BondiFuzz предполагает создание проектов, внутри которых будут создаваться фаззеры, а в фаззеры будут загружаться созданные пользователем фаззинг-тесты. Это упрощает организацию работы. Изначально пользователю доступен проект по-умолчанию <code>default</code>, далее пользователь сможет создать свои проекты.</p>
+<p>При создании и при редактировании проекта можно создать интеграцию проекта с трекерами задач. В таком случае обнаруженные загруженным в BondiFuzz фаззинг-тестом ошибки будут передаваться в трекер задач. Это упрощает взаимодействие команды безопасности и команды разработки.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Создание-проекта"><a class="header" href="#Создание-проекта">Создание проекта</a></h1>
+<ol>
+<li>
+<p>Во вкладке <code>Projects</code> нажмите <code>Add a new project</code>.</p>
+</li>
+<li>
+<p>Введите название проекта.<br />
+<img src="assets/create_project_2.png" alt="Создание проекта" /></p>
+</li>
+</ol>
+<p>Название проекта должно быть уникальным.</p>
+<ol start="3">
+<li>
+<p>Описание проекта опционально.</p>
+</li>
+<li>
+<p>Укажите количество нод, количество CPU и размер памяти.</p>
+</li>
+</ol>
+<p>Значение CPU в проекте измеряется в количестве ядер, и может принимать следующие значения: 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96 (зависит от ограничений облачной платформы).</p>
+<p>Значение RAM в проекте измеряется в GiB и равно значению CPU, умноженному на коэффициенты от 1 до 16, но не может быть более 640 GiB.</p>
+<ol start="5">
+<li>В случае, если необходима интеграция с трекером задач, выберите подходящий в выпадающем списке. Интеграцию можно создать для уже имеющегося проекта нажав кнопку <code>Edit</code> и перейдя во вкладку <code>Integrations</code>.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Интеграция-с-баг-трекерами"><a class="header" href="#Интеграция-с-баг-трекерами">Интеграция с баг-трекерами</a></h1>
+<p>BondiFuzz предполагает возможность интеграции с трекерами Jira и YouTrack.</p>
+<p>При обнаружении фаззинг-тестом крэша будет создаваться issue в трекере.</p>
+<h2 id="Интеграция-с-трекером-задач-jira"><a class="header" href="#Интеграция-с-трекером-задач-jira">Интеграция с трекером задач Jira</a></h2>
+<p>Для интеграции с Jira при создании проекта необходимо в выпадающем списке выбрать необходимый тип интеграции.<br />
+<img src="assets/integration_jira.PNG" alt="Создание интеграции в Jira" /></p>
+<p>Перед созданием интеграции необходимо создать проект в трекере задач.</p>
+<p>Приоритет и тип issue задаются пользователем в соответствии с приоритетами и типами, которые есть в трекере.</p>
+<p>После создания проекта в BondiFuzz необходимо загрузить фаззинг-тест и запустить его. В случае, если фаззинг-тест обнаружит крэш, в Jira будет создано issue с подробным описанием. Если фаззинг-тест найдет дубликаты крэша, то issue изменится автоматически.</p>
+<p>Есть возможность редактирования ранее созданной интеграции. При смене Jira-проекта крэши, которые уже были обнаружены фаззинг-тестом, останутся в старом проекте и там же будет информация о дубликатах крэшей. В новом проекте будут только новые крэши.</p>
+<h2 id="Интеграция-с-трекером-задач-youtrack"><a class="header" href="#Интеграция-с-трекером-задач-youtrack">Интеграция с трекером задач YouTrack</a></h2>
+<p>Для интеграции с YouTrack при создании проекта необходимо в выпадающем списке выбрать необходимый тип интеграции.<br />
+<img src="assets/integration_YT.PNG" alt="Создание интеграции в YouTrack" /></p>
+<p>Перед созданием интеграции необходимо создать проект в трекере задач.</p>
+<p>Идентификация пользователя происходит по токену, создаваемому в YouTrack-е.</p>
+<p>Есть возможность редактирования ранее созданной интеграции. Также как и с Jira, при смене YouTrack-проекта крэши, которые уже были обнаружены фаззинг-тестом, останутся в старом проекте и там же будет информация о дубликатах крэшей. В новом проекте будут только новые крэши.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Удаление-проекта"><a class="header" href="#Удаление-проекта">Удаление проекта</a></h1>
+<p>Проект можно удалить нажав кнопку <code>Delete</code>.</p>
+<p>На всплывающем окне необходимо выбрать одно из действий:<br />
+<img src="assets/delete_project.png" alt="Выбор действия при удалении проекта" /></p>
+<ul>
+<li><code>Move to Trash</code> — перенести проект в корзину, где он будет находиться 30 дней c возможностью восстановления, после чего будет удален полностью.</li>
+</ul>
+<p>Можно нажать <code>Cancel</code> на нотификации <code>Project is being deleted</code>, чтобы отменить удаление.</p>
+<p>Удаленные проекты можно найти во вкладке <code>Deleted</code>.</p>
+<p>Для восстановления удаленного проекта необходимо нажать кнопку <code>Restore</code>.</p>
+<p><code>Delete Permanently</code> — удалить полностью, без возможности восстановления.</p>
+<p>У пользователя есть возможность полностью очистить корзину с проектами, нажав кнопку <code>Empty user bin</code>.</p>
+<p>Это действие также можно отменить, нажав <code>Cancel</code> на нотификации. Удаленное не подлежит восстановлению.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Фаззеры"><a class="header" href="#Фаззеры">Фаззеры</a></h1>
+<p>BondiFuzz предполагает загрузку заранее созданных фаззинг-тестов в формате бинарных файлов.</p>
+<p>Для удобства отслеживания изменений есть возможность загружать разные версии одного и того же фаззинг-теста.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Создание-фаззера"><a class="header" href="#Создание-фаззера">Создание фаззера</a></h1>
+<p>Для создания фаззера во вкладке Fuzzers нажмите кнопку <code>+Fuzzer</code>.</p>
+<ol>
+<li>Введите название фаззера.<br />
+<img src="assets/create_fuzzer.PNG" alt="Создание фаззера" /></li>
+</ol>
+<p>Название должно быть уникальным.</p>
+<ol start="2">
+<li>
+<p>Описание фаззера опционально.</p>
+</li>
+<li>
+<p>Выберите язык программирования, на данный момент доступны <code>Go</code>, <code>C++</code>, <code>Rust</code> и <code>Python</code>.<br />
+<img src="assets/select_fuzzer_language.PNG" alt="Выбор языка программирования" /></p>
+</li>
+<li>
+<p>Выберите тип фаззера.<br />
+<img src="assets/select_fuzzer_engine.PNG" alt="Выбор типа фаззера" /></p>
+</li>
+<li>
+<p>Выберите образ (на данный момент образы может загружать только администратор, есть возможность создать запрос на необходимый образ).<br />
+<img src="assets/images.PNG" alt="Выбор образа" /></p>
+</li>
+<li>
+<p>Установите значения CPU, RAM и tmpfs (максимальные значения приведены для проекта по-умолчанию, в собственных проектах они могут отличаться).</p>
+</li>
+</ol>
+<p>Значение CPU измеряется в mcpu и может быть от 500 до 2000.</p>
+<p>Значение RAM измеряется в MiB и может быть от 500 до 5000.</p>
+<p>Значение tmpfs измеряется в MiB и может быть от 100 до 2000.</p>
+<ol start="7">
+<li>Загрузите следующие файлы:</li>
+</ol>
+<ul>
+<li>бинарный файл фаззинг-теста;</li>
+<li>сиды — набор входных данных для фаззинг-теста (не является обязательным);</li>
+<li>конфигурационный файл — файл с дополнительными опциями (не является обязательным).<br />
+<img src="assets/upload.PNG" alt="Загрузка файлов фаззинг-теста" /></li>
+</ul>
+<ol start="8">
+<li>После загрузки фаззинг-тест можно запускать, останавливать и перезапускать.<br />
+<img src="assets/start.PNG" alt="Запуск фаззинг-теста" /><br />
+<img src="assets/stop.PNG" alt="Остановка фаззинг-теста" /></li>
+</ol>
+<p>Перезапуск фаззинг-теста означает обнуление его состояния, но при этом собранные им креши, статистика и корпуса сохраняются.</p>
+<ol start="9">
+<li>Статусы фаззинг-теста могу быть следующие:</li>
+</ol>
+<ul>
+<li><code>Unverifying</code> — фаззинг-тест еще не загрузился полностью.</li>
+<li><code>Verifying</code> — проверка загруженных файлов.</li>
+<li><code>Running</code> — фаззинг-тест запущен и работает в штатном режиме.</li>
+<li><code>Interrupted</code> — фаззинг-тест остановлен из-за ошибок в работе.</li>
+<li><code>Stopped</code> — фаззинг-тест остановлен.</li>
+</ul>
+<p>Возможные состояния фаззинг-теста:</p>
+<ul>
+<li><code>Ok</code> — фаззинг-тест работает без ошибок.</li>
+<li><code>Warning</code> — предупреждение о том, что есть неполадки в работе фаззинг-теста.</li>
+<li><code>Error</code> — ошибка в работе фаззинг-теста, из-за которой он не может дальше работать.</li>
+</ul>
+<p>Возможные сочетания статусов и состояний:</p>
+<ul>
+<li><code>Unverifying Ok</code> — файлы фаззинг-теста загружаются в штатном режиме.</li>
+<li><code>Verifying Ok</code> — проверка фаззинг-теста идет в штатном режиме.</li>
+<li><code>Unverifying Error</code> — пользователь неправильно написал конфигурационный файл, BondiFuzz не может распознать его содержимое.</li>
+<li><code>Verifying Ok</code> — статус и состояние фаззинг-теста после исправления конфигурационного файла и перезапуска.</li>
+<li><code>Running Ok</code> — фаззинг-тест запущен и работает.</li>
+<li><code>Running Warning</code> — фаззинг-тест долго работал, предполагается, что уже обнаружены все возможные ошибки.</li>
+<li><code>Stopped Warning</code> — фаззинг-тест слишком долго работал, дальнейшая трата ресурсов на его работу не имеет смысла.</li>
+</ul>
+<p>При наведении курсора на <code>Warning</code> и <code>Error</code> выводится описание возникшей проблемы.</p>
+<ol start="10">
+<li>Добавление новой версии фаззинг-теста.</li>
+</ol>
+<p>Для обновления фаззинг-теста не обязательно изменять тот, который уже был запущен в <code>BondiFuzz</code>. Можно добавить новую версию фаззинг-теста. Также это позволит сравнить результаты работы всех загруженных версий одного фаззинг-теста. Для этого во вкладке <code>Fuzzers</code> в правом верхнем углу нажмите кнопку <code>Add version</code>.</p>
+<p>Название версии формируется автоматически — по времени и дате ее создания. Это название можно изменить, описание опционально.<br />
+<img src="assets/create_version.PNG" alt="Создание версии фаззинг-теста" /></p>
+<p>В одном фаззере может быть запущена только одна версия фаззинг-теста. Версии разных фаззинг-тестов могут быть запущены одновременно.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Создание-конфигурационных-файлов-для-фаззинг-тестов"><a class="header" href="#Создание-конфигурационных-файлов-для-фаззинг-тестов">Создание конфигурационных файлов для фаззинг-тестов</a></h1>
+<p>Конфигурационный файл — это загружаемый в BondiFuzz вспомогательный файл, в котором указываются дополнительные опции, необходимые для правильной работы фаззинг-теста.</p>
+<h2 id="Содержимое-конфигурационного-файла-фаззинг-теста-на-основе-afl"><a class="header" href="#Содержимое-конфигурационного-файла-фаззинг-теста-на-основе-afl">Содержимое конфигурационного файла фаззинг-теста на основе AFL</a></h2>
+<p>Пример конфигурационного файла фаззинг-теста на основе AFL:</p>
+<pre><code class="language-json">{
+    &quot;target&quot;: {
+        &quot;path&quot;: &quot;url-fuzz-target&quot;,
+    },
+    &quot;env&quot;: {
+        &quot;MY_ENV&quot;: &quot;val&quot;
+    },
+    &quot;options&quot;: {
+        &quot;afl&quot;: {
+            &quot;min_length&quot;: 50,
+        }
+    }
+}
+</code></pre>
+<p><code>target</code> — путь к бинарному файлу фаззинг-теста.</p>
+<p>Возможные опции:</p>
+<p><code>mode</code> — режимы работы AFL. В BondiFuzz на данный момент поддерживается только режим Normal.</p>
+<p><code>schedule</code> — алгоритмы оценки входных данных, чтобы понять что лучше дальше мутировать чтобы быстрее получить входные данные, увеличивающие покрытие. <a href="https://aflplus.plus/docs/power_schedules/">Более подробно</a>.</p>
+<p><code>dict</code> — словарь, значения из которого будут использоваться иногда вместо случайной мутации.</p>
+<p><code>file_extension</code> — если бинарный файл фаззинг-теста принимает на вход в качестве аргумента путь к файлу, то можно указать какое расширение должно быть у этого файла.</p>
+<p><code>min_length</code> — минимальная длина входных данных.</p>
+<p><code>max_length</code> — максимальная длина входных данных.</p>
+<p><code>queue_selection</code> — все входные данные в AFL находятся в очереди, опция дает возможность выбирать либо поочередно либо согласно весам.</p>
+<p><code>python_module</code> — AFL позволяет написать модуль на языке Python, затем использовать его как мутатор. <a href="https://aflplus.plus/docs/custom_mutators/">Более подробно</a>.</p>
+<p><code>custom_mutator_library</code> — кастомная библиотека, которая будет использоваться как мутатор. <a href="https://aflplus.plus/docs/custom_mutators/">Более подробно</a>.</p>
+<p><code>custom_mutator_only</code> — все вызовы на мутации будут обрабатываться указанными выше библиотекой/Python-модулем.</p>
+<p><code>hang_timeout</code> — граница после которой входные данные считаются hang'ом.</p>
+<p><code>map_size</code> — размер &quot;массива&quot; хранящего информацию по покрытию фаззинг-тестом кода.</p>
+<h2 id="Предзагрузка-библиотек-для-afl"><a class="header" href="#Предзагрузка-библиотек-для-afl">Предзагрузка библиотек для AFL</a></h2>
+<p><code>AFL_PRELOAD</code> — способ подгрузить библиотеку к запускаемому файлу. <code>AFL_PRELOAD</code> необходим когда фаззинг-тест использует внешние зависимости, для загрузки библиотек по указанному в нем пути. Пример:</p>
+<pre><code class="language-bash">AFL_PRELOAD=/path/to/libcompcov.so
+</code></pre>
+<h2 id="Содержимое-конфигурационного-файла-libfuzzer-а"><a class="header" href="#Содержимое-конфигурационного-файла-libfuzzer-а">Содержимое конфигурационного файла LibFuzzer-а</a></h2>
+<p>Пример конфигурационного файла для LibFuzzer-а:</p>
+<pre><code class="language-json">{
+    &quot;target&quot; : {
+        &quot;path&quot;: &quot;my_binary&quot;,
+    }
+    &quot;env&quot;: {
+        &quot;MY_ENV&quot;: &quot;val&quot;
+    },
+    &quot;options&quot;: {
+        &quot;libfuzzer&quot;: {
+            &quot;max_len&quot;: &quot;512&quot;
+        },
+    }
+}
+</code></pre>
+<p><code>target</code> — путь к бинарному файлу фаззинг-теса.</p>
+<p>Возможные опции:</p>
+<p><code>max_len</code> — максимальная длинна входных данных.</p>
+<p><code>dict</code> — файл словаря, который используется в качестве сидов.</p>
+<p><code>prefer_small</code> — если значение равно 1, выбор меньших входных данных. </p>
+<p><code>timeout</code> — временная задержка, значение указывается в секундах.</p>
+<p><code>report_slow_units</code> — пороговое значение, при достижении которого входные данные будут интерпретироваться как не валидные.</p>
+<p><code>only_ascii</code> — если значение равно 1, входные данные только в формате ASCII.</p>
+<p><code>detect_leaks</code> — если значение равно 1, предпринимается попытка определения утечек памяти.</p>
+<p><code>len_control</code> — указывает скорость, с которой увеличивается предел длины.</p>
+<p><code>mutate_depth</code> — количество мутаций для входных данных.</p>
+<p>Больше опций можно найти по <a href="https://llvm.org/docs/LibFuzzer.html#options">ссылке</a>.</p>
+<h2 id="Предзагрузка-библиотек-для-libfuzzer-а"><a class="header" href="#Предзагрузка-библиотек-для-libfuzzer-а">Предзагрузка библиотек для LibFuzzer-а</a></h2>
+<p>Прелоады для добавления библиотек:</p>
+<p><code>LD_PRELOAD</code> — способ подгрузить библиотеку к запускаемому файлу. <code>LD_PRELOAD</code> необходим когда фаззинг-тест использует внешние зависимости, для загрузки библиотек по указанному в нем пути. Пример:</p>
+<pre><code>LD_PRELOAD&quot;: &quot;./libs/libarchive.so.13 ./libs/libicudata.so.60 ./libs/libicuuc.so.60 ./libs/liblzo2.so.2 ./libs/libxml2.so.2
+</code></pre>
+<p>Для того чтобы не указывать все библиотеки можно использовать <code>LD_LIBRARY_PATH</code>, указав в качестве значения путь до директории, где лежат все необходимые для файла библиотеки. Пример:</p>
+<pre><code>LD_LIBRARY_PATH&quot;: &quot;./libs
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Пример-создания-фаззинг-теста-libfuzzer"><a class="header" href="#Пример-создания-фаззинг-теста-libfuzzer">Пример создания фаззинг-теста Libfuzzer</a></h1>
+<p>В качестве примера возьмём фаззинг-тест для известной уязвимости <a href="https://en.wikipedia.org/wiki/Heartbleed">Heartbleed</a> из <a href="https://github.com/google/fuzzer-test-suite">Fuzzer Test Suite</a>. (См. приложение)</p>
+<h2 id="Бинарный-файл"><a class="header" href="#Бинарный-файл">Бинарный файл</a></h2>
+<p>После компиляции получаем непосредственно файл фаззинг-теста. Фаззинг-тест будет назван по-умолчанию, но для последующего удобства это имя можно изменить на <code>target</code>.</p>
+<p>BondiFuzz предполагает загрузку файлов фаззинг-теста в виде архива.</p>
+<pre><code class="language-bash">cd path_to_fuzzer
+tar -czf binaries.tar.gz openssl-1.0.1f-fsanitize_fuzzer runtime
+</code></pre>
+<p>В случае с Heartbleed в архив нужно поместить папку с файлами ключей. </p>
+<h2 id="Конфигурационный-файл"><a class="header" href="#Конфигурационный-файл">Конфигурационный файл</a></h2>
+<p>В ферму также можно загрузить конфигурационный файл <code>config.json</code> с дополнительными опциями.</p>
+<pre><code class="language-json">{
+    &quot;target&quot; : {
+        &quot;path&quot;: &quot;openssl-1.0.1f-fsanitize_fuzzer&quot;
+    }
+    &quot;options&quot;: {
+        &quot;libfuzzer&quot;: {
+             ...
+        }
+    }
+}
+</code></pre>
+<h2 id="Файлы-с-сидами"><a class="header" href="#Файлы-с-сидами">Файлы с сидами</a></h2>
+<p>Сиды — набор входных данных для фаззинг-теста — нужно добавить в архив, не помещая их в директорию.</p>
+<pre><code class="language-bash">cd path_to_seeds
+tar -czf seeds.tar.gz seed1 seed2
+</code></pre>
+<h2 id="Запуск-фаззинг-теста"><a class="header" href="#Запуск-фаззинг-теста">Запуск фаззинг-теста</a></h2>
+<p>Эти файлы необходимо загрузить в BondiFuzz, предварительно выбрав образ из доступных на данный момент.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Работа-с-фаззинг-тестами-в-bondifuzz"><a class="header" href="#Работа-с-фаззинг-тестами-в-bondifuzz">Работа с фаззинг-тестами в BondiFuzz</a></h1>
+<p>Фаззинг в BondiFuzz начинается с загрузки ранее созданных архивов <code>tar.gz</code> (бинарный файл фаззинг-теста, дополнительные файлы и сиды) и конфигурационного файла. Обязателен только бинарный файл, необходимость в других файлах зависит от используемого фаззинг-движка.</p>
+<p>После загрузки файлов происходит проверка правильности форматов загруженных файлов и валидности json-файла. В этот момент фаззинг-тест находится в состоянии <code>Unverified OK</code>. Для начала проверки необходимо кликнуть кнопку <code>Start</code>, и фаззинг-тест будет перенаправлен в очередь из еще не проверенных фаззинг-тестов. Эта очередь приоритетная над основной очередью, т.е. если есть фаззинг-тесты, которым надо пройти проверку, они будут запускаться в первую очередь.</p>
+<p>Сначала фаззинг-тест запускается с режимом запуска <code>firstrun</code>, т.е. с ограничением количества запусков — 10000 раз. Это необходимо для того, чтобы убедиться, что загруженный бинарный файл валидный. Если в этом режиме фаззинг-тест успел найти крэш, то в выводе будет упомянут и крэш. Если обнаружатся ошибки при запуске фаззинг-теста, пользователь будет проинформирован о них.</p>
+<p>Далее фаззинг-тест попадает в общую очередь и будет запущен в обычном режиме.</p>
+<p>В BondiFuzz есть внутренняя система оценки актуальности фаззинг-тестов — каждому присваивается свой вес. В случае, если фаззинг-тест находит крэши новые и/или у него растёт покрытие, вес увеличивается. При увеличении веса фаззинг-тест начинает чаще запускаться, а чем чаще он запускается, тем быстрее будут найдены крэши и/или увеличится покрытие кода.</p>
+<p>Если же фаззинг-тест работает долго без обнаружения крэшей/увеличения покрытия — его вес постепенно уменьшается. Также вес будет уменьшаться, если фаззинг-тест будет обнаруживать только дубликаты крэшей, а не новые.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Загрузка-фаззинг-теста-в-bondifuzz"><a class="header" href="#Загрузка-фаззинг-теста-в-bondifuzz">Загрузка фаззинг-теста в BondiFuzz</a></h1>
+<p>Для понимания процесса работы в BondiFuzz рекомендуем взять уже готовый фаззинг-тест, который точно найдет ошибки.</p>
+<h2 id="Загрузка-файлов-в-bondifuzz"><a class="header" href="#Загрузка-файлов-в-bondifuzz">Загрузка файлов в BondiFuzz</a></h2>
+<p>BondiFuzz предполагает загрузку бинарного файла, сидов, если они есть, и конфигурационного файла, при необходимости.</p>
+<h3 id="Бинарный-файл-1"><a class="header" href="#Бинарный-файл-1">Бинарный файл</a></h3>
+<p>После компиляции мы получаем непосредственно бинарный файл фаззинг-теста. Этот файл для удобства можно назвать <code>target</code>.</p>
+<p>BondiFuzz предполагает загрузку файлов фаззинг-тестов в виде архива.</p>
+<pre><code class="language-bash">cd path_to_fuzzer
+tar -czf binaries.tar.gz fuzzgoat
+</code></pre>
+<h3 id="Конфигурационный-файл-1"><a class="header" href="#Конфигурационный-файл-1">Конфигурационный файл</a></h3>
+<p>В BondiFuzz также можно загрузить конфигурационный файл <code>config.json</code> с дополнительными опциями.</p>
+<pre><code class="language-json">{
+    &quot;target&quot; : {
+        &quot;path&quot;: &quot;target&quot;,
+    }
+    &quot;env&quot;: {
+        &quot;MY_ENV&quot;: &quot;val&quot;
+    },
+    &quot;options&quot;: {
+        &quot;libfuzzer&quot;: {
+            &quot;max_len&quot;: &quot;512&quot;
+        },
+    }
+}
+</code></pre>
+<h3 id="Файлы-с-сидами-1"><a class="header" href="#Файлы-с-сидами-1">Файлы с сидами</a></h3>
+<p>Сиды для фаззинг-теста необходимо добавить в архив не помещая их в директорию. </p>
+<pre><code class="language-bash">cd path_to_seeds
+tar -czf seeds.tar.gz seed1 seed2
+</code></pre>
+<h2 id="Запуск-фаззинг-теста-в-bondifuzz"><a class="header" href="#Запуск-фаззинг-теста-в-bondifuzz">Запуск фаззинг-теста в BondiFuzz</a></h2>
+<p>Созданные файлы необходимо загрузить в BondiFuzz, предварительно выбрав образ из доступных на данный момент согласно той среде, в которой фаззинг-тест был создан и проверялся локально.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Удаление-фаззера"><a class="header" href="#Удаление-фаззера">Удаление фаззера</a></h1>
+<p>Чтобы удалить фаззер, перейдите во вкладку <code>Fuzzers</code>, выберите необходимый фаззер и нажмите кнопку <code>Delete</code>. </p>
+<p>На всплывающем окне необходимо выбрать одно из действий:<br />
+<img src="assets/delete_fuzzer.PNG" alt="Выбор действия при удалении фаззера" /></p>
+<ul>
+<li><code>Move to Trash</code> — перенести фаззер в корзину, где он будет находиться 30 дней c возможностью восстановления, после чего будет удален полностью.</li>
+</ul>
+<p>Можно нажать <code>Cancel</code> на уведомлении <code>Version sent to trash</code>, чтобы отменить удаление.</p>
+<ul>
+<li><code>Delete Permanently</code> — удалить полностью, без возможности восстановления.</li>
+</ul>
+<p>Пока уведомление <code>Version is permanently deleted</code> видно, вы можете нажать <code>Cancel</code>, чтобы отменить удаление.</p>
+<p>Удаление версий фаззинг-тестов происходит аналогично.</p>
+<p>Версию фаззинг-теста, перемещенную в корзину, можно восстановить в течение 30 дней. Для этого необходимо перейти во вкладку <code>Trash</code>, слева выбрать версию фаззинг-теста, которую необходимо восстановить, навести курсор и нажать <code>Restore</code>. Появится уведомление <code>Version is restoring</code>, предоставляющее возможность отменить восстановление из корзины.</p>
+<p>Также можно полностью удалить версию из корзины без возможности восстановления нажав кнопку <code>Delete</code>. На появившемся уведомлении <code>Version is permanently deleted</code> можно нажать <code>Cancel</code>, чтобы отменить удаление, и версия останется в корзине.</p>
+<p>Помимо удаления отдельных версий фаззинг-тестов из корзины, есть возможность удалить навсегда версии, относящиеся к одному фаззеру.</p>
+<p>Можно навсегда удалить все версии фаззеров, относящиеся к определенному проекту. Для этого необходимо перейти во вкладку <code>Trash</code>, нажать <code>Empty project bin</code> и подтвердить свое действие.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Работа-с-cli-утилитой-bondi-python"><a class="header" href="#Работа-с-cli-утилитой-bondi-python">Работа с CLI утилитой bondi-python</a></h1>
+<h2 id="Установка-cli-утилиты"><a class="header" href="#Установка-cli-утилиты">Установка CLI утилиты</a></h2>
+<p>Длы работы потребуется Python 3.7 и выше.</p>
+<p>Склонируйте проект:</p>
+<pre><code class="language-bash">git clone https://github.com/bondifuzz/bondi-python.git
+</code></pre>
+<p>Установите при помощи <code>pip</code>:</p>
+<pre><code class="language-bash">pip install bondi-python
+</code></pre>
+<p>После установки запустите с командой <code>--help</code>:</p>
+<pre><code class="language-bash">bondi --help
+</code></pre>
+<p>Автодополнение вводимых команд можно подключить при помощи дополнительного фреймворка командой:</p>
+<pre><code class="language-bash">bondi --install-completion
+</code></pre>
+<h2 id="Конфигурация-config"><a class="header" href="#Конфигурация-config">Конфигурация (config)</a></h2>
+<p>Инициализация подключения к серверу:</p>
+<pre><code class="language-bash">bondi config init
+</code></pre>
+<p>Необходимо ввести URL сервера, имя пользователя и пароль.</p>
+<pre><code class="language-bash">Server url: https://demo.bondifuzz.com
+Username: username
+Password: ***
+OK - Initialization successful
+</code></pre>
+<p>Подлючение можно обновить командой:</p>
+<pre><code class="language-bash">bondi config set username user_1
+OK - Config updated successfully
+</code></pre>
+<p>Получение информации об уже установленном подключении:</p>
+<pre><code class="language-bash">bondi config show
+
+--------  ------------------
+url       demo.bondifuzz.com
+username  **************name
+password  **************4321
+--------  ------------------
+</code></pre>
+<p>Получение URL сервера, к которому установлено подключение:</p>
+<pre><code class="language-bash">bondi config get url
+
+https://demo.bondifuzz.com
+</code></pre>
+<p>Получение имени пользователя, аккаунт которого подключен к серверу:</p>
+<pre><code class="language-bash">bondi config get username
+</code></pre>
+<h2 id="Работа-с-проектами"><a class="header" href="#Работа-с-проектами">Работа с проектами</a></h2>
+<p>Создание проекта:</p>
+<pre><code class="language-bash">bondi projects create
+</code></pre>
+<p>Необходимо указать название проекта (название должно быть уникальным), значения CPU и RAM. Проекту автоматически присваивается уникальное <code>id</code>.</p>
+<pre><code class="language-bash">Name: project_1
+Node cpu: 40
+Node ram: 360
+----  ---------
+id    10550740
+name  project_1
+----  ---------
+</code></pre>
+<p>Значение CPU в проекте измеряется в количестве ядер, и может принимать следующие значения: 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96. Для упрощения выбора значения можно воспользоваться клавишей <code>Tab</code>.</p>
+<p>Значение RAM в проекте измеряется в GiB и равно значению CPU, умноженному на коэффициенты от 1 до 16, но не может быть более 640 GiB. Для упрощения выбора значения можно воспользоваться клавишей <code>Tab</code>.</p>
+<p>Получение информации о проекте:</p>
+<pre><code class="language-bash">bondi projects get 10550740
+</code></pre>
+<p>Необходимо указать <code>id</code> проекта или его название.</p>
+<pre><code class="language-bash">-----  ---------
+Project name    project_1
+Description     Default project
+Pool status     Ready
+Node group      CPU per node: 4 cores, RAM per node: 8GB, Node count: 1
+Pool resources  CPU in total: 3720 mcpu, RAM in total: 5714MB, Nodes ready: 1
+
+-----  ---------
+</code></pre>
+<p>Получение списка проектов с присвоенными <code>id</code> и описаниями:</p>
+<pre><code class="language-bash">bondi projects list
+
++----------+--------------+------------------+
+|       id | name         | brief            |
+|----------+--------------+------------------|
+| 10550740 | project_1    | My first project |
+|  9845728 | project_2    | No description   |
+|  8953832 | project_3    | No description   |
+|  2755294 | default      | Default project  |
++----------+--------------+------------------+
+</code></pre>
+<p>Изменение названия проекта:</p>
+<pre><code class="language-bash">bondi projects update --id 10550740 --new-name project_2
+</code></pre>
+<p>В таблице выводится предыдущее название проекта и новое.</p>
+<pre><code class="language-bash">+------------+-----------+-----------+
+| Property   | Old       | New       |
+|------------+-----------+-----------|
+| name       | project_1 | project_2 |
++------------+-----------+-----------+
+</code></pre>
+<p>Изменение описания проекта:</p>
+<pre><code class="language-bash">bondi projects update --id 10550740 --new-description no description
+</code></pre>
+<p>В таблице выводится предыдущее описание проекта и новое.</p>
+<pre><code class="language-bash">+-------------+-------+----------------+
+| Property    | Old   | New            |
+|-------------+-------+----------------|
+| description | none  | no description |
++-------------+-------+----------------+
+</code></pre>
+<p>Для удобства работы есть возможность установить текущий проект как проект по умолчанию, в таком случае не будет необходимости вводить его название, оно будет подставляться утилитой автоматически.</p>
+<pre><code class="language-bash">bondi projects set-default project_1
+</code></pre>
+<p>Посмотреть проект, установленный по умолчанию, можно командой:</p>
+<pre><code class="language-bash">bondi projects get-default
+</code></pre>
+<p>Отменить назначение по умолчанию можно командой:</p>
+<pre><code class="language-bash">bondi projects unset-default
+</code></pre>
+<p>Проект можно переместить в корзину командой:</p>
+<pre><code class="language-bash">bondi projects delete project_1
+</code></pre>
+<p>Восстановление проекта из корзины:</p>
+<pre><code class="language-bash">bondi projects restore project_1
+</code></pre>
+<p>Проект можно удалить без возможности восстановления командой:</p>
+<pre><code class="language-bash">bondi projects erase project_1
+</code></pre>
+<h2 id="Работа-с-фаззерами"><a class="header" href="#Работа-с-фаззерами">Работа с фаззерами</a></h2>
+<p>Создание фаззера:</p>
+<pre><code class="language-bash">bondi fuzzers create
+</code></pre>
+<p>При создании фаззера необходимо указать тип фаззера, язык программирования и проект, к которому будет относиться фаззер. Название фаззера должно быть уникальным в рамках проекта. Фаззеры, относящиеся к разным проектам, могут иметь одинаковые названия. Фаззеру автоматически будет присвоен уникальный <code>id</code>.</p>
+<pre><code class="language-bash">Name: fuzzer_1
+Description: none
+Fuzzer type: AFL
+Fuzzer lang: Cpp
+Project: project_2
+----  --------
+id    10591666
+name  fuzzer_1
+----  --------
+</code></pre>
+<p>Получение информации о фаззере:</p>
+<pre><code class="language-bash">bondi fuzzers get fuzzer_1
+</code></pre>
+<p>Будут выведены все данные о фаззере.</p>
+<pre><code class="language-bash">Fuzzer: fuzzer_1
+--------------  --------
+id              10591666
+name            fuzzer_1
+type            AFL
+lang            Cpp
+ci_integration  False
+description     none
+--------------  --------
+</code></pre>
+<p>Получение списка фаззеров, необходимо указать название проекта:</p>
+<pre><code class="language-bash">bondi fuzzers list
+</code></pre>
+<p>Список возможных конфигураций <em>язык программирования -- движок фаззера</em>:</p>
+<pre><code class="language-bash">bondi fuzzers show-configurations
+
+------  --------------
+C++     AFL, LibFuzzer
+Go      LibFuzzer
+Rust    LibFuzzer
+Python  LibFuzzer
+------  --------------
+</code></pre>
+<p>Изменение названия фаззера с указанием проекта, к которому он относится:</p>
+<pre><code class="language-bash">bondi fuzzers update fuzzer_1 -n fuzzer_2
+
+Project: project_2
++-----------------+-------------+-------------+
+| Property name   | Old value   | New value   |
+|-----------------+-------------+-------------|
+| Project name    | fuzzer_1    | fuzzer_2    |
++-----------------+-------------+-------------+
+</code></pre>
+<p>Изменение описания фаззера с указанием проекта, к которому он относится:</p>
+<pre><code class="language-bash">bondi fuzzers update fuzz1 -d nonono
+
+Project: project_2
++-----------------+----------------+-------------+
+| Property name   | Old value      | New value   |
+|-----------------+----------------+-------------|
+| Description     | No description | ololo       |
++-----------------+----------------+-------------+
+</code></pre>
+<p>Для удобства работы есть возможность установить текущий фаззер как фаззер по умолчанию, в таком случае не будет необходимости вводить его название, оно будет подставляться утилитой автоматически.</p>
+<pre><code class="language-bash">bondi fuzzers set-default fuzzer_1
+</code></pre>
+<p>Посмотреть фаззер, установленный по умолчанию, можно командой:</p>
+<pre><code class="language-bash">bondi fuzzers get-default
+</code></pre>
+<p>Отменить назначение по умолчанию можно командой:</p>
+<pre><code class="language-bash">bondi fuzzers unset-default
+</code></pre>
+<p>Фаззер можно переместить в корзину командой:</p>
+<pre><code class="language-bash">bondi fuzzers delete fuzzer_1
+</code></pre>
+<p>Восстановление фаззера из корзины:</p>
+<pre><code class="language-bash">bondi fuzzers restore fuzzer_1
+</code></pre>
+<p>Фаззер можно удалить без возможности восстановления командой:</p>
+<pre><code class="language-bash">bondi fuzzers erase fuzzer_1
+</code></pre>
+<p>Можно скачать корпус фаззера командой:</p>
+<pre><code class="language-bash">bondi fuzzers download-corpus fuzzer_1
+</code></pre>
+<h2 id="Создание-версий-фаззера"><a class="header" href="#Создание-версий-фаззера">Создание версий фаззера</a></h2>
+<p>После создания фаззера необходимо создать его первую версию, а затем последующие. Это позволит не создавать каждый раз заново фаззер после внесения каких-либо изменений в тестируемый код и в фаззинг-тест для него. Каждой версии фаззера соответствует локально созданный пользователем фаззинг-тест. Максимальные значения приведены на проекта, создаваемого по-умолчанию.</p>
+<p>Значение CPU измеряется в mcpu и может быть от 500 до 2000.</p>
+<p>Значение RAM измеряется в MiB и может быть от 500 до 5000.</p>
+<p>Значение tmpfs измеряется в MiB и может быть от 100 до 2000.</p>
+<p>Пример команды для создания версии фаззера:</p>
+<pre><code class="language-bash">bondi revisions create -n revision_1 -i 53823967 -f fuzz1 -p project_1 --cpu 600 --ram 1000 --tmpfs 300
+
+-------------  ----------
+ID             64321403
+Revision name  revision_1
+-------------  ----------
+</code></pre>
+<p>Если не указать название версии в команде, оно сформируется автоматически. Также версии автоматически присваивается уникальный ID.</p>
+<p>Список всех версий фаззера можно посмотреть командой:</p>
+<pre><code class="language-bash">bondi revisions list
+</code></pre>
+<p>Получение информации о конкретной версии фаззера:</p>
+<pre><code class="language-bash">bondi revisions get revision_1 -f fuzzer_1
+</code></pre>
+<p>Для удобства работы есть возможность установить текущую версию как версию по умолчанию, в таком случае не будет необходимости вводить ее название, оно будет подставляться утилитой автоматически.</p>
+<pre><code class="language-bash">bondi revisions set-default revision_1
+</code></pre>
+<p>Посмотреть версию, установленную по умолчанию, можно командой:</p>
+<pre><code class="language-bash">bondi revisions get-default
+</code></pre>
+<p>Отменить назначение по умолчанию можно командой:</p>
+<pre><code class="language-bash">bondi revisions unset-default
+</code></pre>
+<p>Версию можно переместить в корзину командой:</p>
+<pre><code class="language-bash">bondi revisions delete revision_1
+</code></pre>
+<p>Восстановление версии фаззера из корзины:</p>
+<pre><code class="language-bash">bondi revisions restore revision_1
+</code></pre>
+<p>Версию можно удалить без возможности восстановления командой:</p>
+<pre><code class="language-bash">bondi revisions erase revision_1
+</code></pre>
+<p>Корпуса фаззеров можно копировать между версиями одного фаззера командой:</p>
+<pre><code class="language-bash">bondi revisions copy-corpus revision_1 revision_2
+</code></pre>
+<p>Копировать корпус можно только в версию, которая ранее не запускалась.</p>
+<h2 id="Базовые-образы"><a class="header" href="#Базовые-образы">Базовые образы</a></h2>
+<p>Для каждого фаззера необходимо выбрать образ операционной системы, в зависимости от того в какой он запускались локально фаззинг-тесты. Посмотреть доступные образы можно следующей командой:</p>
+<pre><code class="language-bash">bondi images list-available -l Cpp -e LibFuzzer -p project_1
+</code></pre>
+<p>Каждому образу соответствует уникальный ID.</p>
+<p>На данный момент только администраторы BondiFuzz могут загружать новые образы, у пользователя есть возможность через техподдержку отправить запрос на необходимый образ. В будущем планируется добавить такую возможность и для пользователей платформы.</p>
+<h2 id="Загрузка-фаззинг-тестов"><a class="header" href="#Загрузка-фаззинг-тестов">Загрузка фаззинг-тестов</a></h2>
+<p>Предварительно созданные и проверенные на работоспособность файлы фаззинг-тестов загружаются пользователем в созданные фаззеры следующей командой:</p>
+<pre><code class="language-bash">bondi revisions upload-files -p project_1 -f fuzzer_1 revision_1 --binaries-path path_to_fuzzer/binaries.tar.gz --config-path path_to_fuzzer/config.json --seeds-path path_to_fuzzer/seeds.tar.gz
+
+binaries  [####################################]  100%
+seeds  [####################################]  100% 
+config  [####################################]  100%
+OK - Files uploaded successfully
+</code></pre>
+<p>Для удобства можно перейти в директорию с файлами фаззинг-теста и использовать более простую команду:</p>
+<pre><code class="language-bash">bondi revisions upload-files -p project_1 -f fuzzer_1 revision_1 --binaries binaries.tar.gz --config config.json --seeds seeds.tar.gz
+</code></pre>
+<p>Скачать загруженные файлы фаззинг-теста:</p>
+<pre><code class="language-bash">bondi revisions download-files revision_1 -f fuzz11 -p default
+</code></pre>
+<h2 id="Работа-с-фаззинг-тестами"><a class="header" href="#Работа-с-фаззинг-тестами">Работа с фаззинг-тестами</a></h2>
+<p>Фаззинг-тест запускается командой:</p>
+<pre><code class="language-bash">bondi revisions start revision_1
+</code></pre>
+<p>Если все хорошо, появится сообщение: <code>OK - Revision started</code></p>
+<p>Важный момент: архитектура BondiFuzz такова, что запускается именно фаззинг-тест. Невозможно запустить одновременно несколько версий фаззинг-тестов, но могут одновременно работать фаззинг-тесты, относящиеся к разным фаззерам.</p>
+<p>Фаззинг-тест останавливается командой:</p>
+<pre><code class="language-bash">bondi revisions stop revision_1
+</code></pre>
+<p>Фаззинг-тест перезапускается командой:</p>
+<pre><code class="language-bash">bondi revisions restart revision_1
+</code></pre>
+<p>При перезапуске фаззинг-теста сбрасываются все данные, остается только корпус.</p>
+<p>Корпуса можно копировать из одного фаззинг-теста в другой командой:</p>
+<pre><code class="language-bash">bondi revisions copy-corpus revision_1 revision_2
+</code></pre>
+<h2 id="Результаты-работы-фаззинг-тестов"><a class="header" href="#Результаты-работы-фаззинг-тестов">Результаты работы фаззинг-тестов</a></h2>
+<p>Получение списка крэшей для всех версий фаззинг-тестов, в которых они обнаружены, необходимо указать соответствующий проект:</p>
+<pre><code class="language-bash">bondi crashes list -f my_fuzzer -p project_1
+</code></pre>
+<p>или</p>
+<pre><code class="language-bash">bondi crashes list
+</code></pre>
+<p>Также можно получить список крэшей, относящихся к определенной версии фаззинг-теста:</p>
+<pre><code class="language-bash">bondi crashes list -r revision_1
+</code></pre>
+<p>Для получения конкретной информации о крэше, необходимо ввести ID крэша, название фаззера, которым он обнаружен, и соответствующий проект:</p>
+<pre><code class="language-bash">bondi crashes get 10327133 -f my_fuzzer -p project_1
+</code></pre>
+<p>Получение детальной информации о крэше, необходимо ввести ID крэша, название фаззера, в котором он обнаружен, и соответствующий проект:</p>
+<pre><code class="language-bash">bondi crashes get-details 10327133 -f my_fuzzer -p project_1
+</code></pre>
+<p>Вывод будет следующим:</p>
+<pre><code class="language-bash">INFO: Seed: 3128728610
+INFO: Loaded 1 modules   (35943 inline 8-bit counters): 35943 [0xad8690, 0xae12f7), 
+INFO: Loaded 1 PC tables (35943 PCs): 35943 [0x94f0e8,0x9db758), 
+/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer: Running 1 inputs 2000000 time(s) each.
+Running: /mnt/tempfs/binaries/leak-56aa9f9652536ca63aa8251540ae7007a017c735
+==16==WARNING: invalid path to external symbolizer!
+==16==WARNING: Failed to use and restart external symbolizer!
+
+=================================================================
+==16==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x52447d  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x52447d)
+    #1 0x6013fb  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x6013fb)
+    #2 0x6588c1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x6588c1)
+    #3 0x56afb8  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x56afb8)
+    #4 0x55c810  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x55c810)
+    #5 0x59f242  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x59f242)
+    #6 0x59a1d1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x59a1d1)
+    #7 0x556bcd  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x556bcd)
+    #8 0x45d7c1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x45d7c1)
+    #9 0x448ed2  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x448ed2)
+    #10 0x44ef3e  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x44ef3e)
+    #11 0x476a02  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x476a02)
+    #12 0x7f38ee67ed09  (/lib/x86_64-linux-gnu/libc.so.6+0x26d09)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x52447d  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x52447d)
+    #1 0x6013fb  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x6013fb)
+    #2 0x6588e1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x6588e1)
+    #3 0x56afb8  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x56afb8)
+    #4 0x55c810  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x55c810)
+    #5 0x59f242  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x59f242)
+    #6 0x59a1d1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x59a1d1)
+    #7 0x556bcd  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x556bcd)
+    #8 0x45d7c1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x45d7c1)
+    #9 0x448ed2  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x448ed2)
+    #10 0x44ef3e  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x44ef3e)
+    #11 0x476a02  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x476a02)
+    #12 0x7f38ee67ed09  (/lib/x86_64-linux-gnu/libc.so.6+0x26d09)
+
+SUMMARY: AddressSanitizer: 64 byte(s) leaked in 2 allocation(s).
+
+INFO: a leak has been found in the initial corpus.
+
+INFO: to ignore leaks on libFuzzer side use -detect_leaks=0.
+</code></pre>
+<p>Для скачивания данных крэша необходимо ввести ID крэша, название фаззера, в котором он обнаружен, и соответствующий проект:</p>
+<pre><code class="language-bash">bondi crashes download -c 10327133 -f my_fuzzer -p project_1
+</code></pre>
+<p>Вся информация будет сохранена в файл формата .crash.</p>
+<pre><code class="language-bash">crash  [####################################]  100%
+OK - Saved to 10327133.crash  
+</code></pre>
+<h2 id="Просмотр-статистики"><a class="header" href="#Просмотр-статистики">Просмотр статистики</a></h2>
+<p>В BondiFuzz ведется подсчет статистики по работе фаззинг-тестов. </p>
+<p>Статистику по работе конкретного фаззинг-теста можно посмотреть командой:</p>
+<pre><code class="language-bash">bondi statistics show -r revision_1 -f fuzzer_1 -p project_1
+</code></pre>
+<p>Для более подробной статистики можно посмотреть графики по каждому из следующих параметров:</p>
+<ul>
+<li>corpus_entries</li>
+<li>edge_cov</li>
+<li>execs_per_sec</li>
+<li>known_crashes</li>
+<li>unique_crashes</li>
+<li>corpus_size</li>
+<li>execs_done</li>
+<li>feature_cov</li>
+<li>peak_rss</li>
+</ul>
+<pre><code class="language-bash">bondi statistics show-chart -c unique_crashes -r revision_1 -f fuzzer_1 -p project_1
+</code></pre>
+<h2 id="Создание-интеграций-с-трекерами-задач"><a class="header" href="#Создание-интеграций-с-трекерами-задач">Создание интеграций с трекерами задач</a></h2>
+<p>CLI-утилита bondi-python предполагает возможность создания интеграций с трекерами задач.</p>
+<p>Для создания интеграции с Jira необходимо указать URL-адрес, логин/почту пользователя, пароль/токен пользователя, название проекта в Jira, тип issue, приоритет, название интеграции (должно быть оригинальным), тип интеграции, название проекта в BondiFuzz.</p>
+<pre><code class="language-bash">bondi integrations create --jira-url https://demo.jira.com --jira-username User@user.com --jira-password passw123 --jira-project MP --jira-issue-type Task --jira-priority Medium -n integration_1 -t Jira -p project_1
+</code></pre>
+<p>Интеграции будет присвоено уникальный ID.</p>
+<p>Удаление интеграции осуществляется следующей командой:</p>
+<pre><code class="language-bash">bondi integrations delete -p project_1 integration_1
+</code></pre>
+<p>Интеграцию можно отключить следующей командой, указав проект в BondiFuzz и ID/название интеграции.</p>
+<pre><code class="language-bash">bondi integrations disable -p project_1 integration_1
+</code></pre>
+<p>Отключенную интеграцию можно включить, указав проект в BondiFuzz и ID/название интеграции:</p>
+<pre><code class="language-bash">bondi integrations enable -p project_1 integration_1
+</code></pre>
+<p>Для получения детальной информации об интеграции необходимо указать ID/название интеграции и соответствующий проект:</p>
+<pre><code class="language-bash">bondi integrations get -p project_1 17924052
+</code></pre>
+<p>Для получения детальной информации об интеграции необходимо указать ID/название интеграции и соответствующий проект:</p>
+<pre><code class="language-bash">bondi integrations get-config -p project_1 17924052
+</code></pre>
+<p>Получение списка интеграций по названию проекта:</p>
+<pre><code class="language-bash">bondi integrations list -p project_1
+</code></pre>
+<p>Изменение названия интеграции осуществляется следующей командой:</p>
+<pre><code class="language-bash">bondi integrations update -p project_1 17924052 -n integration_2
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Приложения"><a class="header" href="#Приложения">Приложения</a></h1>
+<p>Мы создали фаззинг-тесты для разных языков. На данный момент есть примеры для:</p>
+<ul>
+<li>C++</li>
+<li>Rust</li>
+<li>Go</li>
+<li>Python</li>
+<li>Java (JVM-based) (поддержка находится в разработке)</li>
+<li>Java with JQF (поддержка находится в разработке)</li>
+<li>JavaScript (поддержка находится в разработке)</li>
+</ul>
+<p>Этот список будет дополняться.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c"><a class="header" href="#c">C++</a></h1>
+<p>Для фаззинга кода на языке C++ можно использовать <a href="https://llvm.org/docs/LibFuzzer.html">LibFuzzer</a> — инструмент для фаззинга библиотек, распространяемую вместе с Clang, проект LLVM.</p>
+<h2 id="Пример-1-Фаззинг-тест-для-уязвимости-heartbleed-cve-2014-0160"><a class="header" href="#Пример-1-Фаззинг-тест-для-уязвимости-heartbleed-cve-2014-0160">Пример 1: Фаззинг-тест для уязвимости Heartbleed (CVE-2014-0160)</a></h2>
+<p>В качестве примера фаззинг-теста рассмотрим широко известную уязвимость <a href="https://en.wikipedia.org/wiki/Heartbleed">heartbleed</a>, обнаруженную в <a href="https://github.com/openssl/openssl">OpenSSL</a>.</p>
+<p>Для начала работы необходимо установить уязвимую версию библиотеки.</p>
+<pre><code class="language-bash">curl -O https://ftp.openssl.org/source/old/1.0.1/openssl-1.0.1f.tar.gz
+tar xf openssl-1.0.1f.tar.gz
+cd openssl-1.0.1f/
+./config
+make CC=&quot;/usr/local/bin/clang -g -fsanitize=address,fuzzer-no-link&quot;
+cd ..
+</code></pre>
+<p>Сам фаззинг-тест будет иметь следующий вид:</p>
+<pre><code class="language-cpp">#include &quot;openssl/ssl.h&quot;
+#include &quot;openssl/err.h&quot;
+#include &lt;assert.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stddef.h&gt;
+
+SSL_CTX *Init() {
+  SSL_library_init();
+  SSL_load_error_strings();
+  ERR_load_BIO_strings();
+  OpenSSL_add_all_algorithms();
+  SSL_CTX *sctx;
+  assert (sctx = SSL_CTX_new(TLSv1_method()));
+  assert(SSL_CTX_use_certificate_file(sctx, &quot;../runtime/server.pem&quot;,
+                                      SSL_FILETYPE_PEM));
+  assert(SSL_CTX_use_PrivateKey_file(sctx, &quot;../runtime/server.key&quot;,
+                                     SSL_FILETYPE_PEM));
+  return sctx;
+}
+extern &quot;C&quot; int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
+  static SSL_CTX *sctx = Init();
+  SSL *server = SSL_new(sctx);
+  BIO *sinbio = BIO_new(BIO_s_mem());
+  BIO *soutbio = BIO_new(BIO_s_mem());
+  SSL_set_bio(server, sinbio, soutbio);
+  SSL_set_accept_state(server);
+  BIO_write(sinbio, Data, Size);
+  SSL_do_handshake(server);
+  SSL_free(server);
+  return 0;
+}
+</code></pre>
+<p>Файлы <code>server.key</code> и <code>server.pem</code> создаются следующей командой:</p>
+<pre><code class="language-bash">openssl req -x509 -newkey rsa:512 -keyout server.key -out server.pem -days 9999 -nodes -subj /CN=a/
+</code></pre>
+<p>Содержимое <code>CMakeLists.txt</code>:</p>
+<pre><code class="language-cpp">project(&quot;heartbleed-fuzzer&quot;)
+
+set(CMAKE_CXX_COMPILER &quot;clang++&quot;)
+
+set(SRC &quot;~/heartbleed&quot;)
+set(OPENSSL_PATH ${SRC}/openssl-1.0.1f)
+
+add_executable(heartbleed_fuzzer heartbleed.cpp)
+
+target_include_directories(heartbleed_fuzzer PRIVATE ${OPENSSL_PATH}/include)
+target_compile_options(heartbleed_fuzzer PRIVATE -fsanitize=fuzzer,address)
+
+target_link_options(heartbleed_fuzzer PRIVATE -fsanitize=fuzzer,address)
+target_link_libraries(heartbleed_fuzzer ${OPENSSL_PATH}/libssl.a ${OPENSSL_PATH}/libcrypto.a)
+</code></pre>
+<h3 id="Сборка-и-запуск-фаззинг-теста"><a class="header" href="#Сборка-и-запуск-фаззинг-теста">Сборка и запуск фаззинг-теста</a></h3>
+<p>Сборка и запуск фаззинг-теста осуществляется следующими командами:</p>
+<pre><code class="language-bash">mkdir -p build  
+rm -rf build/*  
+cd build
+cmake ..
+make
+./heartbleed_fuzzer
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rust"><a class="header" href="#rust">Rust</a></h1>
+<h3 id="cargo-fuzz-libfuzzer"><a class="header" href="#cargo-fuzz-libfuzzer">cargo-fuzz (libFuzzer)</a></h3>
+<p>Для начала работы необходимо установить <a href="https://github.com/rust-fuzz/cargo-fuzz">cargo-fuzz</a>:</p>
+<pre><code class="language-bash">cargo install cargo-fuzz
+</code></pre>
+<p>В качестве примера можно использовать <a href="https://github.com/servo/rust-url.git">rust-url</a> — URL библиотеку для Rust.</p>
+<p>Необходимо склонировать репозиторий:</p>
+<pre><code class="language-bash">git clone https://github.com/servo/rust-url.git
+</code></pre>
+<p>Затем перейдя в директорию выполнить:</p>
+<pre><code class="language-bash">git checkout bfa167b4e0253642b6766a7aa74a99df60a94048
+</code></pre>
+<p>Чтобы перейти к конкретной ревизии, которая содержит ошибку синтаксического анализа.</p>
+<p>После необходимо инициализировать <code>cargo-fuzz</code>:</p>
+<pre><code class="language-bash">cargo fuzz init
+</code></pre>
+<p>Появится директория <code>fuzz</code>, код фаззинг-теста необходимо поместить в <code>fuzz/fuzz_targets/fuzz_target_1.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>#![no_main]
+<span class="boring">fn main() {
+</span>#[macro_use] extern crate libfuzzer_sys;
+extern crate url;
+
+fuzz_target!(|data: &amp;[u8]| {
+    if let Ok(s) = std::str::from_utf8(data) {
+        let _ = url::Url::parse(s);
+    }
+});
+<span class="boring">}
+</span></code></pre></pre>
+<p>Корпус в <code>fuzz/corpus/fuzz_target_1/</code>:</p>
+<pre><code class="language-bash">mkdir in
+echo &quot;tcp://example.com/&quot; &gt; in/url
+echo &quot;ssh://192.168.1.1&quot; &gt; in/url2
+echo &quot;http://www.example.com:80/foo?hi=bar&quot; &gt; in/url3
+</code></pre>
+<p>Запуск фаззинг-теста осуществляется следующей командой:</p>
+<pre><code class="language-bash">RUST_BACKTRACE=1 cargo fuzz run
+</code></pre>
+<p>Бинарный файл фаззинг-теста находится по следующему адресу: <code>rust-url/fuzz/target/x86_64-unknown-linux-gnu/release/fuzz_target_1</code></p>
+<p>Бинарный файл и корпус предстоит добавить в архив для последующей загрузки в BondiFuzz.</p>
+<h3 id="afl"><a class="header" href="#afl">AFL</a></h3>
+<p>Для начала работы с AFL-фаззером необходимо установить:</p>
+<pre><code class="language-bash">cargo install afl
+</code></pre>
+<p>Необходимо склонировать репозиторий:</p>
+<pre><code class="language-bash">git clone https://github.com/servo/rust-url.git
+</code></pre>
+<p>и также перейти к уязвимой ревизии.</p>
+<p>Затем инициализировать:</p>
+<pre><code class="language-bash">cargo new --bin url-fuzz-target
+</code></pre>
+<p>Исходник с фаззинг-тестом должен находиться в <code>url-fuzz-target/src/main.rs</code></p>
+<p>В файл <code>url-fuzz-target/Cargo.toml</code> необходимо добавить следующие строки:</p>
+<pre><code>[dependencies]
+afl = &quot;*&quot;
+url = { path = &quot;..&quot;} // это путь к rust-url/ относительно rust-url/url-fuzz-target
+</code></pre>
+<p>Фаззинг-тест собирается следующей командой:</p>
+<pre><code class="language-bash">cargo afl build
+</code></pre>
+<p>Необходимо создать директорию <code>in</code>, где будет храниться тот же корпус, что был создан для libFuzzer-а.</p>
+<p>Затем запускаем фаззинг-тест, предварительно перейдя в директорию <code>url-fuzz-target</code> командой:</p>
+<pre><code class="language-bash">cargo afl fuzz -i in -o out target/debug/url-fuzz-target
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="go"><a class="header" href="#go">Go</a></h1>
+<p>Использование go-fuzz в режиме <code>libfuzzer</code></p>
+<h2 id="Установка"><a class="header" href="#Установка">Установка</a></h2>
+<pre><code class="language-bash">export GO111MODULE=on
+go get github.com/dvyukov/go-fuzz/go-fuzz-build
+go get github.com/dvyukov/go-fuzz/go-fuzz
+</code></pre>
+<h2 id="Пример-1-hello-fuzzer-тестируем-на-наличие-ошибки-типа-divzero"><a class="header" href="#Пример-1-hello-fuzzer-тестируем-на-наличие-ошибки-типа-divzero">Пример 1: Hello, Fuzzer! (тестируем на наличие ошибки типа DivZero)</a></h2>
+<p>В качестве простого примера будет деление на ноль.</p>
+<p>Потребуется верия go - <code>go1.18.2 linux/amd64</code>.</p>
+<p>В файл <code>your_path/fuzz.go</code> записываем следующий код:</p>
+<pre><code class="language-go">package zero
+
+func Fuzz(data []byte) int {
+
+	if len(data) &lt; 10{
+		return 0
+	}
+
+	a := data[0]
+	b := data[1]
+	c := a / (b-100)
+
+	_ = c
+
+	return 0
+}
+</code></pre>
+<p>Сборка:</p>
+<pre><code class="language-bash">go-fuzz-build -libfuzzer -func=Fuzz -o zero.a
+clang -fsanitize=fuzzer zero.a -o divzero-fuzzer
+</code></pre>
+<p>Опции для <code>go-fuzz-build</code>:</p>
+<ul>
+<li><code>-libfuzzer</code> - включение режима <code>libfuzzer</code></li>
+<li><code>-func=Fuzz</code> - определение функции, которая будет подвергнута фаззингу, в данном случае - <code>Fuzz</code></li>
+<li><code>-o zero.a</code> - название статической библиотеки, в которой будет находиться скомпилированный код, название произвольное</li>
+</ul>
+<p>Опции для <code>clang</code>:</p>
+<ul>
+<li><code>-fsanitize=fuzzer</code> - включение режима фаззинга, чтобы компилятор поддтянул все зависимости для <code>libfuzzer</code></li>
+<li><code>zero.a</code> - библиотека, где находится логика фаззинг-теста</li>
+<li><code>-o divzero-fuzzer</code> - название фаззинг-теста</li>
+</ul>
+<p>Запуск:</p>
+<pre><code class="language-bash">./divzero-fuzzer
+</code></pre>
+<h2 id="Пример-2-Тестируем-внутреннии-функции-hashicorp-vault"><a class="header" href="#Пример-2-Тестируем-внутреннии-функции-hashicorp-vault">Пример 2: Тестируем внутреннии функции Hashicorp Vault</a></h2>
+<p>На основе <a href="https://adalogics.com/blog/getting-started-with-go-fuzz">этой</a> статьи. Цель - <a href="https://github.com/hashicorp/vault">Vault</a> -- инструмент для безопасного доступа к секретной информации, функция <code>XORBase64</code>.</p>
+<p>Необходимая версия go - <code>go1.18.2 linux/amd64</code>.</p>
+<p>Устанавливаем <code>vault</code>:</p>
+<pre><code class="language-bash">export GO111MODULE=on
+go get github.com/hashicorp/vault
+cd $GOPATH/src/github.com/hashicorp/vault/sdk/helper/xor
+</code></pre>
+<p>Записываем в файл <code>fuzz.go</code> следующий код:</p>
+<pre><code class="language-go">package xor
+
+func Fuzz(data []byte) int {
+    _, _ = XORBase64(string(data), string(data))
+    return 1
+}
+</code></pre>
+<p>Название пакета такое же, как в <code>xor.go</code>, в котором <code>XORBase64</code>.</p>
+<p>Сборка:</p>
+<pre><code class="language-bash">go-fuzz-build -libfuzzer -func=Fuzz -o Fuzz.a
+clang -fsanitize=fuzzer Fuzz.a -o xor-fuzzer
+</code></pre>
+<p>Запуск:</p>
+<pre><code class="language-bash">./xor-fuzzer
+</code></pre>
+<h2 id="Пример-3-Тестируем-dns-библиотеку"><a class="header" href="#Пример-3-Тестируем-dns-библиотеку">Пример 3: Тестируем DNS-библиотеку</a></h2>
+<p>На основе <a href="https://blog.cloudflare.com/dns-parser-meet-go-fuzzer/">статьи</a>.</p>
+<p>Цель - <a href="https://github.com/miekg/dns">DNS-библиотека</a> версии <code>v1.1.25</code>, функции <code>Unpack</code>, <code>PackBuffer</code>.</p>
+<p>Версия go - <code>go1.13.8 linux/amd64</code>.</p>
+<p>Установка:</p>
+<pre><code class="language-bash">export GO111MODULE=on
+go mod init fuzz
+go get github.com/miekg/dns@v1.1.25
+</code></pre>
+<p>Команда <code>go mod init</code> необходима, чтобы можно было скачать определенную версию репозитория.</p>
+<p>Записываем в файл <code>fuzz.go</code> следующий код:</p>
+<pre><code class="language-go">package fuzz
+
+import	(
+	&quot;github.com/miekg/dns&quot;
+    &quot;bytes&quot;
+    &quot;encoding/hex&quot;
+    &quot;os&quot;
+)
+
+func Fuzz(rawMsg []byte) int {
+    var (
+        msg         = &amp;dns.Msg{}
+        buf, bufOne = make([]byte, 100000), make([]byte, 100000)
+        res, resOne []byte
+
+        unpackErr, packErr error
+    )
+
+    if unpackErr = msg.Unpack(rawMsg); unpackErr != nil {
+        return 0
+    }
+
+    if res, packErr = msg.PackBuffer(buf); packErr != nil {
+        return 0
+    }
+
+    for i := range res {
+        bufOne[i] = 1
+    }
+
+    resOne, packErr = msg.PackBuffer(bufOne)
+    if packErr != nil {
+        println(&quot;Pack failed only with a filled buffer&quot;)
+        panic(packErr)
+    }
+
+    if !bytes.Equal(res, resOne) {
+        println(&quot;buffer bits leaked into the packed message&quot;)
+        println(hex.Dump(res))
+        println(hex.Dump(resOne))
+        os.Exit(1)
+    }
+
+    return 1
+}
+</code></pre>
+<p>Сборка:</p>
+<pre><code class="language-bash">go-fuzz-build -libfuzzer -func=Fuzz -o Fuzz.a
+clang -fsanitize=fuzzer Fuzz.a -o dns-fuzzer
+</code></pre>
+<h3 id="Создание-корпуса"><a class="header" href="#Создание-корпуса">Создание корпуса</a></h3>
+<p>Прежде чем запустить фаззинг-тест, необходимо создать корпус.</p>
+<p>На основе дампа <a href="https://github.com/miekg/pcap/blob/master/test/pcap_files/Network_Join_Nokia_Mobile.pcap">Network_Join_Nokia_Mobile.pcap</a>.</p>
+<p>Скачиваем дамп:</p>
+<pre><code class="language-bash">mkdir corpus
+cd corpus
+git clone https://github.com/miekg/pcap
+</code></pre>
+<p>Записываем в файл <code>corpus/gen_corp.go</code> следующий код:</p>
+<pre><code class="language-go">package main
+
+import (
+	&quot;crypto/rand&quot;
+	&quot;encoding/hex&quot;
+	&quot;log&quot;
+	&quot;os&quot;
+	&quot;strconv&quot;
+	&quot;github.com/miekg/pcap&quot;
+)
+
+func fatalIfErr(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func main() {
+	handle, err := pcap.OpenOffline(os.Args[1])
+	fatalIfErr(err)
+
+	b := make([]byte, 4)
+	_, err = rand.Read(b)
+	fatalIfErr(err)
+	prefix := hex.EncodeToString(b)
+
+	i := 0
+	for pkt := handle.Next(); pkt != nil; pkt = handle.Next() {
+		pkt.Decode()
+
+		f, err := os.Create(&quot;p_&quot; + prefix + &quot;_&quot; + strconv.Itoa(i))
+		fatalIfErr(err)
+		_, err = f.Write(pkt.Payload)
+		fatalIfErr(err)
+		fatalIfErr(f.Close())
+
+		i++
+	}
+}
+
+</code></pre>
+<p>Сборка:</p>
+<pre><code class="language-bash">export GO111MODULE=on
+go get github.com/miekg/pcap
+go build gen_corp.go
+</code></pre>
+<p>Генерация корпусов:</p>
+<pre><code class="language-bash">mkdir in
+cd in
+../gen_corp ../pcap/test/pcap_files/Network_Join_Nokia_Mobile.pcap
+</code></pre>
+<p>Запуск фаззинг-теста со сгенерированными корпусами:</p>
+<pre><code class="language-bash">./dns-fuzzer ./corpus/in
+</code></pre>
+<h2 id="Какие-могут-возникнуть-проблемы"><a class="header" href="#Какие-могут-возникнуть-проблемы">Какие могут возникнуть проблемы</a></h2>
+<h3 id="cryptoelliptic"><a class="header" href="#cryptoelliptic">crypto/elliptic</a></h3>
+<p>Если у вас версия <code>go 1.18.x</code>, и у исследуемого кода есть зависимость от <code>crypto/elliptic</code>, то ничего не выйдет. необходимо ждать, когда закроют это <a href="https://github.com/dvyukov/go-fuzz/issues/338">issue</a>.</p>
+<h3 id="Версия-модуля"><a class="header" href="#Версия-модуля">Версия модуля</a></h3>
+<p>Если нужна конкретная версия модуля, то сначала необходимо проверить есть ли эта версия на <a href="https://pkg.go.dev/">pkg.go.dev</a>. Например:</p>
+<ul>
+<li>https://pkg.go.dev/github.com/artyom/mdserver?tab=versions - у <code>github.com/artyom/mdserver</code> все в порядке</li>
+<li>https://pkg.go.dev/github.com/istio/istio?tab=versions - у <code>github.com/istio/istio</code> не в порядке, ничего не выйдет.</li>
+</ul>
+<h3 id="go111module"><a class="header" href="#go111module">GO111MODULE</a></h3>
+<p>Если не удается скачать модуль, необходимо проверить, что <code>GO111MODULE=on</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="python"><a class="header" href="#python">Python</a></h1>
+<h2 id="Установка-atheris"><a class="header" href="#Установка-atheris">Установка atheris</a></h2>
+<p><code>atheris</code> — фаззер для кода на языке Python, работает на основе <code>libfuzzer</code>. Устанавливается командой:</p>
+<pre><code class="language-bash">pip3 install atheris
+</code></pre>
+<p>Второй вариант установки — сброка из репозитория <a href="https://github.com/google/atheris">atheris</a></p>
+<pre><code class="language-bash">pip3 install --no-binary atheris atheris
+git clone https://github.com/google/atheris.git
+cd atheris
+pip3 install .
+</code></pre>
+<h2 id="Инструментация"><a class="header" href="#Инструментация">Инструментация</a></h2>
+<p>Инструментировать можно разными способами.</p>
+<p>С помощью функций:</p>
+<pre><code class="language-python">@atheris.instrument_func
+def my_function(foo, bar):
+  print(&quot;instrumented&quot;)
+</code></pre>
+<p>С помощью модулей:</p>
+<pre><code class="language-python">with atheris.instrument_imports():
+  import foo
+  from bar import baz
+</code></pre>
+<p>Одновременно с помощью функций и модулей:</p>
+<pre><code class="language-python">atheris.instrument_all()
+atheris.Setup()
+</code></pre>
+<h3 id="Пример-1-hello-fuzzer-тестируем-на-наличие-ошибки-типа-divzero-1"><a class="header" href="#Пример-1-hello-fuzzer-тестируем-на-наличие-ошибки-типа-divzero-1">Пример 1: Hello, Fuzzer! (тестируем на наличие ошибки типа DivZero)</a></h3>
+<p>Есть функция, в которой иногда происходит деление на ноль:</p>
+<pre><code class="language-python">def TestOneInput(data):
+    
+    if len(data) &lt; 2:
+        return 0
+
+    a = data[0]
+    b = data[1]
+
+    c = a / (b - 30)
+
+</code></pre>
+<p>Фаззинг-тест для этой функции будет выглядеть так:</p>
+<pre><code class="language-python">import atheris
+import sys
+
+@atheris.instrument_func
+def TestOneInput(data):
+    
+    if len(data) &lt; 2:
+        return 0
+
+    a = data[0]
+    b = data[1]
+
+    c = a / (b - 30)
+
+
+atheris.Setup(sys.argv, TestOneInput)
+atheris.Fuzz()
+
+</code></pre>
+<h3 id="Пример-2-Ищем-уязвимости-в-pillow-cve-2021-34552"><a class="header" href="#Пример-2-Ищем-уязвимости-в-pillow-cve-2021-34552">Пример 2: Ищем уязвимости в Pillow (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-34552">CVE-2021-34552</a>)</a></h3>
+<p>CVE-2021-34552 — это пример небезопасного использования функции <code>sprintf</code> в модуле на языке C <a href="https://github.com/python-pillow/Pillow/pull/5567/files">_imaging</a>. Приводит к stackoverflow.</p>
+<p>Сборка Pillow выполняется следующей командой:</p>
+<pre><code class="language-bash">git clone https://github.com/python-pillow/Pillow
+cd Pillow
+git checkout 8.2.0 &amp;&amp; python3 ./setup.py build
+</code></pre>
+<p>Фаззинг-тест выглядит таким образом:</p>
+<pre><code class="language-python">import atheris
+import importlib.util
+import sys
+
+def import_PIL(src):
+    spec = importlib.util.spec_from_file_location(&quot;PIL&quot;, &quot;{}/__init__.py&quot;.format(src))
+    PIL_ = importlib.util.module_from_spec(spec)
+    sys.modules[&quot;PIL&quot;] = PIL_
+
+    spec.loader.exec_module(PIL_)
+
+    globals().update({&quot;PIL&quot;: PIL_})
+
+    
+src = 'path/to/Pillow/build/lib.linux-x86_64-3.8/PIL'
+import_PIL(src)
+
+from PIL import Image
+
+@atheris.instrument_func
+def TestOneInput(data):
+
+    data = data.decode()
+
+    try:
+        with Image.open(&quot;some.jpg&quot;) as img:
+            img.convert(mode=data)
+    except ValueError:
+        pass
+
+atheris.Setup(sys.argv, TestOneInput)
+atheris.Fuzz()
+</code></pre>
+<p>Модуль <code>PIL</code> импортируется не из системной директории, а из кастомной, чтобы не засорять систему.</p>
+<p>Для запуска понадобится любая картинка формата <code>.jpg</code>.</p>
+<p>Блок <code>try except</code> необходим потому, что модуль будет сыпать исключениями, что сразу остановит фаззинг.</p>
+<h4 id="Запуск"><a class="header" href="#Запуск">Запуск</a></h4>
+<pre><code class="language-bash">./pillow-fuzzer.py ./corpus -only_ascii=1
+</code></pre>
+<p>Опции идентичны опциям <a href="https://llvm.org/docs/LibFuzzer.html"><code>libfuzzer</code></a>.</p>
+<p>Здесь <code>corpus</code> — это корпус стартовых тест-кейсов. В этом примере можно использовать простой вариант:</p>
+<pre><code class="language-bash">echo 123 &gt; corpus/123
+</code></pre>
+<p><code>-only_ascii=1</code> — требование генерировать тест-кейсы, в которых есть только ASCII символы, как того требует исследуемая функция <code>_imaging.convert</code> </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="java-jvm-based"><a class="header" href="#java-jvm-based">Java (JVM-based)</a></h1>
+<p>(Поддержка Java находится в разработке.)</p>
+<p><code>Jazzer</code> -- это фаззер для кода на языке программирования Java, работает через <code>libfuzzer</code>.</p>
+<h2 id="Установка-1"><a class="header" href="#Установка-1">Установка</a></h2>
+<p><a href="https://github.com/CodeIntelligenceTesting/jazzer">Jazzer</a> собирается при помощи <code>bazel</code>. Прежде чем собирать, необходимо уточнить требуемую версию <code>jazzer/.bazelversion</code>. </p>
+<p>Если такой версии нет в списке пакетов дистрибутива, то необходимо скачать ее либо с <a href="https://github.com/bazelbuild/bazel">github</a>, либо с <a href="https://releases.bazel.build">releases.bazel.build</a>.</p>
+<p>Например, необходима версия <code>5.2.0rc1</code>, берем <a href="https://releases.bazel.build/5.2.0/rc1/index.html">отсюда</a>.</p>
+<p>Сам процесс установки выглядит так:</p>
+<pre><code class="language-bash">git clone https://github.com/CodeIntelligenceTesting/jazzer
+cd jazzer
+bazel build //:jazzer_release
+cd bazel-bin
+tar -xzf jazzer_release.tar.gz
+</code></pre>
+<p>Результат сборки -- бинарный файл <code>./jazzer</code> и его зависимости. Тут кроется одна особенность -- необходимо явно вызывать <code>jazzer</code>, указывая путь. Не получится добавить <code>jazzer</code> и его зависимости в <code>/usr/local/bin</code> и воспользоваться поиском в <code>PATH</code>:</p>
+<pre><code class="language-bash">jazzer  
+Could not find jazzer_agent_deploy.jar. Please provide the pathname via the --agent_path flag.
+</code></pre>
+<p>Зависимости потеряются, потому что поиск опирается на указанный путь до <code>jazzer</code>:</p>
+<pre><code class="language-bash">./jazzer
+bazel-bin/jazzer
+jazzer/bazel-bin/jazzer
+</code></pre>
+<p>и т.д.</p>
+<p>Можно создать переменную <code>JAZZER=/path/jazzer/bazel-bin/jazzer</code> и пользоваться ей.</p>
+<h2 id="Параметры-запуска"><a class="header" href="#Параметры-запуска">Параметры запуска</a></h2>
+<p><code>Jazzer</code> имеет следующий формат запуска:</p>
+<pre><code class="language-bash">$JAZZER --cp=fuzz_target.jar:lib1.jar:lib2.jar --target_class=com.example.MyFirstFuzzTarget &lt;options&gt;
+</code></pre>
+<p>Где:</p>
+<ul>
+<li><code>--cp=fuzz_target.jar:lib1.jar:lib2.jar</code> указывает на исследуемый модуль и его зависимости</li>
+<li><code>--target_class=com.example.MyFirstFuzzTarget</code> - на исследуемый класс в модуле</li>
+<li><code>&lt;options&gt;</code> - <a href="https://llvm.org/docs/LibFuzzer.html#options">опции</a> <code>libfuzzer</code></li>
+</ul>
+<h2 id="Исследуемый-класс"><a class="header" href="#Исследуемый-класс">Исследуемый класс</a></h2>
+<p>В качестве цели может выступать класс с одним из методов:</p>
+<ol>
+<li><code>public static void fuzzerTestOneInput(byte[] input)</code></li>
+<li><code>public static void fuzzerTestOneInput(FuzzedDataProvider data)</code></li>
+</ol>
+<h3 id="Пример-1-hello-fuzzer-тестируем-на-наличие-ошибки-типа-divzero-2"><a class="header" href="#Пример-1-hello-fuzzer-тестируем-на-наличие-ошибки-типа-divzero-2">Пример 1: Hello, Fuzzer! (тестируем на наличие ошибки типа DivZero)</a></h3>
+<p>Это пример про <code>fuzzerTestOneInput(byte[] input)</code>.</p>
+<p>Структура проекта:</p>
+<pre><code class="language-bash">src/main/java/com/example/
+    DivZero.java
+BUILD.bazel
+WORKSPACE
+</code></pre>
+<p><code>WORKSPACE</code> - в данном примере пуст, но он должен быть.</p>
+<p><code>DivZero.java</code>:</p>
+<pre><code class="language-java">package com.example;
+
+public class DivZero{
+
+    public static void fuzzerTestOneInput(byte[] input){
+
+        if(input.length &gt; 1){
+            double a = input[0] / (input[1]-2);
+        }
+
+    }
+}
+</code></pre>
+<p><code>BUILD.bazel</code>:</p>
+<pre><code>java_binary(
+    name = &quot;DivZero&quot;,
+    srcs = [&quot;src/main/java/com/example/DivZero.java&quot;]
+)
+</code></pre>
+<p>Сборка:</p>
+<pre><code class="language-bash">bazel build //:DivZero
+</code></pre>
+<p>Результат - архив <code>bazel-bin/DivZero.jar</code>.</p>
+<p>Запуск фаззинга:</p>
+<pre><code class="language-bash">$JAZZER --cp=bazel-bin/DivZero.jar --target_class=com.example.DivZero
+</code></pre>
+<h3 id="Пример-2-Ищем-cve-2021-44228-в-log4j"><a class="header" href="#Пример-2-Ищем-cve-2021-44228-в-log4j">Пример 2: Ищем CVE-2021-44228 в log4j</a></h3>
+<p>Это пример про <code>fuzzerTestOneInput(FuzzedDataProvider data)</code>.</p>
+<p><code>data</code> - это объект с интерфейсом <code>com.code_intelligence.jazzer.api.FuzzedDataProvider</code>, он необходим для предобработки очередного массива байт. В этом примере массив будет преобразовываться в валидную строку.</p>
+<p>Структура проекта:</p>
+<pre><code class="language-bash">src/main/java/com/
+    code_intelligence/jazzer/api/
+        FuzzedDataProvider.java
+    example/
+        Log4jFuzzer.java
+
+corpus/
+    123
+
+maven.bzl
+BUILD.bazel
+WORKSPACE
+</code></pre>
+<p>Исходные коды для классов можно найти здесь: <a href="https://github.com/CodeIntelligenceTesting/jazzer/blob/main/examples/src/main/java/com/example/Log4jFuzzer.java">Log4jFuzzer.java</a>, <a href="https://github.com/CodeIntelligenceTesting/jazzer/blob/main/agent/src/main/java/com/code_intelligence/jazzer/api/FuzzedDataProvider.java">FuzzedDataProvider.java</a>.</p>
+<h4 id="mavenbzl"><a class="header" href="#mavenbzl">maven.bzl</a></h4>
+<p><code>maven.bzl</code> необходим для того, чтобы скачать зависимости, в примере с <code>log4j</code> это модули:</p>
+<ol>
+<li>log4j-api</li>
+<li>log4j-core</li>
+</ol>
+<p>Выглядит <code>maven.bzl</code> так:</p>
+<pre><code>load(&quot;@rules_jvm_external//:specs.bzl&quot;, &quot;maven&quot;)
+
+MAVEN_ARTIFACTS = [
+    maven.artifact(&quot;org.apache.logging.log4j&quot;, &quot;log4j-api&quot;, &quot;2.14.1&quot;, testonly = True),
+    maven.artifact(&quot;org.apache.logging.log4j&quot;, &quot;log4j-core&quot;, &quot;2.14.1&quot;, testonly = True),
+]
+</code></pre>
+<p>Сам <code>maven</code> надо встроить в сборку через <code>WORKSPACE</code>.</p>
+<h4 id="workspace"><a class="header" href="#workspace">WORKSPACE</a></h4>
+<p>Выглядит так:</p>
+<pre><code>load(&quot;@bazel_tools//tools/build_defs/repo:http.bzl&quot;, &quot;http_archive&quot;, &quot;http_file&quot;, &quot;http_jar&quot;)
+
+http_archive(
+    name = &quot;rules_jvm_external&quot;,
+    sha256 = &quot;f36441aa876c4f6427bfb2d1f2d723b48e9d930b62662bf723ddfb8fc80f0140&quot;,
+    strip_prefix = &quot;rules_jvm_external-4.1&quot;,
+    url = &quot;https://github.com/bazelbuild/rules_jvm_external/archive/refs/tags/4.1.zip&quot;,
+)
+
+load(&quot;@rules_jvm_external//:defs.bzl&quot;, &quot;maven_install&quot;)
+load(&quot;//:maven.bzl&quot;, &quot;MAVEN_ARTIFACTS&quot;)
+
+maven_install(
+    artifacts = MAVEN_ARTIFACTS,
+    fail_if_repin_required = False,
+    repositories = [
+        &quot;https://repo1.maven.org/maven2&quot;,
+    ],
+    strict_visibility = True,
+)
+
+load(&quot;@maven//:defs.bzl&quot;, &quot;pinned_maven_install&quot;)
+
+pinned_maven_install()
+</code></pre>
+<p>Но это еще не все, теперь необходимо сгенерировать файл <code>maven_install.json</code>, который будет содержать всю информацию о зависимостях:</p>
+<pre><code class="language-bash">bazel run @maven//:pin
+</code></pre>
+<p>Далее этот файл необходимо добавить в <code>WORKSPACE</code> в <code>maven_install</code>:</p>
+<pre><code>maven_install(
+    artifacts = MAVEN_ARTIFACTS,
+    fail_if_repin_required = False,
+    maven_install_json = &quot;//:maven_install.json&quot;,
+    repositories = [
+        &quot;https://repo1.maven.org/maven2&quot;,
+    ],
+    strict_visibility = True,
+)
+</code></pre>
+<p>Теперь можно приступить к сборке.</p>
+<h4 id="Сборка"><a class="header" href="#Сборка">Сборка</a></h4>
+<pre><code class="language-bash">bazel build //:Log4jFuzzer
+</code></pre>
+<p>Фаззинг-тест будет находиться в <code>bazel-bin/Log4jFuzzer.jar</code>, а его зависимости по следующим адресам:</p>
+<ol>
+<li><code>bazel-bin/external/maven/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.14.1/log4j-core-2.14.1.jar</code></li>
+<li><code>bazel-bin/external/maven/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.14.1/log4j-api-2.14.1.jar</code></li>
+</ol>
+<h4 id="Запуск-1"><a class="header" href="#Запуск-1">Запуск</a></h4>
+<p>Запуск фаззинг-теста осуществляется следующими командами:</p>
+<pre><code>LOG4J=bazel-bin/external/maven/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j
+LOG4J_CORE=$LOG4J/log4j-core/2.14.1/log4j-core-2.14.1.jar
+LOG4J_API=$LOG4J/log4j-api/2.14.1/log4j-api-2.14.1.jar
+...
+FUZZER=bazel-bin/Log4jFuzzer.jar
+...
+$JAZZER --cp=$FUZZER:$LOG4J_CORE:$LOG4J_API --target_class=com.example.Log4jFuzzer ./corpus
+</code></pre>
+<p>В директории <code>corpus</code> находится файл <code>123</code> с содержимым</p>
+<pre><code class="language-bash">cat 123
+ldap://g.co/
+</code></pre>
+<p>Содержимое может быть любым и файлов может быть сколько угодно.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="jqf"><a class="header" href="#jqf">JQF</a></h1>
+<p>(Поддержка языка программирования Java находится в разработке.)</p>
+<p>JQF — это платформа для фаззинга языка Java с обратной связью (например, AFL/LibFuzzer, но для байт-кода JVM).</p>
+<p>Есть два способа работы с <code>JQF</code>:</p>
+<ul>
+<li>через плагин <code>maven</code></li>
+<li>через программу <code>jqf-zest</code></li>
+</ul>
+<p>У первого способа больше опций, но он требует код проекта. У второго способа меньше опций, но ему достаточно скомпилированных файлов.</p>
+<p>Чтобы объединить плюсы обоих способов, <code>jqf</code> был пропатчен, и появился третий - в <code>jqf-zest</code>. В нем больше больше полезных опций.</p>
+<p>Расскажем обо всех вариантах подробнее.</p>
+<h2 id="maven"><a class="header" href="#maven">Maven</a></h2>
+<p>У этого способа больше опций, но он требует код проекта.</p>
+<h3 id="Создание-шаблона-проекта"><a class="header" href="#Создание-шаблона-проекта">Создание шаблона проекта</a></h3>
+<p>Шаблон проекта создается следующим способом:</p>
+<pre><code class="language-bash">mvn archetype:generate -DgroupId=com.example.fuzzer -DartifactId=your-project-name -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+</code></pre>
+<p>После создания появится директория <code>your-project-name</code>:</p>
+<pre><code class="language-bash">your-project-name/
+    src/
+       main/java/com/example/fuzzer/App.java 
+       test/java/com/example/fuzzer/App.java
+    pom.xml
+</code></pre>
+<p>Параметры сборки хранятся в <code>pom.xml</code>, код фаззинг-теста — в <code>test/java/com/example/fuzzer/</code>.</p>
+<p><code>App.java</code> можно удалить ввиду ненадобности.</p>
+<p>В <code>pom.xml</code> необходимо добавить зависимости <code>jqf</code>:</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;edu.berkeley.cs.jqf&lt;/groupId&gt;
+    &lt;artifactId&gt;jqf-fuzz&lt;/artifactId&gt;
+    &lt;version&gt;1.9&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;plugin&gt;
+    &lt;groupId&gt;edu.berkeley.cs.jqf&lt;/groupId&gt;
+    &lt;artifactId&gt;jqf-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;1.9&lt;/version&gt;
+&lt;/plugin&gt;
+</code></pre>
+<p>Потом обязательно проверить <code>&lt;maven.compiler.source|target&gt;</code>, по умолчанию там будет <code>1.7</code>, надо проставить свою версию <code>jvm</code>. Например, <code>11</code>.</p>
+<p>Код фаззинг-тест имеет вид:</p>
+<pre><code class="language-java">// test/java/com/example/fuzzer/Fuzz.java
+
+package com.example.fuzzer;
+
+import edu.berkeley.cs.jqf.fuzz.Fuzz;
+import edu.berkeley.cs.jqf.fuzz.JQF;
+import org.junit.runner.RunWith;
+
+@RunWith(JQF.class)
+public class Fuzz{
+
+    @Fuzz
+    public void fuzz(byte[] data) {
+        ...
+    }
+
+}
+</code></pre>
+<h3 id="Сборка-1"><a class="header" href="#Сборка-1">Сборка</a></h3>
+<p>Сборка осуществляется следующей командой:</p>
+<pre><code class="language-bash">mvn install
+</code></pre>
+<h3 id="Запуск-2"><a class="header" href="#Запуск-2">Запуск</a></h3>
+<p>Запуск осуществляется командой:</p>
+<pre><code class="language-bash">mvn jqf:fuzz -Dclass=com.example.fuzzer.Fuzz -Dmethod=fuzz
+</code></pre>
+<p>Опции запуска (<a href="https://github.com/rohanpadhye/JQF/blob/master/maven-plugin/src/main/java/edu/berkeley/cs/jqf/plugin/FuzzGoal.java">src</a>) могут быть следующимиы:</p>
+<ul>
+<li><code>-Dclass</code> — исследуемый класс</li>
+<li><code>-Dmethod</code> — метод, в который подавать входные данные</li>
+<li><code>-Dexcludes</code> — какие классы не нужно инструментировать</li>
+<li><code>-Dincludes</code> — какие классы необходимо инструментировать</li>
+<li><code>-Dtime</code> — через сколько остановить фаззинг</li>
+<li><code>-Dtrials</code> — через сколько итераций остановить фаззинг</li>
+<li><code>-DrandomSeed</code> — число, которое определит порядок мутаторов</li>
+<li><code>-Dblind</code> — не учитывать покрытие, брутфорс</li>
+<li><code>-Dengine</code> — может быть <code>zest</code> или <code>zeal</code></li>
+<li><code>-DnoCov</code> — отключить инструментацию, брутфорс</li>
+<li><code>-Din</code> — корпус</li>
+<li><code>-Dout</code> — выхлоп</li>
+<li><code>-DsaveAll</code> — сохранять тест-кейсы, которые не дают уникальное покрытие</li>
+<li><code>-DlibFuzzerCompatOutput</code> — вывод статистики в формате LibFuzzer-а</li>
+<li><code>-DexitOnCrash</code> — остановить фаззинг при первом крэше</li>
+<li><code>-DrunTimeout</code> — таймаут</li>
+<li><code>-DfixedSize</code> — постоянный размер тест-кейса</li>
+</ul>
+<h3 id="Пример-1-hello-fuzzer-тестируем-на-наличие-ошибки-типа-divzero-3"><a class="header" href="#Пример-1-hello-fuzzer-тестируем-на-наличие-ошибки-типа-divzero-3">Пример 1: Hello, Fuzzer! (тестируем на наличие ошибки типа DivZero)</a></h3>
+<p>Код фаззинг-теста:</p>
+<pre><code class="language-java">package com.example.fuzzer;
+
+import edu.berkeley.cs.jqf.fuzz.Fuzz;
+import edu.berkeley.cs.jqf.fuzz.JQF;
+import org.junit.runner.RunWith;
+
+@RunWith(JQF.class)
+public class DivZero{
+
+    @Fuzz
+    public void fuzz(byte[] data) {
+        if(data.length &gt; 1){
+            double a = data[0] / (data[1]-2);
+        }
+    }
+
+}
+</code></pre>
+<h2 id="jqf-zest"><a class="header" href="#jqf-zest">jqf-zest</a></h2>
+<p>У этого способа меньше опций, но для работы достаточно скомпилированных файлов.</p>
+<h3 id="Запуск-3"><a class="header" href="#Запуск-3">Запуск</a></h3>
+<p>Запускается следующей командой:</p>
+<pre><code class="language-bash">/path/to/jqf/bin/jqf-zest -c .:$(/path/to/jqf/scripts/classpath.sh) TEST_CLASS TEST_METHOD OUTPUT_DIR SEED_DIR
+</code></pre>
+<p>Здесь 4 опции для <code>jqf-zest</code>, которые говорят сами за себя, и 1 опция для <code>jvm</code>.</p>
+<p>Через <code>-c</code> указываются пути, где искать <code>.jar</code> архивы. Скрипт <code>classpath.sh</code> находит только архивы <code>jqf</code>. А добавлять свои необходимо так:</p>
+<pre><code class="language-bash">-c mypackage1.jar:mypackage2.jar:$(/path/to/jqf/scripts/classpath.sh)
+</code></pre>
+<h3 id="Пропатченный-jqf-zest"><a class="header" href="#Пропатченный-jqf-zest">Пропатченный jqf-zest</a></h3>
+<p>Патчем добавлены следующие опции:</p>
+<ul>
+<li><code>bondi.time_limit</code> - число в мс (по умолчанию 0)</li>
+<li><code>bondi.output</code> - куда сохранять (<code>fuzz-results</code>)</li>
+<li><code>bondi.input</code>  - откуда брать (<code>fuzz-input</code>)</li>
+<li><code>bondi.crash_log_path</code> - (<code>./crash_log.txt</code>)</li>
+<li><code>bondi.crash_data_path</code> - (<code>./crash_data</code>)</li>
+<li><code>bondi.max_len</code> - (10240)</li>
+<li><code>bondi.child_timeout</code> - (null)</li>
+<li><code>bondi.seed</code> - (пусто)</li>
+</ul>
+<p>Устанавливаются таким образом:</p>
+<pre><code class="language-bash">JAVA_TOOL_OPTIONS=&quot;-Dbondi.time_limit=360000 -Dbondi.execs=10000000 -Dbondi.output=out -Dbondi.input=corpus /path/to/jqf/bin/jqf-zest -c .:$(/path/to/jqf/scripts/classpath.sh) TEST_CLASS TEST_METHOD
+</code></pre>
+<h2 id="zest"><a class="header" href="#zest">Zest</a></h2>
+<p>Zest - это алгоритм, который превращает обычный фаззинг в структурный.</p>
+<p>Подробности в <a href="https://rohan.padhye.org/files/zest-issta19.pdf">статье</a>.</p>
+<p>Обычный фаззинг - тот, который работает с &quot;сырым&quot; массивом байт. Структурный - с пользовательскими типами данных, умеет создавать любые объекты.</p>
+<p>Обычный фаззинг не в состоянии сгенерировать валидный, например, документ <code>xml</code>. А все невалидное будет отброшено исследуемым кодом, никакого результата не будет, кроме потраченного времени.</p>
+<p>Валидные объекты можно создавать, например, через библиотеку <code>junit-quickcheck</code>.</p>
+<p>Пользователь создает генератор, который производит такие объекты на основе рандома.</p>
+<p>Пример логики генератора xml:</p>
+<pre><code>random.nextInt(1, MAX_STRLEN) → 3 
+random.nextChar() → ‘f’ 
+random.nextChar() → ‘o’ 
+random.nextChar() → ‘o’ 
+random.nextInt(MAX_CHILDREN) → 2 
+random.nextInt(1, MAX_STRLEN) → 3
+...
+random.nextBool() → False 
+random.nextBool() → False 
+</code></pre>
+<p>Результат:</p>
+<pre><code>&lt;foo&gt;&lt;bar&gt;Hello&lt;/bar&gt;&lt;baz /&gt;&lt;/foo&gt;
+</code></pre>
+<p>То есть это целиком работа пользователя, как он справится с генератором, так он и будет работать. Фаззер просто будет забирать готовые объекты.</p>
+<p>Но оно опирается на рандом и для фаззинга пока еще не годится, потому что нет учета покрытия.</p>
+<p>Учет покрытия реализован через алгоритм <code>Zest</code>. </p>
+<p>Как указывается в статье, <code>Zest</code> вмешивается в работу <code>Random</code>, берет под контроль поток битов в нем. </p>
+<p>Один и тот же поток приводит к созданию одних и тех же объектов. То есть <code>Zest</code> нет необходимости что-то знать об объектах, чтобы оценить их влияение на покрытие. Когда приходит время мутировать данные, <code>Zest</code> мутирует биты в потоке.</p>
+<p>Таким образом, авторы <code>Zest</code> свели структурный фаззинг к обычному, работают с массивом байт, просто издалека.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="javascript"><a class="header" href="#javascript">JavaScript</a></h1>
+<p>(Поддержка языка JavaScript находится в разработке.)</p>
+<p>Для фаззинга кода на JavaScript применим <a href="https://gitlab.com/gitlab-org/security-products/analyzers/fuzzers/jsfuzz">фаззер</a> <code>jsfuzz</code>. Имеет сходство с <code>libfuzzer</code>, но не имеет к нему отношения.</p>
+<h2 id="Установка-2"><a class="header" href="#Установка-2">Установка</a></h2>
+<p>Установка осуществляется командой:</p>
+<pre><code class="language-bash">npm i -g jsfuzz
+</code></pre>
+<h2 id="Опции"><a class="header" href="#Опции">Опции</a></h2>
+<p>Для работы с <code>jsfuzz</code> могут быть применены следующие опции:</p>
+<ul>
+<li><code>dir</code> - одна или несколько директорий с корпусом</li>
+<li><code>regression</code> - воспроизведение, проверка крэшей</li>
+<li><code>exact-artifact-path</code> - мосто, куда сохранится крэш</li>
+<li><code>rss-limit-mb</code> - ограничение по памяти</li>
+<li><code>timeout</code> - таймаут на итерацию</li>
+<li><code>versifier</code> - мутатор для текстовых протоколов типа xml, http, json</li>
+<li><code>only-ascii</code> - только ascii тест-кейсы</li>
+<li><code>fuzzTime</code> - время работы фаззинг-теста</li>
+</ul>
+<h2 id="Код"><a class="header" href="#Код">Код</a></h2>
+<p>Исследуемая логика должна находиться в функции <code>fuzz(buf)</code>:</p>
+<pre><code class="language-js">function fuzz(buf) {
+  // call your package with buf  
+}
+module.exports = {
+    fuzz
+};
+
+</code></pre>
+<h2 id="Запуск-4"><a class="header" href="#Запуск-4">Запуск</a></h2>
+<p>Запуск осуществляется командой:</p>
+<pre><code class="language-bash">jsfuzz your.js [options]
+</code></pre>
+<h2 id="Пример-1-фаззинг-тест-для-парсера-jpeg"><a class="header" href="#Пример-1-фаззинг-тест-для-парсера-jpeg">Пример 1: фаззинг-тест для парсера jpeg</a></h2>
+<p>Пример взят из репозитория <code>jsfuzz</code>:</p>
+<pre><code class="language-js">const jpeg = require('jpeg-js');
+
+function fuzz(buf) {
+    try {
+        jpeg.decode(buf);
+    } catch (e) {
+        // Those are &quot;valid&quot; exceptions. we can't catch them in one line as
+        // jpeg-js doesn't export/inherit from one exception class/style.
+        if (e.message.indexOf('JPEG') !== -1 ||
+            e.message.indexOf('length octect') !== -1 ||
+            e.message.indexOf('Failed to') !== -1 ||
+            e.message.indexOf('DecoderBuffer') !== -1 ||
+            e.message.indexOf('invalid table spec') !== -1 ||
+            e.message.indexOf('SOI not found') !== -1) {
+        } else {
+            throw e;
+        }
+    }
+}
+
+module.exports = {
+    fuzz
+};
+
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,14 @@
+[
+  {
+    "_key": "62170",
+    "_id": "Fuzzers/62170",
+    "_rev": "_c88tdhS---",
+    "name": "my_fuzzer",
+    "type": "AFL",
+    "lang": "Cpp",
+    "description": "desc",
+    "project_id": "62131",
+    "created": "2021-09-07T21:04:20Z",
+    "ci_integration": false
+  }
+]

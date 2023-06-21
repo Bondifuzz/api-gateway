@@ -1,0 +1,28 @@
+[
+  {
+    "_key": "46707",
+    "_id": "Users/46707",
+    "_rev": "_c5xTAJ----",
+    "name": "root",
+    "display_name": "Root",
+    "password_hash": "$argon2id$v=19$m=102400,t=2,p=8$g7ShSESlXwE9+cxmEFl07g$nrujoWyGQ/pIEKwpnn3J9A",
+    "is_confirmed": true,
+    "is_disabled": false,
+    "is_admin": true,
+    "is_system": true,
+    "email": "ff.admin@example.ru"
+  },
+  {
+    "_key": "46709",
+    "_id": "Users/46709",
+    "_rev": "_c5xTAUu---",
+    "name": "default",
+    "display_name": "Default",
+    "password_hash": "$argon2id$v=19$m=102400,t=2,p=8$zWXbHrSgzOePyk+kk9lYyg$TW0/j1OpoDBZf5U5A32VkQ",
+    "is_confirmed": true,
+    "is_disabled": false,
+    "is_admin": false,
+    "is_system": true,
+    "email": "ff.default@example.ru"
+  }
+]

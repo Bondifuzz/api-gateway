@@ -1,0 +1,1691 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js bondi">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title></title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Intro</a></li><li class="chapter-item expanded "><a href="start.html"><strong aria-hidden="true">2.</strong> Start</a></li><li class="chapter-item expanded "><a href="project.html"><strong aria-hidden="true">3.</strong> Project</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="create_project.html"><strong aria-hidden="true">3.1.</strong> Create project</a></li><li class="chapter-item expanded "><a href="bug_trackers.html"><strong aria-hidden="true">3.2.</strong> Bug tracker integrations</a></li><li class="chapter-item expanded "><a href="delete_project.html"><strong aria-hidden="true">3.3.</strong> Delete project</a></li></ol></li><li class="chapter-item expanded "><a href="fuzzer.html"><strong aria-hidden="true">4.</strong> Fuzzer</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="create_fuzzer.html"><strong aria-hidden="true">4.1.</strong> Create a fuzzer</a></li><li class="chapter-item expanded "><a href="create_config.html"><strong aria-hidden="true">4.2.</strong> Creating a fuzzing test suite config file</a></li><li class="chapter-item expanded "><a href="upload_fuzzer.html"><strong aria-hidden="true">4.3.</strong> Example of creating fuzzing test suite</a></li><li class="chapter-item expanded "><a href="process.html"><strong aria-hidden="true">4.4.</strong> How fuzzers work in the farm</a></li><li class="chapter-item expanded "><a href="fuzzer_example.html"><strong aria-hidden="true">4.5.</strong> Example of fuzzing test suite</a></li><li class="chapter-item expanded "><a href="delete_fuzzer.html"><strong aria-hidden="true">4.6.</strong> Delete a fuzzer</a></li></ol></li><li class="chapter-item expanded "><a href="CLI_user_manual.html"><strong aria-hidden="true">5.</strong> CLI guide</a></li><li class="chapter-item expanded "><a href="appendix.html"><strong aria-hidden="true">6.</strong> Appendix</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cpp_fuzzing.html"><strong aria-hidden="true">6.1.</strong> Example of C++ fuzzing test suite</a></li><li class="chapter-item expanded "><a href="rust_fuzzing.html"><strong aria-hidden="true">6.2.</strong> Example of Rust fuzzing test suite</a></li><li class="chapter-item expanded "><a href="go_fuzzing.html"><strong aria-hidden="true">6.3.</strong> Example of Go fuzzing test suite</a></li><li class="chapter-item expanded "><a href="python_fuzzing.html"><strong aria-hidden="true">6.4.</strong> Example of Python fuzzing test suite</a></li><li class="chapter-item expanded "><a href="java_fuzzing.html"><strong aria-hidden="true">6.5.</strong> Example of Java fuzzing test suite</a></li><li class="chapter-item expanded "><a href="JQF.html"><strong aria-hidden="true">6.6.</strong> Example of Java fuzzing test suite with JQF</a></li><li class="chapter-item expanded "><a href="js_fuzzing.html"><strong aria-hidden="true">6.7.</strong> Example of JS fuzzing test suite</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="about-bondifuzz"><a class="header" href="#about-bondifuzz">About BondiFuzz</a></h1>
+<blockquote>
+<p>BondiFuzz - Fuzzing as a Service</p>
+</blockquote>
+<p>BondiFuzz is a Fuzzing as a Service solution meant for stress-testing products by quick CI integration.</p>
+<h2 id="how-can-bondifuzz-help"><a class="header" href="#how-can-bondifuzz-help">How can BondiFuzz help?</a></h2>
+<ul>
+<li>Automated search and preventive detection of issues, including software vulnerabilities.</li>
+<li>Improvement of code reliability.</li>
+<li>It helps to automate code coverage in tests, thus facilitating development and reducing its costs.</li>
+<li>Quick fuzzing initiation:
+<ul>
+<li>automated assessment of a vulnerability's severity;</li>
+<li>automated management of resources of various fuzzing solutions.</li>
+</ul>
+</li>
+</ul>
+<h2 id="why-bondifuzz"><a class="header" href="#why-bondifuzz">Why BondiFuzz?</a></h2>
+<p>Fuzzing is getting more and more popular. Yet, it may seem like a lot of work, as many fuzzing tools still look more like hacking utilities. Our team has found a way to do fuzzing without access to the source code. Thus, we could move the previous self-hosted version to the cloud.</p>
+<h2 id="integration-into-development"><a class="header" href="#integration-into-development">Integration into development</a></h2>
+<p>Integrating BondiFuzz into the development process allows you to improve the quality of your product significantly because continuous fuzzing tests with sufficient code coverage have an accumulative effect.</p>
+<h2 id="solution-for-different-departments"><a class="header" href="#solution-for-different-departments">Solution for different departments</a></h2>
+<p>BondiFuzz can be used by various departments involved in both software development and security:</p>
+<ul>
+<li>
+<p>Developers: faster bug detection and readily available data for unit tests. The developer is notified of a bug, fixes it, and tests the fixed code.</p>
+</li>
+<li>
+<p>QA: better optimization with automated generation of unit tests based on fuzzing results.</p>
+</li>
+<li>
+<p>Security: automated analysis of error criticality and management of different fuzzing solutions' resources.</p>
+</li>
+</ul>
+<p><em>If you have any issues when working with BondiFuzz or you want to share your ideas on how to make it better, please contact us at <code>support@bondifuzz.com</code></em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="start"><a class="header" href="#start">Start</a></h1>
+<p>Before you start working with BondiFuzz, you have to complete authentication. Enter the login and password you received from the admin. You can change the password in the account settings later. Once authentication is complete, you will be redirected to the page with fuzzing test suite.</p>
+<h2 id="tabs"><a class="header" href="#tabs">Tabs</a></h2>
+<p>The web interface of BondiFuzz has the following tabs:</p>
+<p><strong>Projects</strong> — projects created by the user and a <em>default</em> project created when a new user was created.</p>
+<p><strong>Fuzzers</strong> — fuzzing test suites created by the user. The user can start and stop a fuzzing test suites, add new versions and delete them.</p>
+<p><strong>FAQ</strong> — frequently asked questions.</p>
+<p><strong>Documentation</strong> — BondiFuzz documentation.</p>
+<p><strong>Trash</strong> — deleted fuzzers go here.</p>
+<p>The <strong>Fuzzers</strong> tab has the following tabs:</p>
+<p><strong>Versions</strong> — after applying changes to a fuzzing test suite, the user can create a new version. Thus, you can compare the results of the two versions or roll back to the previous one if the changes are unsatisfactory.</p>
+<p><strong>Crashes</strong> — crashes detected by a fuzzing test suites; they can be sorted by fuzzing test suite's version.</p>
+<p><strong>Statistics</strong> — the stats from the fuzzing results. It shows the metrics that represent the efficiency of fuzzing test suites. You can choose a fuzzing test suite's version and time period to view the stats for it.</p>
+<p>You need the following files for fuzzing:</p>
+<p><strong>Binaries</strong> — the fuzzing test suite binary. </p>
+<p><strong>Seeds</strong> — this is a directory with files whose content has to be valid for the target program or function. Seeds will undergo numerous mutations during fuzzing, which increases code coverage. During fuzzing, seeds are transformed into a corpus. A corpus is a set of test cases that has increased code coverage during the fuzzing of the target program or function. At first, a corpus contains seeds; then -- their mutations, the mutations' mutations, and so on.</p>
+<p><strong>Options and environment</strong> — additional options.</p>
+<p><strong>Image</strong> — agent's docker image. An agent is a program that is run when a container is started and starts the fuzzing test suite itself. An agent collects fuzzing results and stats.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="projects"><a class="header" href="#projects">Projects</a></h1>
+<p>The fuzzing farm allows you to create projects inside which fuzzers are created, which makes it easier to work with fuzzing test suites. In addition to the <code>default</code> project, users can can create their own.</p>
+<p>While creating or editing a project, you can create a task tracker integration. Thus, the bugs detected by a fuzzer will be sent to the task tracker. This facilitates the cooperation between the security and development teams.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-project"><a class="header" href="#create-a-project">Create a project</a></h1>
+<ol>
+<li>
+<p>In the Projects tab, click <code>Add a new project</code>.</p>
+</li>
+<li>
+<p>Enter a project name.<br />
+<img src="assets/create_project.PNG" alt="Creating a project" /></p>
+</li>
+</ol>
+<p>The project name has to be unique.</p>
+<ol start="3">
+<li>
+<p>Project description is optional</p>
+</li>
+<li>
+<p>Provide the number of nodes and CPU and RAM values.</p>
+</li>
+</ol>
+<p>The CPU value is measured as the number of cores and can be: 2,4,6,8,10,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,68,72,76,80,84,88,92,96.</p>
+<p>The RAM value is measured in GiB and is equal to the CPU value times a coefficient of 1 to 16 but cannot be more than 640 GiB.</p>
+<ol start="5">
+<li>If you need to integrate it with a task tracker, you can choose it in the drop-down list. You can create an integration for an existing project by clicking <code>Edit</code> and going to <code>Integrations</code>.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bug-tracker-integrations"><a class="header" href="#bug-tracker-integrations">Bug tracker integrations</a></h1>
+<p>BondiFuzz can be integrated with Jira and YouTrack task trackers.</p>
+<p>When a fuzzing test suite detects a crash, an issue will be created in the task tracker.</p>
+<h2 id="issue-tracking-with-jira"><a class="header" href="#issue-tracking-with-jira">Issue tracking with Jira</a></h2>
+<p>To create a Jira integration, go to the <code>Integration</code> tab while editing a project and choose an integration type.<br />
+<img src="assets/integration_jira.PNG" alt="Creating an integration" /></p>
+<p>To create an integration, you must have an existing project in Jira.</p>
+<p>Priority and issue type should be assigned according to the priorities and types existing in the tracker.</p>
+<p>After creating a project in BondiFuzz, load a fuzzing test suite and run it. If it detects a crash, an issue with a detailed description will be created in Jira. If the fuzzing test suite finds the duplicates of a crash, the issue will be automatically updated.</p>
+<p>You can edit existing integrations. If you switch to a different project in Jira, the previously detected crashes and their duplicates will be aggregated in the old project. Only crashes will appear in the new one.</p>
+<h2 id="youtrack-integration"><a class="header" href="#youtrack-integration">YouTrack integration</a></h2>
+<p>When creating a project, choose YouTrack in the drop-down list of integration options.<br />
+<img src="assets/integration_YT.PNG" alt="Creating an integration" /></p>
+<p>Before creating an integration, you have to create a project in YouTrack.</p>
+<p>User identification is performed using the token generated in YouTrack.</p>
+<p>You can edit an existing integration. Just like with Jira, when you switch YouTrack projects, detected crashes remain in the old project along with the information about duplicates. The new project will only have new crashes.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="delete-a-project"><a class="header" href="#delete-a-project">Delete a project</a></h1>
+<p>You can delete a project by clicking <code>Delete</code>.</p>
+<p>Choose one of the actions in the pop-up window:<br />
+<img src="assets/delete_project.PNG" alt="Choose actions" /></p>
+<ul>
+<li><code>Move to Trash</code>: the project will be stored in Trash for 30 days, and it can be recovered. After that period, it will be deleted permanently.</li>
+</ul>
+<p>Click <code>Cancel</code> on <code>Project is being deleted</code>, to cancel the operation.</p>
+<p>You can find deleted project in the <code>Deleted</code> tab.</p>
+<p>You can restore a deleted project by clicking <code>Restore</code>.</p>
+<p><code>Delete Permanently</code> delets the project permanently; the project cannot be restored.</p>
+<p>The user can remove all projects from the bin by clicking <code>Empty user bin</code>.</p>
+<p>You can cancel these actions by clicking <code>Cancel</code> on the notification. Deleted projects cannot be restored.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fuzzers"><a class="header" href="#fuzzers">Fuzzers</a></h1>
+<p>The fuzzing farm allows you to upload previously created fuzzing test suite as binary files.</p>
+<p>To facilitate the tracking of changes history, you can upload different versions of the same fuzzing test suite.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-fuzzer"><a class="header" href="#create-a-fuzzer">Create a fuzzer</a></h1>
+<p>To create a Fuzzer, click <code>+Fuzzer</code> in the <code>Fuzzers</code> tab.</p>
+<ol>
+<li>Enter the fuzzer's name<br />
+<img src="assets/create_fuzzer.PNG" alt="Create fuzzer" /></li>
+</ol>
+<p>The name must be unique</p>
+<ol start="2">
+<li>
+<p>Fuzzer description is optional</p>
+</li>
+<li>
+<p>Choose a programming language (currently, <code>Go</code>, <code>C++</code>, <code>Rust</code> and <code>Python</code> are supported)<br />
+<img src="assets/select_fuzzer_language.PNG" alt="Select fuzzer language" /></p>
+</li>
+<li>
+<p>Choose the fuzzer type<br />
+<img src="assets/select_fuzzer_engine.PNG" alt="Select fuzzer engine" /></p>
+</li>
+<li>
+<p>Choose an image (currently, only the administrator can upload images)<br />
+<img src="assets/images.PNG" alt="Choose an image" /></p>
+</li>
+<li>
+<p>Set CPU, RAM, and tmpfs values.</p>
+</li>
+</ol>
+<p>The CPU value is measured in mcpu and ranges from 500 to 2000.</p>
+<p>The RAM value is measured in MiB and ranges from 500 to 5000.</p>
+<p>The tmpfs value is measured in MiB and ranges from 100 to 2000.</p>
+<ol start="7">
+<li>Upload these files:</li>
+</ol>
+<ul>
+<li>the fuzzing test suite's binary</li>
+<li>seeds — input data for the fuzzing test suite (optional)</li>
+<li>config — file with additional options (optional)<br />
+<img src="assets/upload.PNG" alt="Upload files" /></li>
+</ul>
+<ol start="8">
+<li>After it's uploaded, you can start, stop, and restart the fuzzer.<br />
+<img src="assets/start.PNG" alt="Start fuzzing" /><br />
+<img src="assets/stop.PNG" alt="Stop fuzzing" /></li>
+</ol>
+<p>Restart means clearing the fuzzing test suite's state, but the detected crashes, stats, and corpora are saved.</p>
+<ol start="9">
+<li>The following fuzzing test suite statuses exist:</li>
+</ol>
+<ul>
+<li><code>Unverifying</code> — the fuzzing test suite has not loaded completely.</li>
+<li><code>Verifying</code> — verification of the files uploaded to the farm.</li>
+<li><code>Running</code> — the fuzzing test suite is running as expected.</li>
+<li><code>Stopped</code> — the fuzzing test suite has been stopped.</li>
+</ul>
+<p>fuzzing test suite states:</p>
+<ul>
+<li><code>Ok</code> — the fuzzing test suite is working without errors.</li>
+<li><code>Warning</code> — there are some issues with the fuzzing test suite.</li>
+<li><code>Error</code> — an error that prevents the fuzzing test suite from working.</li>
+</ul>
+<p>Possible fuzzing test suite combinations of states and statuses:</p>
+<ul>
+<li><code>Unverifying Ok</code> — the fuzzing test suite's files are being loaded as expected.</li>
+<li><code>Verifying Ok</code> — fuzzing test suite verification is in process.</li>
+<li><code>Unverifying Error</code> — the user made erros in the cofig file, and the farm cannot read it.</li>
+<li><code>Verifying Ok</code> — the confid file has been corrected and fuzzing test suite restarted.</li>
+<li><code>Running Ok</code> — the fuzzing test suite is up and running.</li>
+<li><code>Running Warning</code> — the fuzzing test suite has been working for a long time; supposedly, all errors has been found.</li>
+<li><code>Stopped Warning</code> — the fuzzing test suite has been working for too long; there's no need for it to be running anymore.</li>
+</ul>
+<p>By hovering over <code>Warning</code> and <code>Error</code>, you will see a description of the issue.</p>
+<ol start="10">
+<li>Adding a new fuzzing test suite version</li>
+</ol>
+<p>When you are adding a new version of a fuzzing test suite, you do not have to modify the one already running in <code>BondiFuzz</code>. You can add a new version. This allows comparing  the results of all uploaded versions of a fuzzing test suite. Click <code>+ Add version</code> in the top right-hand corner of <code>Fuzzers</code> to add a version.</p>
+<p>A version name is generated automatically based on the date and time. This name can be changed, and the description is optional.<br />
+<img src="assets/create_version.PNG" alt="Create new version" /></p>
+<p>You can run just one version of a fuzzing test suite; versions of different fuzzing test suites can be running simultaneously.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-fuzzing-test-suite-config-file"><a class="header" href="#creating-a-fuzzing-test-suite-config-file">Creating a fuzzing test suite config file</a></h1>
+<p>A configuration file is an auxiliary file woth additional options necessary for the correct operation of a fuzzing test suite.</p>
+<h2 id="afl-fuzzing-test-suite-example"><a class="header" href="#afl-fuzzing-test-suite-example">AFL fuzzing test suite example</a></h2>
+<p>Here's an example of a config file for an AFL fuzzer:</p>
+<pre><code>{
+    &quot;target&quot;: {
+        &quot;path&quot;: &quot;url-fuzz-target&quot;,
+    },
+    &quot;env&quot;: {
+        &quot;MY_ENV&quot;: &quot;val&quot;
+    },
+    &quot;options&quot;: {
+        &quot;afl&quot;: {
+            &quot;min_length&quot;: 50,
+        }
+    }
+}
+</code></pre>
+<p><code>target</code> — path to the fuzzing test suite's binary.</p>
+<p>Options:</p>
+<p><code>mode</code> — fuzzer's mode. Currently, BondiFuzz only supports Normal.</p>
+<p><code>schedule</code> — algorithms for assessing inout data that allow us to understand what to mutate to get input that increases code coverage. <a href="https://aflplus.plus/docs/power_schedules/">Read more about it here</a>.</p>
+<p><code>dict</code> — dictionary that sometimes will provide values instead of random mutations.</p>
+<p><code>file_extension</code> — if the fuzzing test suite's binary receives file paths as input, you can specify the file extension here.</p>
+<p><code>min_length</code> — minimum input length.</p>
+<p><code>max_length</code> — maximum input length.</p>
+<p><code>queue_selection</code> — in AFL, all input is queued; with this option you can choose the order: by weight or by position in the queue.</p>
+<p><code>python_module</code> — AFL allows you to write a module in Python and use it as a mutator. <a href="https://aflplus.plus/docs/custom_mutators/">Read more about it here</a>.</p>
+<p><code>custom_mutator_library</code> — custom library what will be used as a mutator. <a href="https://aflplus.plus/docs/custom_mutators/">Read more about it here</a>.</p>
+<p><code>custom_mutator_only</code> — all calls will be processed by the module/library from the options above.</p>
+<p><code>hang_timeout</code> — after this period, input is deemed as a hang.</p>
+<p><code>map_size</code> — the size of the array that stores code coverage information.</p>
+<h2 id="preloading-libraries-for-afl"><a class="header" href="#preloading-libraries-for-afl">Preloading libraries for AFL</a></h2>
+<p><code>AFL-PRELOAD</code> is a way to upload a library to a binary. <code>AFL_PRELOAD</code> is required when the fuzzing test suite uses external dependencies and you need to upload libraries to a specified path. For example:</p>
+<p><code>AFL_PRELOAD=/path/to/libcompcov.so</code></p>
+<h2 id="libfuzzer-config-file"><a class="header" href="#libfuzzer-config-file">LibFuzzer config file</a></h2>
+<p>Here's an example of a config file for LibFuzzer:</p>
+<pre><code>{
+    &quot;target&quot; : {
+        &quot;path&quot;: &quot;my_binary&quot;,
+    }
+    &quot;env&quot;: {
+        &quot;MY_ENV&quot;: &quot;val&quot;
+    },
+    &quot;options&quot;: {
+        &quot;libfuzzer&quot;: {
+            &quot;max_len&quot;: &quot;512&quot;
+        },
+    }
+}
+</code></pre>
+<p><code>target</code> — path to the fuzzing test suite's binary file.</p>
+<p>Options:</p>
+<p><code>max_len</code> — maximum inout length.</p>
+<p><code>dict</code> — dictionary that is used for seeds.</p>
+<p><code>prefer_small</code> — if it equals 1, smaller input is prefered.</p>
+<p><code>timeout</code> — timeout in seconds.</p>
+<p><code>report_slow_units</code> — upon reaching this threshold input will be interpreted as invalid.</p>
+<p><code>only_ascii</code> — if it equals 1, only ASCII input is received.</p>
+<p><code>detect_leaks</code> — if it equals 1, the fuzzer attempts to detect data leaks.</p>
+<p><code>len_control</code> — defines how fast the length limit is extended.</p>
+<p><code>mutate_depth</code> — number of mutations for input data.</p>
+<p>You can find more options <a href="https://llvm.org/docs/LibFuzzer.html#options">here</a>.</p>
+<h2 id="preloading-libraries-for-libfuzzer"><a class="header" href="#preloading-libraries-for-libfuzzer">Preloading libraries for LibFuzzer</a></h2>
+<p><code>LD_PRELOAD</code> — is a way to upload a library to a binary. <code>LD_PRELOAD</code> is required when the fuzzing test suite uses external dependencies and you need to upload libraries to a specified path. For example:</p>
+<p><code>LD_PRELOAD&quot;: &quot;./libs/libarchive.so.13 ./libs/libicudata.so.60 ./libs/libicuuc.so.60 ./libs/liblzo2.so.2 ./libs/libxml2.so.2</code></p>
+<p>If you don't want to list all libraries, use <code>LD_LIBRARY_PATH</code> to provide the path to the folder with them. For example:</p>
+<p><code>LD_LIBRARY_PATH&quot;: &quot;./libs</code></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="example-of-creating-fuzzing-test-suite"><a class="header" href="#example-of-creating-fuzzing-test-suite">Example of creating fuzzing test suite</a></h1>
+<p>For demonstration, we will use a fuzzing test suite for the notorious <a href="https://en.wikipedia.org/wiki/Heartbleed">Heartbleed</a> vulnerability from <a href="https://github.com/google/fuzzer-test-suite">Fuzzer Test Suite</a>. (See appendix)</p>
+<h2 id="binary-file"><a class="header" href="#binary-file">Binary file</a></h2>
+<p>After compilation we get the fuzzing test suite's binary. It will have a default name, but for convenience we can rename it as <code>target</code>.</p>
+<p>Upload the archive with fuzzing test suite files to the fuzzing farm.</p>
+<p><code>cd path_to_fuzzer</code><br />
+<code>tar -czf binaries.tar.gz openssl-1.0.1f-fsanitize_fuzzer</code></p>
+<p>In the case of Heartbleed, we have to add a folder with keys to the archive. </p>
+<h2 id="config-file"><a class="header" href="#config-file">Config file</a></h2>
+<p>You can upload <code>config.json</code> with additional options to the farm.</p>
+<pre><code>{
+    &quot;target&quot; : {
+        &quot;path&quot;: &quot;openssl-1.0.1f-fsanitize_fuzzer&quot;
+    }
+    &quot;options&quot;: {
+        &quot;libfuzzer&quot;: {
+             ...
+        }
+    }
+}
+</code></pre>
+<h2 id="seeds-file"><a class="header" href="#seeds-file">Seeds file</a></h2>
+<p>Seeds must be archived without placing them in a folder. </p>
+<p><code>cd path_to_seeds</code><br />
+<code>tar -czf seeds.tar.gz seed1 seed2</code></p>
+<h2 id="execution"><a class="header" href="#execution">Execution</a></h2>
+<p>Upload these files to the farm and select the Ubuntu image.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="how-fuzzing-test-suites-work-in-the-farm"><a class="header" href="#how-fuzzing-test-suites-work-in-the-farm">How fuzzing test suites work in the farm</a></h1>
+<p>To start working with a fuzzing test suite, you have to upload <code>tar.gz</code> archives (fuzzing test suite's binary and seeds) and the config file tp the farm. Only the binary is mandatory.</p>
+<p>Once the files are uploaded, file types and the json's validity are verified. At this point, the fuzzing test suite is in <code>Unverified OK</code> state. To start the verification process, click <code>Start</code>, and the fuzzing test suite will be moved to the queue of unverified fuzzing test suites. This queue has priority over the main one, so if there are fuzzing test suites that require verification, they will be executed first.</p>
+<p>When it's time to run the fuzzing test suite, it will be run in the <code>firstrun</code> mode with the limit of 10000 executions. This is done to make sure that the uploaded binary file is valid. If the fuzzing test suite finds a crash in this mode, it will be reflected in the output. If there are any errors, you will be notified about them.</p>
+<p>Then, the fuzzing test suite is moved to the main queue to be executed in the regular mode.</p>
+<p>The fuzzing farm has a system of evaluating a fuzzing test suite's relevance: each fuzzing test suite has its weight. If a fuzzing test suite finds new crashes and/or code coverage grows, its coverage is increased. As the weight increases, the fuzzing test suite is run more frequently. The more often a fuzzing test suite is run, the more crashes it finds and the faster code coverage grows.</p>
+<p>If a fuzzing test suite has been working without new crashes or increasing code coverage for a while, its weight is decreased. If a fuzzing test suite's weight continues to drop, it will only find crash duplicates and not the new ones.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="examples-of-fuzzing-test-suite"><a class="header" href="#examples-of-fuzzing-test-suite">Examples of fuzzing test suite</a></h1>
+<p>To better understand how to work in the fuzzing farm, we can take an existing fuzzing test suite that will definitely find some errors.</p>
+<h2 id="uploading-files-to-bondifuzz"><a class="header" href="#uploading-files-to-bondifuzz">Uploading files to BondiFuzz</a></h2>
+<p>You need to upload a binary file and, if you have them, seeds and config files.</p>
+<h3 id="binary"><a class="header" href="#binary">Binary</a></h3>
+<p>After compilation, we get the fuzzing test suite's binary. It will be named by default, but we can change its name to <code>target</code> for convenience.</p>
+<p>Fuzzing test suite files are uploaded in archives.</p>
+<p><code>cd path_to_fuzzer</code><br />
+<code>tar -czf binaries.tar.gz fuzzgoat</code></p>
+<h3 id="config-file-1"><a class="header" href="#config-file-1">Config file</a></h3>
+<p>You can also upload a config file <code>config.json</code> with additional options.</p>
+<pre><code>{
+    &quot;target&quot; : {
+        &quot;path&quot;: &quot;my_fuzzer&quot;,
+    }
+    &quot;env&quot;: {
+        &quot;MY_ENV&quot;: &quot;val&quot;
+    },
+    &quot;options&quot;: {
+        &quot;libfuzzer&quot;: {
+            &quot;max_len&quot;: &quot;512&quot;
+        },
+    }
+}
+</code></pre>
+<h3 id="seed-files"><a class="header" href="#seed-files">Seed files</a></h3>
+<p>Seeds have to be archived without being placed in a folder. </p>
+<p><code>cd path_to_seeds</code><br />
+<code>tar -czf seeds.tar.gz seed1 seed2</code></p>
+<h2 id="running-a-fuzzing-test-suite-in-bondifuzz"><a class="header" href="#running-a-fuzzing-test-suite-in-bondifuzz">Running a fuzzing test suite in BondiFuzz</a></h2>
+<p>Upload these files to the fuzzing farm. First, you have to choose an available Ubuntu image. It has to be the same version as the one used on your local machine during compilation.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="delete-a-fuzzer"><a class="header" href="#delete-a-fuzzer">Delete a fuzzer</a></h1>
+<p>To delete a fuzzer, go to <code>Fuzzers</code>, choose a fuzzer, and click <code>Delete</code>. </p>
+<p>In the pop-up window, choose one of the actions:<br />
+<img src="assets/delete_fuzzer.PNG" alt="Deletion options" /></p>
+<ul>
+<li>
+<p><code>Move to Trash</code> — fuzzer will be moved to the trash and kept there for 30 days, during which it can be recovered.</p>
+</li>
+<li>
+<p><code>Delete Permanently</code> — fuzzer will be deleted without options to recover it.</p>
+</li>
+</ul>
+<p>A fuzzing test suite's version can be recovered from trash within 30 days after deletion. Go to <code>Trash</code>, choose a fuzzing test suite that you want to restore, choose a version and click <code>Restore</code>. You will see a notification saying <code>Version is restoring</code>, where you can cancel fuzzing test suite recovery.</p>
+<p>You can also delete a fuzzing test suite's version from the trash completely by clicking <code>Delete</code>. On the notification saying <code>Version is permanently deleted</code>, you can click <code>Cancel</code>, to reverse this action and keep the version in the trash.</p>
+<p>You can also delete all versions of a fuzzing test suite from the trash. In the <code>Trash</code> tab, click <code>Delete</code> and confirm.</p>
+<p>You can permanently delete all fuzzing test suite versions related to a project. Go to <code>Trash</code>, click <code>Empty project bin</code> and confirm.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="working-with-bondifuzz-cli"><a class="header" href="#working-with-bondifuzz-cli">Working with BondiFuzz CLI</a></h1>
+<h2 id="installation"><a class="header" href="#installation">Installation</a></h2>
+<p>Python 3.7 or higher is required.</p>
+<p>Clone the project:</p>
+<p><code>git clone https://github.com/bondifuzz/bondi-python.git</code></p>
+<p>Install it using <code>pip</code>:</p>
+<p><code>pip install bondi-python</code></p>
+<p>Once installed, run it using <code>--help</code>:</p>
+<p><code>bondi --help</code></p>
+<p>You can enable autocompletion of commands using an additional framework:</p>
+<p><code>bondi --install-completion</code></p>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
+<p>Initialize server connection:</p>
+<p><code>bondi config init</code></p>
+<p>Enter the server URL, username, and password.</p>
+<pre><code>Server url: https://demo.bondifuzz.com
+Username: username
+Password: ***
+OK - Initialization successful
+</code></pre>
+<p>You can refresh the connection with a command like this one:</p>
+<p><code>bondi config set username user_1</code></p>
+<pre><code>OK - Config updated successfully
+</code></pre>
+<p>Get info about an established connection:</p>
+<p><code>bondi config show</code></p>
+<pre><code>--------  ------------------
+url       demo.bondifuzz.com
+username  **************name
+password  **************4321
+--------  ------------------
+</code></pre>
+<p>Get the URL of the connected server:</p>
+<p><code>bondi config get url</code></p>
+<p><code>https://demo.bondifuzz.com</code></p>
+<p>Get the username of the account connected to the server:</p>
+<p><code>bondi config get username</code></p>
+<p><code>username</code></p>
+<h2 id="managing-projects"><a class="header" href="#managing-projects">Managing projects</a></h2>
+<p>Create a new project:</p>
+<p><code>bondi projects create</code></p>
+<p>You need to give it a unique name and provide CPU and RAM values. A unique <code>id</code> will be assigned to the project automatically.</p>
+<pre><code>Name: project_1
+Node cpu: 40
+Node ram: 360
+----  ---------
+id    10550740
+name  project_1
+----  ---------
+</code></pre>
+<p>The CPU value is measured as the number of cores and can be: 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96. You can <code>Tab</code> to choose a value.</p>
+<p>The RAM value is measured in GiB and is equal to the CPU value times a coefficient of 1 to 16 but cannot be more than 640 GiB. You can <code>Tab</code> to choose a value.</p>
+<p>Get project information:</p>
+<p><code>bondi projects get 10550740</code></p>
+<p>Provide the project's <code>id</code> or name.</p>
+<pre><code>-----  ---------
+Project name    project_1
+Description     Default project
+Pool status     Ready
+Node group      CPU per node: 4 cores, RAM per node: 8GB, Node count: 1
+Pool resources  CPU in total: 3720 mcpu, RAM in total: 5714MB, Nodes ready: 1
+
+-----  ---------
+</code></pre>
+<p>Get the list of projects with <code>id</code>'s and descriptions:</p>
+<p><code>bondi projects list</code></p>
+<pre><code>+----------+--------------+------------------+
+|       id | name         | brief            |
+|----------+--------------+------------------|
+| 10550740 | project_1    | My first project |
+|  9845728 | project_2    | No description   |
+|  8953832 | project_3    | No description   |
+|  2755294 | default      | Default project  |
++----------+--------------+------------------+
+</code></pre>
+<p>Change project name:</p>
+<p><code>bondi projects update --id 10550740 --new-name project_2</code></p>
+<p>The table shows the new and old project names.</p>
+<pre><code>+------------+-----------+-----------+
+| property   | old       | new       |
+|------------+-----------+-----------|
+| name       | project_1 | project_2 |
++------------+-----------+-----------+
+</code></pre>
+<p>Change project description:</p>
+<p><code>bondi projects update --id 10550740 --new-description no description</code></p>
+<p>The table shows the new and old project descriptions.</p>
+<pre><code>+-------------+-------+----------------+
+| property    | old   | new            |
+|-------------+-------+----------------|
+| description | none  | no description |
++-------------+-------+----------------+
+</code></pre>
+<p>For convenience, you can set a current project as the default one, so you won't have to enter its name and it will be entered automatically.</p>
+<p><code>bondi projects set-default project_1</code></p>
+<p>View the default project:</p>
+<p><code>bondi projects get-default</code></p>
+<p>Cancel setting a project as default:</p>
+<p><code>bondi projects unset-default</code></p>
+<p>Delete project:</p>
+<p><code>bondi projects delete project_1</code></p>
+<p>Recover project from trash:</p>
+<p><code>bondi projects restore project_1</code></p>
+<p>Delete project completely:</p>
+<p><code>bondi projects erase project_1</code></p>
+<h2 id="working-with-fuzzers"><a class="header" href="#working-with-fuzzers">Working with fuzzers</a></h2>
+<p>Create a fuzzer:</p>
+<p><code>bondi fuzzers create</code></p>
+<p>When creating a fuzzer, you must specify its type, programming language, and the project it's related to. A fuzzer's name has to be unique in the context of a project. Fuzzers related to different projects can be named the same. A fuzzer will be automatically assigned a unique <code>id</code>.</p>
+<pre><code>Name: fuzzer_1
+Description: none
+Fuzzer type: AFL
+Fuzzer lang: Cpp
+Project: project_2
+----  --------
+id    10591666
+name  fuzzer_1
+----  --------
+</code></pre>
+<p>Get fuzzer information:</p>
+<p><code>bondi fuzzers get fuzzer_1</code></p>
+<p>You will see all information about the fuzzer.</p>
+<pre><code>Fuzzer: fuzzer_1
+--------------  --------
+id              10591666
+name            fuzzer_1
+type            AFL
+lang            Cpp
+ci_integration  False
+description     none
+--------------  --------
+</code></pre>
+<p>Get the list of fuzzers (you have to provide the project name):</p>
+<p><code>bondi fuzzers list</code></p>
+<p>Get a list of possible configurations <em>programming language — fuzzer engine</em>:</p>
+<p><code>bondi fuzzers show-configurations</code></p>
+<pre><code>------  --------------
+C++     AFL, LibFuzzer
+Go      LibFuzzer
+Rust    LibFuzzer
+Python  LibFuzzer
+------  --------------
+</code></pre>
+<p>Change fuzzer name providing the project name:</p>
+<p><code>bondi fuzzers update fuzzer_1 -n fuzzer_2</code></p>
+<pre><code>Project: project_2
++-----------------+-------------+-------------+
+| Property name   | Old value   | New value   |
+|-----------------+-------------+-------------|
+| Project name    | fuzzer_1    | fuzzer_2    |
++-----------------+-------------+-------------+
+</code></pre>
+<p>Change fuzzer description providing the project name:</p>
+<p><code>bondi fuzzers update fuzzer_1 -d description</code></p>
+<pre><code>Project: project_2
++-----------------+----------------+-------------+
+| Property name   | Old value      | New value   |
+|-----------------+----------------+-------------|
+| Description     | No description | description |
++-----------------+----------------+-------------+
+</code></pre>
+<p>For convenience, you can set a current fuzzer as the default one, so you won't have to enter its name and it will be entered automatically.</p>
+<p><code>bondi fuzzers set-default fuzzer_1</code></p>
+<p>View the default fuzzer:</p>
+<p><code>bondi fuzzers get-default</code></p>
+<p>Cancel setting a fuzzer as default:</p>
+<p><code>bondi fuzzers unset-default </code></p>
+<p>Delete fuzzer:</p>
+<p><code>bondi fuzzers delete fuzzer_1</code></p>
+<p>Recover fuzzer from trash:</p>
+<p><code>bondi fuzzers restore fuzzer_1</code></p>
+<p>Delete fuzzer completely:</p>
+<p><code>bondi fuzzers erase fuzzer_1</code></p>
+<p>Download fuzzer corpus:</p>
+<p><code>bondi fuzzers download-corpus fuzzer_1</code></p>
+<h2 id="creating-fuzzer-versions"><a class="header" href="#creating-fuzzer-versions">Creating fuzzer versions</a></h2>
+<p>Once a fuzzer is created, you have to create its first version and the next versions after that. This would allow to keep the original fuzzer while making changes to it and the tested code.</p>
+<p>The CPU value is measured in mcpu and ranges from 500 to 2000.</p>
+<p>The RAM value is measured in MiB and ranges from 500 to 5000.</p>
+<p>The tmpfs value is measured in MiB and ranges from 100 to 2000.</p>
+<p>Create a fuzzer version:</p>
+<p><code>bondi revisions create -n revision_1 -i 53823967 -f fuzzer_1 -p project_1 --cpu 600 --ram 1000 --tmpfs 300</code></p>
+<pre><code>-------------  ----------
+ID             64321403
+Revision name  revision_1
+-------------  ----------
+</code></pre>
+<p>If you do not provide a version name in the command, it will be generated automatically. A unique ID is assigned to a version as well.</p>
+<p>View the list of all fuzzer versions:</p>
+<p><code>bondi revisions list</code></p>
+<p>Get information about a specific version:</p>
+<p><code>bondi revisions get revision_1 -f fuzzer_1</code></p>
+<p>For convenience, you can set the current fuzzer as the default one, so you won't have to enter its name and it will be entered automatically.</p>
+<p><code>bondi revisions set-default revision_1</code></p>
+<p>View the default version:</p>
+<p><code>bondi revisions get-default</code></p>
+<p>Cancel setting a version as default:</p>
+<p><code>bondi revisions unset-default</code></p>
+<p>Delete a version:</p>
+<p><code>bondi revisions delete revision_1</code></p>
+<p>Recover a version from trash:</p>
+<p><code>bondi revisions restore revision_1</code></p>
+<p>Delete a version completely:</p>
+<p><code>bondi revisions erase revision_1</code></p>
+<p>Fuzzer corpora can be copied and pasted between versions of the same fuzzer:</p>
+<p><code>bondi revisions copy-corpus revision_1 revision_2</code></p>
+<p>You can only paste to a version that hasn't been run yet.</p>
+<h2 id="images"><a class="header" href="#images">Images</a></h2>
+<p>You have to choose an image for every fuzzer. Here's how to view all available images:</p>
+<p><code>bondi images list-available -l Cpp -e LibFuzzer -p project_1</code></p>
+<p>Each image has a unique ID.</p>
+<p>Currently, only farm admins can upload images. User can send requests for images through support.</p>
+<h2 id="uploading-fuzzing-test-suite-files"><a class="header" href="#uploading-fuzzing-test-suite-files">Uploading fuzzing test suite files</a></h2>
+<p>Create and tested files are uploaded to the farm with a command like this:</p>
+<p><code>bondi revisions upload-files -p project_1 -f fuzzer_1 revision_1 --binaries-path path_to_fuzzer/binaries.tar.gz --config-path path_to_fuzzer/config.json --seeds-path path_to_fuzzer/seeds.tar.gz</code></p>
+<p><code>binaries  [####################################]  100%</code><br />
+<code>seeds  [####################################]  100%</code><br />
+<code>config  [####################################]  100%</code><br />
+<code>OK - Files uploaded successfully</code></p>
+<p>You can go to the directory with fuzzing test suite files and user a simpler command:</p>
+<p><code>bondi revisions upload-files -p project_1 -f fuzzer_1 revision_1 --binaries binaries.tar.gz --config config.json --seeds seeds.tar.gz</code></p>
+<p>Download fuzzing test suite files:</p>
+<p><code>bondi revisions download-files revision_1 -f fuzzer_1 -p default</code></p>
+<h2 id="working-with-fuzzers-1"><a class="header" href="#working-with-fuzzers-1">Working with fuzzers</a></h2>
+<p>Run the fuzzer:</p>
+<p><code>bondi revisions start revision_1</code></p>
+<p>If everything's okay, you will see this message: <code>OK - Revision started</code></p>
+<p>Note: the farm's architecture implies that a fuzzer versions is executed. You cannot run several versions of the same simultaneously, but you can run versions of different fuzzers.</p>
+<p>Stop the fuzzed:</p>
+<p><code>bondi revisions stop revision_1</code></p>
+<p>Restart the fuzzer:</p>
+<p><code>bondi revisions restart revision_1</code></p>
+<p>Upon a restart all fuzzer data are cleared, only the corpus remains.</p>
+<p>Corpora can be copied between fuzzer versions:</p>
+<p><code>bondi revisions copy-corpus revision_1 revision_2</code></p>
+<h2 id="fuzzer-results"><a class="header" href="#fuzzer-results">Fuzzer results</a></h2>
+<p>To get a list of crashes for all fuzzer versions, provide the project name:</p>
+<p><code>bondi crashes list -f my_fuzzer -p project_1</code></p>
+<p>or use</p>
+<p><code>bondi crashes list</code></p>
+<p>You can also get list of crashes for a version:</p>
+<p><code>bondi crashes list -r revision_1</code></p>
+<p>To get crash data, enter the crash ID, fuzzer name and the related project name:</p>
+<p><code>bondi crashes get 10327133 -f my_fuzzer -p project_1</code></p>
+<p>To get detailed crash data, enter the crash ID, fuzzer name and the related project name:</p>
+<p><code>bondi crashes get-details 10327133 -f my_fuzzer -p project_1</code></p>
+<p>Here's the output:</p>
+<pre><code>INFO: Seed: 3128728610
+INFO: Loaded 1 modules   (35943 inline 8-bit counters): 35943 [0xad8690, 0xae12f7), 
+INFO: Loaded 1 PC tables (35943 PCs): 35943 [0x94f0e8,0x9db758), 
+/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer: Running 1 inputs 2000000 time(s) each.
+Running: /mnt/tempfs/binaries/leak-56aa9f9652536ca63aa8251540ae7007a017c735
+==16==WARNING: invalid path to external symbolizer!
+==16==WARNING: Failed to use and restart external symbolizer!
+
+=================================================================
+==16==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x52447d  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x52447d)
+    #1 0x6013fb  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x6013fb)
+    #2 0x6588c1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x6588c1)
+    #3 0x56afb8  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x56afb8)
+    #4 0x55c810  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x55c810)
+    #5 0x59f242  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x59f242)
+    #6 0x59a1d1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x59a1d1)
+    #7 0x556bcd  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x556bcd)
+    #8 0x45d7c1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x45d7c1)
+    #9 0x448ed2  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x448ed2)
+    #10 0x44ef3e  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x44ef3e)
+    #11 0x476a02  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x476a02)
+    #12 0x7f38ee67ed09  (/lib/x86_64-linux-gnu/libc.so.6+0x26d09)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x52447d  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x52447d)
+    #1 0x6013fb  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x6013fb)
+    #2 0x6588e1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x6588e1)
+    #3 0x56afb8  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x56afb8)
+    #4 0x55c810  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x55c810)
+    #5 0x59f242  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x59f242)
+    #6 0x59a1d1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x59a1d1)
+    #7 0x556bcd  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x556bcd)
+    #8 0x45d7c1  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x45d7c1)
+    #9 0x448ed2  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x448ed2)
+    #10 0x44ef3e  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x44ef3e)
+    #11 0x476a02  (/mnt/tempfs/binaries/openssl-1.0.1f-fsanitize_fuzzer+0x476a02)
+    #12 0x7f38ee67ed09  (/lib/x86_64-linux-gnu/libc.so.6+0x26d09)
+
+SUMMARY: AddressSanitizer: 64 byte(s) leaked in 2 allocation(s).
+
+INFO: a leak has been found in the initial corpus.
+
+INFO: to ignore leaks on libFuzzer side use -detect_leaks=0.
+</code></pre>
+<p>To download crash data, enter the crash ID, fuzzer name and the related project name:</p>
+<p><code>bondi crashes download -c 10327133 -f my_fuzzer -p project_1</code></p>
+<p>All data will be saved to a .crash file.</p>
+<pre><code>crash  [####################################]  100%
+OK - Saved to 10327133.crash
+
+</code></pre>
+<h2 id="viewing-stats"><a class="header" href="#viewing-stats">Viewing stats</a></h2>
+<p>The fuzzing farm keeps the stats on fuzzers. </p>
+<p>You can view the stats for a fuzzer version:</p>
+<p><code>bondi statistics show -r revision_1 -f fuzzer_1 -p project_1</code></p>
+<p>For detailed stats you can view graphs for each of the following parameters:</p>
+<ul>
+<li>corpus_entries</li>
+<li>edge_cov</li>
+<li>execs_per_sec</li>
+<li>known_crashes</li>
+<li>unique_crashes</li>
+<li>corpus_size</li>
+<li>execs_done</li>
+<li>feature_cov</li>
+<li>peak_rss</li>
+</ul>
+<p><code>bondi statistics show-chart -c unique_crashes -r revision_1 -f fuzzer_1 -p project_1</code></p>
+<h2 id="task-tracker-integration"><a class="header" href="#task-tracker-integration">Task tracker integration</a></h2>
+<p>The BondiFuzz CLI utility allows you to integrate task trackers.</p>
+<p>To create a Jira integration, you have to provide a URL, the user's login/email and password/token, Jira project name, issue type, priority, integration name (it must be unique), integration type, and BondiFuzz project name.</p>
+<p><code>bondi integrations create --jira-url https://demo.jira.com --jira-username User@user.com --jira-password passw123 --jira-project MP --jira-issue-type Task --jira-priority Medium -n integration_1 -t Jira -p project_1</code></p>
+<p>The integration will get a unique ID.</p>
+<p>Delete an integration:</p>
+<p><code>bondi integrations delete -p project_1 integration_1</code></p>
+<p>Disable an integration by providing the project name in the farm and the integration's ID/name:</p>
+<p><code>bondi integrations disable -p project_1 integration_1</code></p>
+<p>You can enable a previously disabled integration by providing the project name and integration ID/name:</p>
+<p><code>bondi integrations enable -p project_1 integration_1</code></p>
+<p>Для получения детальной информации об интеграции нужно указать ID/название интеграции и соответствующий проект:</p>
+<p><code>bondi integrations get -p project_1 17924052</code></p>
+<p>To get detailed information about an integration, provide its ID/name and project name:</p>
+<p><code>bondi integrations get-config -p project_1 17924052</code></p>
+<p>Get a list of integrations by project name:</p>
+<p><code>bondi integrations list -p project_1</code></p>
+<p>Change integration name:</p>
+<p><code>bondi integrations update -p project_1 17924052 -n integration_2</code></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="appendix"><a class="header" href="#appendix">Appendix</a></h1>
+<p>We've created fuzzing test suite samples for different programming languages. Currently they are available for:</p>
+<ul>
+<li>C++</li>
+<li>Rust</li>
+<li>Go</li>
+<li>Python</li>
+<li>Java (This language is not supported, but we are working on it.)</li>
+<li>Java with JQF (This language is not supported, but we are working on it.)</li>
+<li>Java Script (This language is not supported, but we are working on it.)</li>
+</ul>
+<p>The list of languages will grow.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c"><a class="header" href="#c">C++</a></h1>
+<p>You can use <a href="https://llvm.org/docs/LibFuzzer.html">LibFuzzer</a> to fuzz C++ code. It's a library meant for fuzzing other libraries distributed with Clang, a project by LLVM.</p>
+<h2 id="heartbleed-example"><a class="header" href="#heartbleed-example">Heartbleed example</a></h2>
+<p>As an example, let's take the famous <a href="https://en.wikipedia.org/wiki/Heartbleed">heartbleed</a> vulnerability found in <a href="https://en.wikipedia.org/wiki/OpenSSL">OpenSSL</a>.</p>
+<p>First, we have to install the vulnerable version of the library.</p>
+<p><code>curl -O https://ftp.openssl.org/source/old/1.0.1/openssl-1.0.1f.tar.gz</code><br />
+<code>tar xf openssl-1.0.1f.tar.gz</code><br />
+<code>cd openssl-1.0.1f/</code><br />
+<code>./config</code><br />
+<code>make CC=&quot;/usr/local/bin/clang -g -fsanitize=address,fuzzer-no-link&quot;</code><br />
+<code>cd ..</code></p>
+<p>The fuzzing test suite looks like this:</p>
+<pre><code class="language-cpp">#include &quot;openssl/ssl.h&quot;
+#include &quot;openssl/err.h&quot;
+#include &lt;assert.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stddef.h&gt;
+
+SSL_CTX *Init() {
+  SSL_library_init();
+  SSL_load_error_strings();
+  ERR_load_BIO_strings();
+  OpenSSL_add_all_algorithms();
+  SSL_CTX *sctx;
+  assert (sctx = SSL_CTX_new(TLSv1_method()));
+  assert(SSL_CTX_use_certificate_file(sctx, &quot;../runtime/server.pem&quot;,
+                                      SSL_FILETYPE_PEM));
+  assert(SSL_CTX_use_PrivateKey_file(sctx, &quot;../runtime/server.key&quot;,
+                                     SSL_FILETYPE_PEM));
+  return sctx;
+}
+extern &quot;C&quot; int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
+  static SSL_CTX *sctx = Init();
+  SSL *server = SSL_new(sctx);
+  BIO *sinbio = BIO_new(BIO_s_mem());
+  BIO *soutbio = BIO_new(BIO_s_mem());
+  SSL_set_bio(server, sinbio, soutbio);
+  SSL_set_accept_state(server);
+  BIO_write(sinbio, Data, Size);
+  SSL_do_handshake(server);
+  SSL_free(server);
+  return 0;
+}
+
+</code></pre>
+<p>The files <code>server.key</code> and <code>server.pem</code> are generated using the following command:</p>
+<p><code>openssl req -x509 -newkey rsa:512 -keyout server.key -out server.pem -days 9999 -nodes -subj /CN=a/</code></p>
+<p>Here's the content of <code>CMakeLists.txt</code>:</p>
+<pre><code>project(&quot;heartbleed-fuzzer&quot;)
+
+set(CMAKE_CXX_COMPILER &quot;clang++&quot;)
+
+set(SRC &quot;~/heartbleed&quot;)
+set(OPENSSL_PATH ${SRC}/openssl-1.0.1f)
+
+add_executable(heartbleed_fuzzer heartbleed.cpp)
+
+target_include_directories(heartbleed_fuzzer PRIVATE ${OPENSSL_PATH}/include)
+target_compile_options(heartbleed_fuzzer PRIVATE -fsanitize=fuzzer,address)
+
+target_link_options(heartbleed_fuzzer PRIVATE -fsanitize=fuzzer,address)
+target_link_libraries(heartbleed_fuzzer ${OPENSSL_PATH}/libssl.a ${OPENSSL_PATH}/libcrypto.a)
+</code></pre>
+<p>Now, it's time to build and run the fuzzuer:</p>
+<p><code>mkdir -p build</code><br />
+<code>rm -rf build/*</code><br />
+<code>cd build</code><br />
+<code>cmake ..</code><br />
+<code>make</code><br />
+<code>./heartbleed_fuzzer</code>  </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rust"><a class="header" href="#rust">Rust</a></h1>
+<p>How to write a fuzzing test suite in Rust.</p>
+<h2 id="example-1-cargo-fuzz-libfuzzer"><a class="header" href="#example-1-cargo-fuzz-libfuzzer">Example 1: cargo-fuzz (libFuzzer)</a></h2>
+<p>First, install <a href="https://github.com/rust-fuzz/cargo-fuzz">cargo-fuzz</a>:</p>
+<p><code>cargo install cargo-fuzz</code></p>
+<p>You can use <a href="https://github.com/servo/rust-url.git">rust-url</a>, a URL library for Rust.</p>
+<p>Clone the repository:</p>
+<p><code>git clone https://github.com/servo/rust-url.git</code></p>
+<p>And run this command:</p>
+<p><code>git checkout bfa167b4e0253642b6766a7aa74a99df60a94048</code>,</p>
+<p>to go to a specific revision that has a syntax analysis error.</p>
+<p>Then, initialize <code>cargo-fuzz</code>:</p>
+<p><code>cargo fuzz init</code></p>
+<p>A directory called <code>fuzz</code> will be created. Place the fuzzing test suite's code to <code>fuzz/fuzz_targets/fuzz_target_1.rs</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>#![no_main]
+<span class="boring">fn main() {
+</span>#[macro_use] extern crate libfuzzer_sys;
+extern crate url;
+
+fuzz_target!(|data: &amp;[u8]| {
+    if let Ok(s) = std::str::from_utf8(data) {
+        let _ = url::Url::parse(s);
+    }
+});
+<span class="boring">}
+</span></code></pre></pre>
+<p>and corpus to <code>fuzz/corpus/fuzz_target_1/</code>:</p>
+<p><code>mkdir in</code>
+<code>echo &quot;tcp://example.com/&quot; &gt; in/url</code>
+<code>echo &quot;ssh://192.168.1.1&quot; &gt; in/url2</code>
+<code>echo &quot;http://www.example.com:80/foo?hi=bar&quot; &gt; in/url3</code></p>
+<p>Use this command to run the fuzzing test suite:</p>
+<p><code>RUST_BACKTRACE=1 cargo fuzz run</code></p>
+<p>The fuzzing test suite's binary can be found here: <code>rust-url/fuzz/target/x86_64-unknown-linux-gnu/release/fuzz_target_1</code></p>
+<p>You have to compress the binary and the corpus into an archive which you will upload to BondiFuzz.</p>
+<h2 id="example-2-afl"><a class="header" href="#example-2-afl">Example 2: AFL</a></h2>
+<p>To start working with the AFL-fuzzer install:</p>
+<p><code>cargo install afl</code></p>
+<p>Clone:</p>
+<p><code>git clone https://github.com/servo/rust-url.git</code></p>
+<p>and go to a vulnerable revision.</p>
+<p>Then, initialize:</p>
+<p><code>cargo new --bin url-fuzz-target</code></p>
+<p>The source with the fuzzing test suite has to be here <code>url-fuzz-target/src/main.rs</code></p>
+<p>Add the following strings to <code>url-fuzz-target/Cargo.toml</code>:</p>
+<pre><code>[dependencies]
+afl = &quot;*&quot;
+url = { path = &quot;..&quot;} // это путь к rust-url/ относительно rust-url/url-fuzz-target
+</code></pre>
+<p>Build the fuzzing test suite:</p>
+<p><code>cargo afl build</code></p>
+<p>Create a directory called <code>in</code> where you will store the corpus used for libFuzzer.</p>
+<p>Run the fuzzing test suite first going to the directory <code>url-fuzz-target</code>:</p>
+<p><code>cargo afl fuzz -i in -o out target/debug/url-fuzz-target</code></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="go"><a class="header" href="#go">Go</a></h1>
+<p>Using go-fuzz in <code>libfuzzer</code> mode</p>
+<h2 id="installation-1"><a class="header" href="#installation-1">Installation</a></h2>
+<p>Run this commands:</p>
+<p><code>export GO111MODULE=on</code><br />
+<code>go get github.com/dvyukov/go-fuzz/go-fuzz-build</code><br />
+<code>go get github.com/dvyukov/go-fuzz/go-fuzz</code></p>
+<h3 id="example-1-low-difficulty"><a class="header" href="#example-1-low-difficulty">Example 1: Low difficulty</a></h3>
+<p>Let's consider division by zero as an example.</p>
+<p>Required version of go: <code>go1.18.2 linux/amd64</code>.</p>
+<p>Write the following code to <code>your_path/fuzz.go</code>:</p>
+<pre><code class="language-go">package zero
+
+func Fuzz(data []byte) int {
+
+	if len(data) &lt; 10{
+		return 0
+	}
+
+	a := data[0]
+	b := data[1]
+	c := a / (b-100)
+
+	_ = c
+
+	return 0
+}
+</code></pre>
+<p>Build:</p>
+<p><code>your_path$ go-fuzz-build -libfuzzer -func=Fuzz -o zero.a</code><br />
+<code>your_path$ clang -fsanitize=fuzzer zero.a -o divzero-fuzzer</code></p>
+<p>Options for <code>go-fuzz-build</code>:</p>
+<ul>
+<li><code>-libfuzzer</code> - enable <code>libfuzzer</code> mode</li>
+<li><code>-func=Fuzz</code> - define a function that will be subject to fuzzing(in this case it's <code>Fuzz</code>)</li>
+<li><code>-o zero.a</code> - name of a static library storing the compiled code (arbitrary name)</li>
+</ul>
+<p>Options for <code>clang</code>:</p>
+<ul>
+<li><code>-fsanitize=fuzzer</code> - enable a fuzzing mode in which the compiler will include all dependencies for <code>libfuzzer</code></li>
+<li><code>zero.a</code> - library with the fuzzing test suite's logic</li>
+<li><code>-o divzero-fuzzer</code> - fuzzing test suite name</li>
+</ul>
+<p>Run with this command:</p>
+<p><code>your_path$ ./divzero-fuzzer</code></p>
+<h3 id="example-2-medium-difficulty"><a class="header" href="#example-2-medium-difficulty">Example 2: Medium difficulty</a></h3>
+<p>This example is based on <a href="https://adalogics.com/blog/getting-started-with-go-fuzz">this</a> article. The target is <a href="https://github.com/hashicorp/vault">Vault</a>, a tool for secure access to classified data (function <code>XORBase64</code>).</p>
+<p>Required version of go: <code>go1.18.2 linux/amd64</code>.</p>
+<p>Install <code>vault</code>:</p>
+<p><code>export GO111MODULE=on</code><br />
+<code>go get github.com/hashicorp/vault</code><br />
+<code>cd $GOPATH/src/github.com/hashicorp/vault/sdk/helper/xor</code></p>
+<p>Write the following code to <code>fuzz.go</code>:</p>
+<pre><code class="language-go">package xor
+
+func Fuzz(data []byte) int {
+    _, _ = XORBase64(string(data), string(data))
+    return 1
+}
+</code></pre>
+<p>The package name is the same as in <code>xor.go</code> with <code>XORBase64</code>.</p>
+<p>Build:</p>
+<p><code>sdk/helper/xor$ go-fuzz-build -libfuzzer -func=Fuzz -o Fuzz.a</code><br />
+<code>sdk/helper/xor$ clang -fsanitize=fuzzer Fuzz.a -o xor-fuzzer</code></p>
+<p>Run with this command:</p>
+<p><code>sdk/helper/xor$ ./xor-fuzzer</code></p>
+<h3 id="example-3-medium-difficulty-2"><a class="header" href="#example-3-medium-difficulty-2">Example 3: Medium difficulty [2]</a></h3>
+<p>This is based on this <a href="https://blog.cloudflare.com/dns-parser-meet-go-fuzzer/">article</a>.</p>
+<p>The target is the <a href="https://github.com/miekg/dns">DNS library</a> <code>v1.1.25</code> and its functions <code>Unpack</code> and <code>PackBuffer</code>.</p>
+<p>Required version of go: <code>go1.13.8 linux/amd64</code>.</p>
+<p>Install:</p>
+<p><code>your_path$ export GO111MODULE=on</code><br />
+<code>your_path$ go mod init fuzz</code><br />
+<code>your_path$ go get github.com/miekg/dns@v1.1.25</code></p>
+<p>The <code>go mod init</code> command is required to download a specific versions of the repository.</p>
+<p>Write the following code to <code>fuzz.go</code>:</p>
+<pre><code class="language-go">package fuzz
+
+import	(
+	&quot;github.com/miekg/dns&quot;
+    &quot;bytes&quot;
+    &quot;encoding/hex&quot;
+    &quot;os&quot;
+)
+
+func Fuzz(rawMsg []byte) int {
+    var (
+        msg         = &amp;dns.Msg{}
+        buf, bufOne = make([]byte, 100000), make([]byte, 100000)
+        res, resOne []byte
+
+        unpackErr, packErr error
+    )
+
+    if unpackErr = msg.Unpack(rawMsg); unpackErr != nil {
+        return 0
+    }
+
+    if res, packErr = msg.PackBuffer(buf); packErr != nil {
+        return 0
+    }
+
+    for i := range res {
+        bufOne[i] = 1
+    }
+
+    resOne, packErr = msg.PackBuffer(bufOne)
+    if packErr != nil {
+        println(&quot;Pack failed only with a filled buffer&quot;)
+        panic(packErr)
+    }
+
+    if !bytes.Equal(res, resOne) {
+        println(&quot;buffer bits leaked into the packed message&quot;)
+        println(hex.Dump(res))
+        println(hex.Dump(resOne))
+        os.Exit(1)
+    }
+
+    return 1
+}
+</code></pre>
+<p>Build:</p>
+<p><code>your_path$ go-fuzz-build -libfuzzer -func=Fuzz -o Fuzz.a</code><br />
+<code>your_path$ clang -fsanitize=fuzzer Fuzz.a -o dns-fuzzer</code></p>
+<h2 id="corpus"><a class="header" href="#corpus">Corpus</a></h2>
+<p>Before running a fuzzing test suite, you have to create a corpus.</p>
+<p>This is based on the dump <a href="https://github.com/miekg/pcap/blob/master/test/pcap_files/Network_Join_Nokia_Mobile.pcap">Network_Join_Nokia_Mobile.pcap</a>.</p>
+<p>Clone the dump:</p>
+<p><code>mkdir corpus</code><br />
+<code>cd corpus</code><br />
+<code>git clone https://github.com/miekg/pcap</code></p>
+<p>Write the following code to <code>corpus/gen_corp.go</code>:</p>
+<pre><code class="language-go">package main
+
+import (
+	&quot;crypto/rand&quot;
+	&quot;encoding/hex&quot;
+	&quot;log&quot;
+	&quot;os&quot;
+	&quot;strconv&quot;
+	&quot;github.com/miekg/pcap&quot;
+)
+
+func fatalIfErr(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func main() {
+	handle, err := pcap.OpenOffline(os.Args[1])
+	fatalIfErr(err)
+
+	b := make([]byte, 4)
+	_, err = rand.Read(b)
+	fatalIfErr(err)
+	prefix := hex.EncodeToString(b)
+
+	i := 0
+	for pkt := handle.Next(); pkt != nil; pkt = handle.Next() {
+		pkt.Decode()
+
+		f, err := os.Create(&quot;p_&quot; + prefix + &quot;_&quot; + strconv.Itoa(i))
+		fatalIfErr(err)
+		_, err = f.Write(pkt.Payload)
+		fatalIfErr(err)
+		fatalIfErr(f.Close())
+
+		i++
+	}
+}
+
+</code></pre>
+<p>Build:</p>
+<p><code>corpus$ export GO111MODULE=on</code><br />
+<code>corpus$ go get github.com/miekg/pcap</code><br />
+<code>corpus$ go build gen_corp.go</code></p>
+<p>Corpus generation:</p>
+<p><code>corpus$ mkdir in</code><br />
+<code>corpus$ cd in</code><br />
+<code>corpus$ ../gen_corp ../pcap/test/pcap_files/Network_Join_Nokia_Mobile.pcap</code></p>
+<p>Run the fuzzing test suite with the generated corpus:</p>
+<p><code>./dns-fuzzer ./corpus/in</code></p>
+<h2 id="possible-problems"><a class="header" href="#possible-problems">Possible problems</a></h2>
+<h3 id="cryptoelliptic"><a class="header" href="#cryptoelliptic">crypto/elliptic</a></h3>
+<p>If you are using <code>go 1.18.x</code> and the subject code has a <code>crypto/elliptic</code> dependency, nothing would work. You'll have to wait until they resolve this <a href="https://github.com/dvyukov/go-fuzz/issues/338">issue</a>.</p>
+<h3 id="module-version"><a class="header" href="#module-version">Module version</a></h3>
+<p>If you need a specific version, first check if it can be found at <a href="https://pkg.go.dev/">pkg.go.dev</a>.</p>
+<p>For example, </p>
+<p>https://pkg.go.dev/github.com/artyom/mdserver?tab=versions - it's OK in <code>github.com/artyom/mdserver</code>,</p>
+<p>https://pkg.go.dev/github.com/istio/istio?tab=versions - but not in <code>github.com/istio/istio</code>, so it wouldn't work.</p>
+<h3 id="go111module"><a class="header" href="#go111module">GO111MODULE</a></h3>
+<p>If you cannot download a module, check that <code>GO111MODULE=on</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="python"><a class="header" href="#python">Python</a></h1>
+<p>How to write a fuzzing test suite in Python</p>
+<h2 id="installing-atheris"><a class="header" href="#installing-atheris">Installing atheris</a></h2>
+<p><code>atheris</code> is a code fuzzing test suite written in Python and based on <code>LibFuzzer</code>. Install it using this command:</p>
+<p><code>pip3 install atheris</code></p>
+<p>Another option is to build it from the <a href="https://github.com/google/atheris">atheris</a> repository</p>
+<p><code>pip3 install --no-binary atheris atheris</code><br />
+<code>git clone https://github.com/google/atheris.git</code><br />
+<code>cd atheris</code><br />
+<code>pip3 install .</code></p>
+<h2 id="instrumentation"><a class="header" href="#instrumentation">Instrumentation</a></h2>
+<p>Instrumentation can be done in different ways.</p>
+<p>Using functions:</p>
+<pre><code class="language-python">@atheris.instrument_func
+def my_function(foo, bar):
+  print(&quot;instrumented&quot;)
+</code></pre>
+<p>Using modules:</p>
+<pre><code class="language-python">with atheris.instrument_imports():
+  import foo
+  from bar import baz
+</code></pre>
+<p>Using modules and functions:</p>
+<pre><code class="language-python">atheris.instrument_all()
+atheris.Setup()
+</code></pre>
+<h3 id="example-1-division-by-zero"><a class="header" href="#example-1-division-by-zero">Example 1: Division by zero</a></h3>
+<p>There is a function where division by zero never happens:</p>
+<pre><code class="language-python">def TestOneInput(data):
+    
+    if len(data) &lt; 2:
+        return 0
+
+    a = data[0]
+    b = data[1]
+
+    c = a / (b - 30)
+
+</code></pre>
+<p>The fuzzing test suite for it looks like this:</p>
+<pre><code class="language-python">import atheris
+import sys
+
+@atheris.instrument_func
+def TestOneInput(data):
+    
+    if len(data) &lt; 2:
+        return 0
+
+    a = data[0]
+    b = data[1]
+
+    c = a / (b - 30)
+
+
+atheris.Setup(sys.argv, TestOneInput)
+atheris.Fuzz()
+
+</code></pre>
+<h3 id="example-2-pillow-cve-2021-34552"><a class="header" href="#example-2-pillow-cve-2021-34552">Example 2: Pillow (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-34552">CVE-2021-34552</a>)</a></h3>
+<p>CVE-2021-34552 is an instance of unsafe use of <code>sprintf</code> in a module written in C <a href="https://github.com/python-pillow/Pillow/pull/5567/files"><em>imaging</em></a>. It results in stack overflow.</p>
+<p>You can build Pillow with this command:</p>
+<p><code>git clone https://github.com/python-pillow/Pillow</code><br />
+<code>cd Pillow</code><br />
+<code>git checkout 8.2.0 &amp;&amp; python3 ./setup.py build</code></p>
+<p>That's what a fuzzing test suite looks like:</p>
+<pre><code class="language-python">import atheris
+import importlib.util
+import sys
+
+def import_PIL(src):
+    spec = importlib.util.spec_from_file_location(&quot;PIL&quot;, &quot;{}/__init__.py&quot;.format(src))
+    PIL_ = importlib.util.module_from_spec(spec)
+    sys.modules[&quot;PIL&quot;] = PIL_
+
+    spec.loader.exec_module(PIL_)
+
+    globals().update({&quot;PIL&quot;: PIL_})
+
+    
+src = 'path/to/Pillow/build/lib.linux-x86_64-3.8/PIL'
+import_PIL(src)
+
+from PIL import Image
+
+@atheris.instrument_func
+def TestOneInput(data):
+
+    data = data.decode()
+
+    try:
+        with Image.open(&quot;some.jpg&quot;) as img:
+            img.convert(mode=data)
+    except ValueError:
+        pass
+
+atheris.Setup(sys.argv, TestOneInput)
+atheris.Fuzz()
+</code></pre>
+<p>The <code>PIL</code> module is importen from a custom directory (not a system one) to keep the system clean.</p>
+<p>You need any <code>.jpg</code> image to run it.</p>
+<p>The <code>try except</code> block is required because the module will generate lots of exceptions which would stop the fuzzing process.</p>
+<p>Run with this command:</p>
+<p><code>./pillow-fuzzer.py ./corpus -only_ascii=1</code></p>
+<p>The options are the same as in <a href="https://llvm.org/docs/LibFuzzer.html"><code>libfuzzer</code></a>.</p>
+<p>Here <code>corpus</code> is a corpus of starting test cases. Here's a simple option:</p>
+<p><code>echo 123 &gt; corpus/123</code></p>
+<p>Use <code>-only_ascii=1</code> to generate test cases that only feature ASCII symbols as required by the tested function <code>_imaging.convert</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="java"><a class="header" href="#java">Java</a></h1>
+<p><strong>Java is not supported, but we are working on it.</strong></p>
+<p><code>Jazzer</code> -- is a Java-based fuzzer that works using <code>libfuzzer</code>.</p>
+<h2 id="installation-2"><a class="header" href="#installation-2">Installation</a></h2>
+<p><a href="https://github.com/CodeIntelligenceTesting/jazzer">Jazzer</a> is built using <code>bazel</code>. Before building it, you have to specify the required version <code>jazzer/.bazelversion</code>. </p>
+<p>If you can't find a certain version in the package list of the distributive, you can download it from <a href="https://github.com/bazelbuild/bazel">github</a> or <a href="https://releases.bazel.build">releases.bazel.build</a>.</p>
+<p>Let's say you need version <code>5.2.0rc1</code>, and you can find it <a href="https://releases.bazel.build/5.2.0/rc1/index.html">here</a>.</p>
+<p>Installation process:</p>
+<p><code>git clone https://github.com/CodeIntelligenceTesting/jazzer</code><br />
+<code>cd jazzer</code><br />
+<code>bazel build //:jazzer_release</code><br />
+<code>cd bazel-bin</code><br />
+<code>tar -xzf jazzer_release.tar.gz</code></p>
+<p>The result is a binary called <code>./jazzer</code> and its dependencies. Here's a detail: you have to explicitly call <code>jazzer</code> by specifying the path. You can't move <code>jazzer</code> and its dependencies to <code>/usr/local/bin</code> and use search in <code>PATH</code>:</p>
+<p><code>jazzer</code>
+<code>Could not find jazzer_agent_deploy.jar. Please provide the pathname via the --agent_path flag</code></p>
+<p>The dependencies will be lost because the search is based on the provided path to <code>jazzer</code>:</p>
+<p><code>./jazzer</code><br />
+<code>bazel-bin/jazzer</code><br />
+<code>jazzer/bazel-bin/jazzer</code><br />
+etc.</p>
+<p>You can create a variable <code>JAZZER=/path/jazzer/bazel-bin/jazzer</code> and use it.</p>
+<h2 id="execution-examples"><a class="header" href="#execution-examples">Execution examples</a></h2>
+<p><code>Jazzer</code> is executed this way:</p>
+<p><code>$JAZZER --cp=fuzz_target.jar:lib1.jar:lib2.jar --target_class=com.example.MyFirstFuzzTarget &lt;options&gt;</code></p>
+<p>Where:</p>
+<ul>
+<li><code>--cp=fuzz_target.jar:lib1.jar:lib2.jar</code> -- points to a tested module and its dependencies</li>
+<li><code>--target_class=com.example.MyFirstFuzzTarget</code> -- tested class in the module</li>
+<li><code>&lt;options&gt;</code> - <a href="https://llvm.org/docs/LibFuzzer.html#options">options</a> <code>libfuzzer</code></li>
+</ul>
+<h2 id="tested-class"><a class="header" href="#tested-class">Tested class</a></h2>
+<p>As a target, you can have a class with one of the following methods:</p>
+<ol>
+<li><code>public static void fuzzerTestOneInput(byte[] input)</code></li>
+<li><code>public static void fuzzerTestOneInput(FuzzedDataProvider data)</code></li>
+</ol>
+<h3 id="example-1-divzero"><a class="header" href="#example-1-divzero">Example 1: DivZero</a></h3>
+<p>This example is about <code>fuzzerTestOneInput(byte[] input)</code>.</p>
+<p>Project structure:</p>
+<pre><code>src/main/java/com/example/
+    DivZero.java
+BUILD.bazel
+WORKSPACE
+</code></pre>
+<p><code>WORKSPACE</code> is empty here, but it has to be filled in.</p>
+<p><code>DivZero.java</code>:</p>
+<pre><code class="language-java">package com.example;
+
+public class DivZero{
+
+    public static void fuzzerTestOneInput(byte[] input){
+
+        if(input.length &gt; 1){
+            double a = input[0] / (input[1]-2);
+        }
+
+    }
+}
+</code></pre>
+<p><code>BUILD.bazel</code>:</p>
+<pre><code>java_binary(
+    name = &quot;DivZero&quot;,
+    srcs = [&quot;src/main/java/com/example/DivZero.java&quot;]
+)
+</code></pre>
+<p>Build:</p>
+<p><code>bazel build //:DivZero</code></p>
+<p>The result is an archive called <code>bazel-bin/DivZero.jar</code>.</p>
+<p>Start the fuzzing process:</p>
+<p><code>$JAZZER --cp=bazel-bin/DivZero.jar --target_class=com.example.DivZero</code></p>
+<h3 id="example-2-log4j"><a class="header" href="#example-2-log4j">Example 2: log4j</a></h3>
+<p>This example considers <code>fuzzerTestOneInput(FuzzedDataProvider data)</code>.</p>
+<p><code>data</code> is an object with <code>com.code_intelligence.jazzer.api.FuzzedDataProvider</code> interface. Its function is to pre-process byte arrays. In this example, an array is transformed into a valid string.</p>
+<p>Project structure:</p>
+<pre><code>src/main/java/com/
+    code_intelligence/jazzer/api/
+        FuzzedDataProvider.java
+    example/
+        Log4jFuzzer.java
+
+corpus/
+    123
+
+maven.bzl
+BUILD.bazel
+WORKSPACE
+</code></pre>
+<p>You can find the sources for classes here: <a href="https://github.com/CodeIntelligenceTesting/jazzer/blob/main/examples/src/main/java/com/example/Log4jFuzzer.java">Log4jFuzzer.java</a>, <a href="https://github.com/CodeIntelligenceTesting/jazzer/blob/main/agent/src/main/java/com/code_intelligence/jazzer/api/FuzzedDataProvider.java">FuzzedDataProvider.java</a>.</p>
+<h3 id="mavenbzl"><a class="header" href="#mavenbzl">maven.bzl</a></h3>
+<p><code>maven.bzl</code> is meant for downloading dependencies. In the <code>log4j</code> example, those are modules:</p>
+<ol>
+<li>log4j-api</li>
+<li>log4j-core</li>
+</ol>
+<p>That's what <code>maven.bzl</code> looks like:</p>
+<pre><code>load(&quot;@rules_jvm_external//:specs.bzl&quot;, &quot;maven&quot;)
+
+MAVEN_ARTIFACTS = [
+    maven.artifact(&quot;org.apache.logging.log4j&quot;, &quot;log4j-api&quot;, &quot;2.14.1&quot;, testonly = True),
+    maven.artifact(&quot;org.apache.logging.log4j&quot;, &quot;log4j-core&quot;, &quot;2.14.1&quot;, testonly = True),
+]
+</code></pre>
+<p><code>maven</code> should be introduced to a build through <code>WORKSPACE</code>.</p>
+<h3 id="workspace"><a class="header" href="#workspace">WORKSPACE</a></h3>
+<p>That's what it looks like:</p>
+<pre><code>load(&quot;@bazel_tools//tools/build_defs/repo:http.bzl&quot;, &quot;http_archive&quot;, &quot;http_file&quot;, &quot;http_jar&quot;)
+
+http_archive(
+    name = &quot;rules_jvm_external&quot;,
+    sha256 = &quot;f36441aa876c4f6427bfb2d1f2d723b48e9d930b62662bf723ddfb8fc80f0140&quot;,
+    strip_prefix = &quot;rules_jvm_external-4.1&quot;,
+    url = &quot;https://github.com/bazelbuild/rules_jvm_external/archive/refs/tags/4.1.zip&quot;,
+)
+
+load(&quot;@rules_jvm_external//:defs.bzl&quot;, &quot;maven_install&quot;)
+load(&quot;//:maven.bzl&quot;, &quot;MAVEN_ARTIFACTS&quot;)
+
+maven_install(
+    artifacts = MAVEN_ARTIFACTS,
+    fail_if_repin_required = False,
+    repositories = [
+        &quot;https://repo1.maven.org/maven2&quot;,
+    ],
+    strict_visibility = True,
+)
+
+load(&quot;@maven//:defs.bzl&quot;, &quot;pinned_maven_install&quot;)
+
+pinned_maven_install()
+</code></pre>
+<p>But that's not all. You have to generate <code>maven_install.json</code> with all the information about dependencies:</p>
+<p><code>bazel run @maven//:pin</code></p>
+<p>Then add this file to <code>maven_install</code> in <code>WORKSPACE</code>:</p>
+<pre><code>maven_install(
+    artifacts = MAVEN_ARTIFACTS,
+    fail_if_repin_required = False,
+    maven_install_json = &quot;//:maven_install.json&quot;,
+    repositories = [
+        &quot;https://repo1.maven.org/maven2&quot;,
+    ],
+    strict_visibility = True,
+)
+</code></pre>
+<p>Now you can build it.</p>
+<h3 id="build"><a class="header" href="#build">Build</a></h3>
+<pre><code>bazel build //:Log4jFuzzer
+</code></pre>
+<p>The fuzzing test suite will be located in <code>bazel-bin/Log4jFuzzer.jar</code>, and its dependencies by the following paths:</p>
+<ol>
+<li><code>bazel-bin/external/maven/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.14.1/log4j-core-2.14.1.jar</code></li>
+<li><code>bazel-bin/external/maven/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.14.1/log4j-api-2.14.1.jar</code></li>
+</ol>
+<h2 id="running-the-fuzzing-test-suite"><a class="header" href="#running-the-fuzzing-test-suite">Running the fuzzing test suite</a></h2>
+<p>Here's how to run it:</p>
+<pre><code>LOG4J=bazel-bin/external/maven/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j
+LOG4J_CORE=$LOG4J/log4j-core/2.14.1/log4j-core-2.14.1.jar
+LOG4J_API=$LOG4J/log4j-api/2.14.1/log4j-api-2.14.1.jar
+
+FUZZER=bazel-bin/Log4jFuzzer.jar
+
+$JAZZER --cp=$FUZZER:$LOG4J_CORE:$LOG4J_API --target_class=com.example.Log4jFuzzer ./corpus
+
+</code></pre>
+<p>In the <code>corpus</code> directory, there's a file called <code>123</code> with</p>
+<p><code>cat 123</code><br />
+<code>ldap://g.co/</code></p>
+<p>Its content can be anything, and there may by any number of such files.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="jqf"><a class="header" href="#jqf">JQF</a></h1>
+<p><strong>Java is not supported, but we are working on it.</strong></p>
+<p>JQF is a fuzzing platform for Java with feedback (e.g., AFL/LibFuzzer but for JVM byte code).</p>
+<p>There are two ways of working with <code>JQF</code>:</p>
+<ul>
+<li>using the <code>maven</code> plugin</li>
+<li>using <code>jqf-zest</code>.</li>
+</ul>
+<p><code>maven</code> offers more options, but it requires the project's code. <code>jqf-zest</code> is less versatile, but it only needs compiled files.</p>
+<p>To combine the advantages of both ways, <code>JQF</code> was patched, so now we have <code>jqf-zest</code>, which offers more useful options.</p>
+<p>Let's take a closer look at each one of them.</p>
+<h2 id="maven"><a class="header" href="#maven">Maven</a></h2>
+<p>Maven has more options, but it requires the project's code.</p>
+<h3 id="creating-a-project-template"><a class="header" href="#creating-a-project-template">Creating a project template</a></h3>
+<p>Here's how to create a project template:</p>
+<p><code>mvn archetype:generate -DgroupId=com.example.fuzzer -DartifactId=your-project-name -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false</code></p>
+<p>Once the template is created, you'll see a directory named <code>your-project-name</code>:</p>
+<pre><code>your-project-name/
+    src/
+       main/java/com/example/fuzzer/App.java 
+       test/java/com/example/fuzzer/App.java
+    pom.xml
+</code></pre>
+<p>Build parameters are stored in <code>pom.xml</code>, fuzzing test suite's code in <code>test/java/com/example/fuzzer/</code>.</p>
+<p><code>App.java</code> can be deleted.</p>
+<p>In <code>pom.xml</code>, add <code>jqf</code> dependencies:</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;edu.berkeley.cs.jqf&lt;/groupId&gt;
+    &lt;artifactId&gt;jqf-fuzz&lt;/artifactId&gt;
+    &lt;version&gt;1.9&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;plugin&gt;
+    &lt;groupId&gt;edu.berkeley.cs.jqf&lt;/groupId&gt;
+    &lt;artifactId&gt;jqf-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;1.9&lt;/version&gt;
+&lt;/plugin&gt;
+</code></pre>
+<p>Then, check <code>&lt;maven.compiler.source|target&gt;</code>: it's <code>1.7</code> by default, so make sure to write your <code>jvm</code> version (e.g., <code>11</code>).</p>
+<p>Here's the fuzzing test suite's code:</p>
+<pre><code class="language-java">// test/java/com/example/fuzzer/Fuzz.java
+
+package com.example.fuzzer;
+
+import edu.berkeley.cs.jqf.fuzz.Fuzz;
+import edu.berkeley.cs.jqf.fuzz.JQF;
+import org.junit.runner.RunWith;
+
+@RunWith(JQF.class)
+public class Fuzz{
+
+    @Fuzz
+    public void fuzz(byte[] data) {
+        ...
+    }
+
+}
+</code></pre>
+<h3 id="build-1"><a class="header" href="#build-1">Build</a></h3>
+<p>Build using this command:</p>
+<p><code>your-project-name$ mvn install</code></p>
+<h3 id="execution-1"><a class="header" href="#execution-1">Execution</a></h3>
+<p>Run <code>JQF</code> using this command:</p>
+<p><code>your-project-name$ mvn jqf:fuzz -Dclass=com.example.fuzzer.Fuzz -Dmethod=fuzz</code></p>
+<p>Execution options (<a href="https://github.com/rohanpadhye/JQF/blob/master/maven-plugin/src/main/java/edu/berkeley/cs/jqf/plugin/FuzzGoal.java">src</a>) are:</p>
+<ul>
+<li><code>-Dclass</code> - tested class</li>
+<li><code>-Dmethod</code> - input is fed to this method</li>
+<li><code>-Dexcludes</code> - classes to exclude from instrumentation</li>
+<li><code>-Dincludes</code> - classes to include into instrumentation</li>
+<li><code>-Dtime</code> - when to stop fuzzing</li>
+<li><code>-Dtrials</code> - after how many iterations to stop fuzzing</li>
+<li><code>-DrandomSeed</code> - the seed to determine the order of mutators</li>
+<li><code>-Dblind</code> - disregard coverage, brute force</li>
+<li><code>-Dengine</code> - <code>zest</code> or <code>zeal</code></li>
+<li><code>-DnoCov</code> - disable instrumentation, brute force</li>
+<li><code>-Din</code> - corpus</li>
+<li><code>-Dout</code> - output</li>
+<li><code>-DsaveAll</code> - save test cases that do not provide unique coverage</li>
+<li><code>-DlibFuzzerCompatOutput</code> - output stats in the LibFuzzer format</li>
+<li><code>-DexitOnCrash</code> - stop fuzzing on first crash</li>
+<li><code>-DrunTimeout</code> - timeout</li>
+<li><code>-DfixedSize</code> - fixed test case size</li>
+</ul>
+<h3 id="divzero-example"><a class="header" href="#divzero-example">DivZero example</a></h3>
+<p>Fuzzing test suite's code:</p>
+<pre><code class="language-java">package com.example.fuzzer;
+
+import edu.berkeley.cs.jqf.fuzz.Fuzz;
+import edu.berkeley.cs.jqf.fuzz.JQF;
+import org.junit.runner.RunWith;
+
+@RunWith(JQF.class)
+public class DivZero{
+
+    @Fuzz
+    public void fuzz(byte[] data) {
+        if(data.length &gt; 1){
+            double a = data[0] / (data[1]-2);
+        }
+    }
+
+}
+</code></pre>
+<h2 id="jqf-zest"><a class="header" href="#jqf-zest">jqf-zest</a></h2>
+<p><code>jqf-zest</code> has less options but it only needs compiled files to work.</p>
+<h3 id="execution-2"><a class="header" href="#execution-2">Execution</a></h3>
+<p>To run <code>jqf-zest</code>, use this command:</p>
+<p><code>/path/to/jqf/bin/jqf-zest -c .:$(/path/to/jqf/scripts/classpath.sh) TEST_CLASS TEST_METHOD OUTPUT_DIR SEED_DIR</code></p>
+<p>There are four self-explanatory <code>jqf-zest</code> options and one for <code>jvm</code>.</p>
+<p>Use <code>-c</code> to provide paths to <code>.jar</code> archives. The <code>classpath.sh</code> script can only find <code>jqf</code> archives.</p>
+<p>Here's how to add your own:</p>
+<p><code>-c mypackage1.jar:mypackage2.jar:$(/path/to/jqf/scripts/classpath.sh)</code></p>
+<h3 id="patched-jqf-zest"><a class="header" href="#patched-jqf-zest">Patched jqf-zest</a></h3>
+<p>The patch adds the following options:</p>
+<ul>
+<li><code>bondi.time_limit</code> - time in ms (0 by default)</li>
+<li><code>bondi.output</code> - where to save output (<code>fuzz-results</code>)</li>
+<li><code>bondi.input</code>  - where to get input from (<code>fuzz-input</code>)</li>
+<li><code>bondi.crash_log_path</code> - (<code>./crash_log.txt</code>)</li>
+<li><code>bondi.crash_data_path</code> - (<code>./crash_data</code>)</li>
+<li><code>bondi.max_len</code> - (10240)</li>
+<li><code>bondi.child_timeout</code> - (null)</li>
+<li><code>bondi.seed</code> - (empty)</li>
+</ul>
+<p>Installation:</p>
+<pre><code>JAVA_TOOL_OPTIONS=&quot; \
+        -Dbondi.time_limit=360000 \
+        -Dbondi.execs=10000000 \
+        -Dbondi.output=out \
+        -Dbondi.input=corpus \
+&quot; \
+/path/to/jqf/bin/jqf-zest -c .:$(/path/to/jqf/scripts/classpath.sh) TEST_CLASS TEST_METHOD
+</code></pre>
+<h2 id="zest"><a class="header" href="#zest">Zest</a></h2>
+<p>Zest is an algorithm that turns regular fuzzing into structured fuzzing.</p>
+<p>You can find more about it <a href="https://rohan.padhye.org/files/zest-issta19.pdf">here</a>.</p>
+<p>Regular fuzzing works with an array of bytes. Structured fuzzing works with custom data types and can create any objects.</p>
+<p>For example, regular fuzzing cannot generate a valid <code>xml</code> document. The tested code will reject invalid data, and fuzzing won't deliver any results.</p>
+<p>Valid objects can be created using the <code>junit-quickcheck</code> library.</p>
+<p>A user creates a generator that randomly generates such objects.</p>
+<p>Example of an <code>xml</code> generator:</p>
+<pre><code>random.nextInt(1, MAX_STRLEN) → 3 
+random.nextChar() → ‘f’ 
+random.nextChar() → ‘o’ 
+random.nextChar() → ‘o’ 
+random.nextInt(MAX_CHILDREN) → 2 
+random.nextInt(1, MAX_STRLEN) → 3
+...
+random.nextBool() → False 
+random.nextBool() → False 
+</code></pre>
+<p>Results:</p>
+<p><code>&lt;foo&gt;&lt;bar&gt;Hello&lt;/bar&gt;&lt;baz /&gt;&lt;/foo&gt;</code></p>
+<p>So, this is totally up to the user: the results depend on how they handle the generator. The fuzzing test suite only gets generated objects.</p>
+<p>As for now, the process is based on random values is not suitable for fuzzing, as it does not account for coverage.</p>
+<p>Coverage is assessed by the <code>Zest</code> algorithm. </p>
+<p>As stated in the source article, <code>Zest</code> intervenes in <code>Random</code>'s workflow and takes over control of the bit stream in it. </p>
+<p>Only similar objects can be generated from the same stream. Thus, <code>Zest</code> doesn't need to know anything about the objects to assess their contribution towards coverage. When the time to mutate data comes, <code>Zest</code> mutates bites in the stream.</p>
+<p>Thus, the authors of <code>Zest</code> reduced structured fuzzing back to regular – they work with arrays of bytes but from afar.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="javascript"><a class="header" href="#javascript">JavaScript</a></h1>
+<p><strong>JavaScript is not supported, but we are working on it.</strong></p>
+<p>The <code>jsfuzz</code> <a href="https://gitlab.com/gitlab-org/security-products/analyzers/fuzzers/jsfuzz">fuzzer</a> can be used to work with JavaScript code. It's similar but unrelated to <code>libfuzz</code>.</p>
+<h2 id="installation-3"><a class="header" href="#installation-3">Installation</a></h2>
+<p>To install <code>jsfuzz</code>, use this command:</p>
+<p><code>npm i -g jsfuzz</code></p>
+<h2 id="options"><a class="header" href="#options">Options</a></h2>
+<p>Here are the options that can be used with <code>jsfuzz</code>:</p>
+<ul>
+<li><code>dir</code> – one or several directories with the corpus</li>
+<li><code>regression</code> – crash reproduction and recheck</li>
+<li><code>exact-artifact-path</code> – path to save a crash</li>
+<li><code>rss-limit-mb</code> – memory limit</li>
+<li><code>timeout</code> – iteration timeout</li>
+<li><code>versifier</code> – mutator for text protocols like xml, http, and json</li>
+<li><code>only-ascii</code> – ascii test cases only</li>
+<li><code>fuzzTime</code> – fuzzer operation time</li>
+</ul>
+<h2 id="code"><a class="header" href="#code">Code</a></h2>
+<p>Tested logic must be placed in the <code>fuzz(buf)</code> function:</p>
+<pre><code class="language-js">function fuzz(buf) {
+  // call your package with buf  
+}
+module.exports = {
+    fuzz
+};
+
+</code></pre>
+<h2 id="execution-3"><a class="header" href="#execution-3">Execution</a></h2>
+<p>Run <code>jsfuzz</code> using this command:</p>
+<p><code>jsfuzz your.js [options]</code></p>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
+<p>This example is taken from the <code>jsfuzz</code> repo:</p>
+<pre><code class="language-js">const jpeg = require('jpeg-js');
+
+function fuzz(buf) {
+    try {
+        jpeg.decode(buf);
+    } catch (e) {
+        // Those are &quot;valid&quot; exceptions. we can't catch them in one line as
+        // jpeg-js doesn't export/inherit from one exception class/style.
+        if (e.message.indexOf('JPEG') !== -1 ||
+            e.message.indexOf('length octect') !== -1 ||
+            e.message.indexOf('Failed to') !== -1 ||
+            e.message.indexOf('DecoderBuffer') !== -1 ||
+            e.message.indexOf('invalid table spec') !== -1 ||
+            e.message.indexOf('SOI not found') !== -1) {
+        } else {
+            throw e;
+        }
+    }
+}
+
+module.exports = {
+    fuzz
+};
+
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>

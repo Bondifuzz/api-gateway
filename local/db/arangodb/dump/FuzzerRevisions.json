@@ -1,0 +1,23 @@
+[
+  {
+    "_key": "81029",
+    "_id": "Revisions/81029",
+    "_rev": "_c7oGxr2---",
+    "id": "81029",
+    "name": "my_revision",
+    "description": "desc",
+    "binaries": { "uploaded": true, "last_error": null },
+    "seeds": { "uploaded": true, "last_error": null },
+    "config": { "uploaded": true, "last_error": null },
+    "status": "Unverified",
+    "health": "Ok",
+    "feedback": null,
+    "scheduler_state": null,
+    "fuzzer_id": "62170",
+    "image_id": "80312",
+    "is_verified": false,
+    "created": "2021-09-10T22:39:41Z",
+    "cpu_usage": 1000,
+    "ram_usage": 1000
+  }
+]

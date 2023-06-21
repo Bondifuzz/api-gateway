@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js bondi">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Creating a fuzzing test suite config file</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Intro</a></li><li class="chapter-item expanded "><a href="start.html"><strong aria-hidden="true">2.</strong> Start</a></li><li class="chapter-item expanded "><a href="project.html"><strong aria-hidden="true">3.</strong> Project</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="create_project.html"><strong aria-hidden="true">3.1.</strong> Create project</a></li><li class="chapter-item expanded "><a href="bug_trackers.html"><strong aria-hidden="true">3.2.</strong> Bug tracker integrations</a></li><li class="chapter-item expanded "><a href="delete_project.html"><strong aria-hidden="true">3.3.</strong> Delete project</a></li></ol></li><li class="chapter-item expanded "><a href="fuzzer.html"><strong aria-hidden="true">4.</strong> Fuzzer</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="create_fuzzer.html"><strong aria-hidden="true">4.1.</strong> Create a fuzzer</a></li><li class="chapter-item expanded "><a href="create_config.html" class="active"><strong aria-hidden="true">4.2.</strong> Creating a fuzzing test suite config file</a></li><li class="chapter-item expanded "><a href="upload_fuzzer.html"><strong aria-hidden="true">4.3.</strong> Example of creating fuzzing test suite</a></li><li class="chapter-item expanded "><a href="process.html"><strong aria-hidden="true">4.4.</strong> How fuzzers work in the farm</a></li><li class="chapter-item expanded "><a href="fuzzer_example.html"><strong aria-hidden="true">4.5.</strong> Example of fuzzing test suite</a></li><li class="chapter-item expanded "><a href="delete_fuzzer.html"><strong aria-hidden="true">4.6.</strong> Delete a fuzzer</a></li></ol></li><li class="chapter-item expanded "><a href="CLI_user_manual.html"><strong aria-hidden="true">5.</strong> CLI guide</a></li><li class="chapter-item expanded "><a href="appendix.html"><strong aria-hidden="true">6.</strong> Appendix</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cpp_fuzzing.html"><strong aria-hidden="true">6.1.</strong> Example of C++ fuzzing test suite</a></li><li class="chapter-item expanded "><a href="rust_fuzzing.html"><strong aria-hidden="true">6.2.</strong> Example of Rust fuzzing test suite</a></li><li class="chapter-item expanded "><a href="go_fuzzing.html"><strong aria-hidden="true">6.3.</strong> Example of Go fuzzing test suite</a></li><li class="chapter-item expanded "><a href="python_fuzzing.html"><strong aria-hidden="true">6.4.</strong> Example of Python fuzzing test suite</a></li><li class="chapter-item expanded "><a href="java_fuzzing.html"><strong aria-hidden="true">6.5.</strong> Example of Java fuzzing test suite</a></li><li class="chapter-item expanded "><a href="JQF.html"><strong aria-hidden="true">6.6.</strong> Example of Java fuzzing test suite with JQF</a></li><li class="chapter-item expanded "><a href="js_fuzzing.html"><strong aria-hidden="true">6.7.</strong> Example of JS fuzzing test suite</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="creating-a-fuzzing-test-suite-config-file"><a class="header" href="#creating-a-fuzzing-test-suite-config-file">Creating a fuzzing test suite config file</a></h1>
+<p>A configuration file is an auxiliary file woth additional options necessary for the correct operation of a fuzzing test suite.</p>
+<h2 id="afl-fuzzing-test-suite-example"><a class="header" href="#afl-fuzzing-test-suite-example">AFL fuzzing test suite example</a></h2>
+<p>Here's an example of a config file for an AFL fuzzer:</p>
+<pre><code>{
+    &quot;target&quot;: {
+        &quot;path&quot;: &quot;url-fuzz-target&quot;,
+    },
+    &quot;env&quot;: {
+        &quot;MY_ENV&quot;: &quot;val&quot;
+    },
+    &quot;options&quot;: {
+        &quot;afl&quot;: {
+            &quot;min_length&quot;: 50,
+        }
+    }
+}
+</code></pre>
+<p><code>target</code> — path to the fuzzing test suite's binary.</p>
+<p>Options:</p>
+<p><code>mode</code> — fuzzer's mode. Currently, BondiFuzz only supports Normal.</p>
+<p><code>schedule</code> — algorithms for assessing inout data that allow us to understand what to mutate to get input that increases code coverage. <a href="https://aflplus.plus/docs/power_schedules/">Read more about it here</a>.</p>
+<p><code>dict</code> — dictionary that sometimes will provide values instead of random mutations.</p>
+<p><code>file_extension</code> — if the fuzzing test suite's binary receives file paths as input, you can specify the file extension here.</p>
+<p><code>min_length</code> — minimum input length.</p>
+<p><code>max_length</code> — maximum input length.</p>
+<p><code>queue_selection</code> — in AFL, all input is queued; with this option you can choose the order: by weight or by position in the queue.</p>
+<p><code>python_module</code> — AFL allows you to write a module in Python and use it as a mutator. <a href="https://aflplus.plus/docs/custom_mutators/">Read more about it here</a>.</p>
+<p><code>custom_mutator_library</code> — custom library what will be used as a mutator. <a href="https://aflplus.plus/docs/custom_mutators/">Read more about it here</a>.</p>
+<p><code>custom_mutator_only</code> — all calls will be processed by the module/library from the options above.</p>
+<p><code>hang_timeout</code> — after this period, input is deemed as a hang.</p>
+<p><code>map_size</code> — the size of the array that stores code coverage information.</p>
+<h2 id="preloading-libraries-for-afl"><a class="header" href="#preloading-libraries-for-afl">Preloading libraries for AFL</a></h2>
+<p><code>AFL-PRELOAD</code> is a way to upload a library to a binary. <code>AFL_PRELOAD</code> is required when the fuzzing test suite uses external dependencies and you need to upload libraries to a specified path. For example:</p>
+<p><code>AFL_PRELOAD=/path/to/libcompcov.so</code></p>
+<h2 id="libfuzzer-config-file"><a class="header" href="#libfuzzer-config-file">LibFuzzer config file</a></h2>
+<p>Here's an example of a config file for LibFuzzer:</p>
+<pre><code>{
+    &quot;target&quot; : {
+        &quot;path&quot;: &quot;my_binary&quot;,
+    }
+    &quot;env&quot;: {
+        &quot;MY_ENV&quot;: &quot;val&quot;
+    },
+    &quot;options&quot;: {
+        &quot;libfuzzer&quot;: {
+            &quot;max_len&quot;: &quot;512&quot;
+        },
+    }
+}
+</code></pre>
+<p><code>target</code> — path to the fuzzing test suite's binary file.</p>
+<p>Options:</p>
+<p><code>max_len</code> — maximum inout length.</p>
+<p><code>dict</code> — dictionary that is used for seeds.</p>
+<p><code>prefer_small</code> — if it equals 1, smaller input is prefered.</p>
+<p><code>timeout</code> — timeout in seconds.</p>
+<p><code>report_slow_units</code> — upon reaching this threshold input will be interpreted as invalid.</p>
+<p><code>only_ascii</code> — if it equals 1, only ASCII input is received.</p>
+<p><code>detect_leaks</code> — if it equals 1, the fuzzer attempts to detect data leaks.</p>
+<p><code>len_control</code> — defines how fast the length limit is extended.</p>
+<p><code>mutate_depth</code> — number of mutations for input data.</p>
+<p>You can find more options <a href="https://llvm.org/docs/LibFuzzer.html#options">here</a>.</p>
+<h2 id="preloading-libraries-for-libfuzzer"><a class="header" href="#preloading-libraries-for-libfuzzer">Preloading libraries for LibFuzzer</a></h2>
+<p><code>LD_PRELOAD</code> — is a way to upload a library to a binary. <code>LD_PRELOAD</code> is required when the fuzzing test suite uses external dependencies and you need to upload libraries to a specified path. For example:</p>
+<p><code>LD_PRELOAD&quot;: &quot;./libs/libarchive.so.13 ./libs/libicudata.so.60 ./libs/libicuuc.so.60 ./libs/liblzo2.so.2 ./libs/libxml2.so.2</code></p>
+<p>If you don't want to list all libraries, use <code>LD_LIBRARY_PATH</code> to provide the path to the folder with them. For example:</p>
+<p><code>LD_LIBRARY_PATH&quot;: &quot;./libs</code></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="create_fuzzer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                                   <svg width="65" height="40" viewBox="0 0 65 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.9286 26.0491C11.3429 25.4633 11.3429 24.5135 11.9286 23.9278L21.4746 14.3818C22.0604 13.796 23.0101 13.796 23.5959 14.3818C24.1817 14.9676 24.1817 15.9173 23.5959 16.5031L15.1106 24.9884L23.5959 33.4737C24.1817 34.0595 24.1817 35.0092 23.5959 35.595C23.0101 36.1808 22.0604 36.1808 21.4746 35.595L11.9286 26.0491ZM32.0377 28.5135L32.8573 27.2572L32.8631 27.261L32.0377 28.5135ZM12.9893 23.4884C17.2502 23.4884 22.8724 23.2192 27.9557 22.2925C30.4974 21.8291 32.8616 21.2089 34.8363 20.3978C36.8277 19.5799 38.3108 18.6135 39.2149 17.5231L41.5243 19.438C40.18 21.0593 38.1937 22.2621 35.9761 23.1729C33.742 24.0904 31.1579 24.7582 28.4938 25.2439C23.1654 26.2153 17.3458 26.4884 12.9893 26.4884V23.4884ZM39.2149 17.5231C41.1353 15.207 40.9526 13.0313 40.1915 11.9242C39.8074 11.3655 39.2478 11.0044 38.565 10.9101C37.8759 10.815 36.9226 10.9759 35.7726 11.7338L34.1218 9.22883C35.7491 8.15636 37.4244 7.72415 38.9753 7.9383C40.5325 8.15331 41.8244 9.0039 42.6637 10.2247C44.3493 12.6766 44.1004 16.3309 41.5243 19.438L39.2149 17.5231ZM35.7726 11.7338C33.2838 13.374 30.9703 16.3983 30.129 19.4851C29.7138 21.0082 29.6765 22.4726 30.0758 23.7665C30.468 25.0371 31.3125 26.2494 32.8573 27.2572L31.2181 29.7698C29.1259 28.4049 27.8214 26.6345 27.2092 24.6512C26.6043 22.6911 26.7074 20.6304 27.2346 18.6962C28.2778 14.8684 31.056 11.2493 34.1218 9.22883L35.7726 11.7338ZM32.8631 27.261C34.4086 28.2796 37.1416 29.115 40.4853 29.115C43.7957 29.115 47.5947 28.2938 51.2448 26.1374L52.7708 28.7203C48.618 31.1737 44.2835 32.115 40.4853 32.115C36.7204 32.115 33.3698 31.1879 31.2123 29.766L32.8631 27.261Z" fill="#00D95A"/>
+</svg>
+
+                            </a>
+
+                            <a rel="next" href="upload_fuzzer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                                        <svg width="65" height="40" viewBox="0 0 65 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M64.0012 20.9764C64.5559 20.3611 64.5069 19.4127 63.8916 18.8579L53.8655 9.81765C53.2502 9.2629 52.3018 9.31194 51.747 9.9272C51.1922 10.5425 51.2413 11.4909 51.8565 12.0457L60.7687 20.0815L52.7329 28.9936C52.1782 29.6089 52.2272 30.5573 52.8425 31.1121C53.4577 31.6669 54.4062 31.6178 54.9609 31.0026L64.0012 20.9764ZM47.0285 20.792L47.0862 22.2908L47.0961 22.2905L47.106 22.29L47.0285 20.792ZM31.0471 23.8272L30.2413 22.562L30.2355 22.5657L31.0471 23.8272ZM14.1324 32.4661L14.3861 33.9445L14.3935 33.9432L14.4009 33.9418L14.1324 32.4661ZM62.8097 18.4739L46.9511 19.294L47.106 22.29L62.9646 21.4699L62.8097 18.4739ZM46.9709 19.2931C41.4901 19.504 36.7927 19.2676 33.0186 18.4363C29.2386 17.6037 26.5313 16.2072 24.8412 14.2173L22.5547 16.1594C24.8308 18.8393 28.2494 20.4577 32.3733 21.366C36.5032 22.2757 41.488 22.5063 47.0862 22.2908L46.9709 19.2931ZM24.8412 14.2173C23.1942 12.2782 23.3932 10.5242 23.9911 9.67509C24.2972 9.24046 24.7469 8.95281 25.3091 8.87702C25.8772 8.80044 26.6825 8.92741 27.6692 9.56217L29.2923 7.03919C27.8292 6.09794 26.316 5.71417 24.9084 5.90391C23.4948 6.09444 22.3113 6.85015 21.5383 7.94775C19.9782 10.1631 20.2355 13.4289 22.5547 16.1594L24.8412 14.2173ZM27.6692 9.56217C29.8317 10.9534 31.8369 13.5184 32.5624 16.1171C32.9194 17.3956 32.9469 18.6078 32.6116 19.6685C32.2834 20.7063 31.573 21.7139 30.2413 22.562L31.8528 25.0924C33.7291 23.8976 34.9143 22.3368 35.472 20.5729C36.0225 18.8318 35.9261 17.0087 35.4519 15.3104C34.5152 11.9552 32.0292 8.79993 29.2923 7.03919L27.6692 9.56217ZM30.2355 22.5657C28.9062 23.421 26.5266 24.1367 23.5959 24.1367C20.6981 24.1367 17.3739 23.4348 14.1819 21.5939L12.6831 24.1927C16.3736 26.321 20.2235 27.1367 23.5959 27.1367C26.9353 27.1367 29.9217 26.3348 31.8586 25.0887L30.2355 22.5657ZM14.1819 21.5939C12.6547 20.7131 12.0311 19.8484 11.827 19.2625C11.6387 18.7219 11.7606 18.3188 12.0071 18.0301C12.5031 17.4489 14.2247 16.8048 16.4305 18.6689L18.3669 16.3775C15.3234 13.8055 11.6206 13.8618 9.72522 16.0824C8.77602 17.1945 8.46046 18.7178 8.99394 20.2493C9.51161 21.7355 10.7691 23.0889 12.6831 24.1927L14.1819 21.5939ZM16.4305 18.6689C18.6429 20.5385 19.5655 23.3897 19.1424 25.8818C18.7321 28.2986 17.0603 30.4087 13.8639 30.9903L14.4009 33.9418C18.9036 33.1225 21.4897 29.9792 22.1001 26.3839C22.6977 22.8639 21.4039 18.9441 18.3669 16.3775L16.4305 18.6689ZM13.8788 30.9877C12.0898 31.2946 9.99356 31.145 8.03653 30.5495C6.07431 29.9524 4.36786 28.9435 3.25942 27.6413L0.974964 29.5859C2.54954 31.4357 4.80927 32.7033 7.16321 33.4195C9.52233 34.1374 12.0922 34.338 14.3861 33.9445L13.8788 30.9877Z" fill="#00D95A"/>
+</svg>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="create_fuzzer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <svg width="65" height="40" viewBox="0 0 65 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.9286 26.0491C11.3429 25.4633 11.3429 24.5135 11.9286 23.9278L21.4746 14.3818C22.0604 13.796 23.0101 13.796 23.5959 14.3818C24.1817 14.9676 24.1817 15.9173 23.5959 16.5031L15.1106 24.9884L23.5959 33.4737C24.1817 34.0595 24.1817 35.0092 23.5959 35.595C23.0101 36.1808 22.0604 36.1808 21.4746 35.595L11.9286 26.0491ZM32.0377 28.5135L32.8573 27.2572L32.8631 27.261L32.0377 28.5135ZM12.9893 23.4884C17.2502 23.4884 22.8724 23.2192 27.9557 22.2925C30.4974 21.8291 32.8616 21.2089 34.8363 20.3978C36.8277 19.5799 38.3108 18.6135 39.2149 17.5231L41.5243 19.438C40.18 21.0593 38.1937 22.2621 35.9761 23.1729C33.742 24.0904 31.1579 24.7582 28.4938 25.2439C23.1654 26.2153 17.3458 26.4884 12.9893 26.4884V23.4884ZM39.2149 17.5231C41.1353 15.207 40.9526 13.0313 40.1915 11.9242C39.8074 11.3655 39.2478 11.0044 38.565 10.9101C37.8759 10.815 36.9226 10.9759 35.7726 11.7338L34.1218 9.22883C35.7491 8.15636 37.4244 7.72415 38.9753 7.9383C40.5325 8.15331 41.8244 9.0039 42.6637 10.2247C44.3493 12.6766 44.1004 16.3309 41.5243 19.438L39.2149 17.5231ZM35.7726 11.7338C33.2838 13.374 30.9703 16.3983 30.129 19.4851C29.7138 21.0082 29.6765 22.4726 30.0758 23.7665C30.468 25.0371 31.3125 26.2494 32.8573 27.2572L31.2181 29.7698C29.1259 28.4049 27.8214 26.6345 27.2092 24.6512C26.6043 22.6911 26.7074 20.6304 27.2346 18.6962C28.2778 14.8684 31.056 11.2493 34.1218 9.22883L35.7726 11.7338ZM32.8631 27.261C34.4086 28.2796 37.1416 29.115 40.4853 29.115C43.7957 29.115 47.5947 28.2938 51.2448 26.1374L52.7708 28.7203C48.618 31.1737 44.2835 32.115 40.4853 32.115C36.7204 32.115 33.3698 31.1879 31.2123 29.766L32.8631 27.261Z" fill="#00D95A"/>
+</svg>
+
+                    </a>
+
+                    <a rel="next" href="upload_fuzzer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <svg width="65" height="40" viewBox="0 0 65 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M64.0012 20.9764C64.5559 20.3611 64.5069 19.4127 63.8916 18.8579L53.8655 9.81765C53.2502 9.2629 52.3018 9.31194 51.747 9.9272C51.1922 10.5425 51.2413 11.4909 51.8565 12.0457L60.7687 20.0815L52.7329 28.9936C52.1782 29.6089 52.2272 30.5573 52.8425 31.1121C53.4577 31.6669 54.4062 31.6178 54.9609 31.0026L64.0012 20.9764ZM47.0285 20.792L47.0862 22.2908L47.0961 22.2905L47.106 22.29L47.0285 20.792ZM31.0471 23.8272L30.2413 22.562L30.2355 22.5657L31.0471 23.8272ZM14.1324 32.4661L14.3861 33.9445L14.3935 33.9432L14.4009 33.9418L14.1324 32.4661ZM62.8097 18.4739L46.9511 19.294L47.106 22.29L62.9646 21.4699L62.8097 18.4739ZM46.9709 19.2931C41.4901 19.504 36.7927 19.2676 33.0186 18.4363C29.2386 17.6037 26.5313 16.2072 24.8412 14.2173L22.5547 16.1594C24.8308 18.8393 28.2494 20.4577 32.3733 21.366C36.5032 22.2757 41.488 22.5063 47.0862 22.2908L46.9709 19.2931ZM24.8412 14.2173C23.1942 12.2782 23.3932 10.5242 23.9911 9.67509C24.2972 9.24046 24.7469 8.95281 25.3091 8.87702C25.8772 8.80044 26.6825 8.92741 27.6692 9.56217L29.2923 7.03919C27.8292 6.09794 26.316 5.71417 24.9084 5.90391C23.4948 6.09444 22.3113 6.85015 21.5383 7.94775C19.9782 10.1631 20.2355 13.4289 22.5547 16.1594L24.8412 14.2173ZM27.6692 9.56217C29.8317 10.9534 31.8369 13.5184 32.5624 16.1171C32.9194 17.3956 32.9469 18.6078 32.6116 19.6685C32.2834 20.7063 31.573 21.7139 30.2413 22.562L31.8528 25.0924C33.7291 23.8976 34.9143 22.3368 35.472 20.5729C36.0225 18.8318 35.9261 17.0087 35.4519 15.3104C34.5152 11.9552 32.0292 8.79993 29.2923 7.03919L27.6692 9.56217ZM30.2355 22.5657C28.9062 23.421 26.5266 24.1367 23.5959 24.1367C20.6981 24.1367 17.3739 23.4348 14.1819 21.5939L12.6831 24.1927C16.3736 26.321 20.2235 27.1367 23.5959 27.1367C26.9353 27.1367 29.9217 26.3348 31.8586 25.0887L30.2355 22.5657ZM14.1819 21.5939C12.6547 20.7131 12.0311 19.8484 11.827 19.2625C11.6387 18.7219 11.7606 18.3188 12.0071 18.0301C12.5031 17.4489 14.2247 16.8048 16.4305 18.6689L18.3669 16.3775C15.3234 13.8055 11.6206 13.8618 9.72522 16.0824C8.77602 17.1945 8.46046 18.7178 8.99394 20.2493C9.51161 21.7355 10.7691 23.0889 12.6831 24.1927L14.1819 21.5939ZM16.4305 18.6689C18.6429 20.5385 19.5655 23.3897 19.1424 25.8818C18.7321 28.2986 17.0603 30.4087 13.8639 30.9903L14.4009 33.9418C18.9036 33.1225 21.4897 29.9792 22.1001 26.3839C22.6977 22.8639 21.4039 18.9441 18.3669 16.3775L16.4305 18.6689ZM13.8788 30.9877C12.0898 31.2946 9.99356 31.145 8.03653 30.5495C6.07431 29.9524 4.36786 28.9435 3.25942 27.6413L0.974964 29.5859C2.54954 31.4357 4.80927 32.7033 7.16321 33.4195C9.52233 34.1374 12.0922 34.338 14.3861 33.9445L13.8788 30.9877Z" fill="#00D95A"/>
+</svg>
+
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
