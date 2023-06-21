@@ -129,10 +129,6 @@ if [ "$1" = 'arangod' ]; then
 
         $NUMACTL arangosh ${ARANGOSH_ARGS} \
                 --server.endpoint=tcp://127.0.0.1:$ARANGO_INIT_PORT \
-                --javascript.execute "$INITDB/pools.js" "$INITDB/pools.yaml"
-
-        $NUMACTL arangosh ${ARANGOSH_ARGS} \
-                --server.endpoint=tcp://127.0.0.1:$ARANGO_INIT_PORT \
                 --javascript.execute "$INITDB/images.js" "$INITDB/images.yaml"
 
         if [ "$(id -u)" = "0" ] ; then
