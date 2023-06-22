@@ -1,4 +1,4 @@
--r requirements.txt
+-r requirements-base.txt
 git+https://github.com/Bondifuzz/aioboto3-hints.git
 python-dotenv==0.19.2
 pdoc3==0.10.0
