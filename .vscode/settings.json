@@ -1,7 +1,7 @@
 {
 	"python.formatting.provider": "black",
 	"python.testing.pytestArgs": [
-		"starter"
+		"api_gateway"
 	],
 	"python.testing.unittestEnabled": false,
 	"python.testing.pytestEnabled": true
