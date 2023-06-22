@@ -3,15 +3,13 @@ from typing import Any
 
 from argon2 import PasswordHasher
 from argon2.exceptions import VerificationError
+from fastapi import APIRouter, Depends, Response
 from starlette.status import *
 
 from api_gateway.app.api.constants import *
 from api_gateway.app.api.error_codes import *
 from api_gateway.app.api.error_model import error_model, error_msg
-from api_gateway.app.api.models.users import (
-    UpdateUserRequestModel,
-    UserResponseModel,
-)
+from api_gateway.app.api.models.users import UpdateUserRequestModel, UserResponseModel
 from api_gateway.app.api.utils import (
     log_operation_debug_info_to,
     log_operation_error_to,
@@ -20,10 +18,9 @@ from api_gateway.app.api.utils import (
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.errors import DBUserNotFoundError
 from api_gateway.app.database.orm import ORMUser
-from fastapi import APIRouter, Depends, Response
 
-from ...error_model import ErrorModel
 from ...depends import Operation, current_user, get_db
+from ...error_model import ErrorModel
 
 router = APIRouter(
     tags=["users"],

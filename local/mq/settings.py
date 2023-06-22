@@ -32,7 +32,7 @@ class AppSettings(BaseModel):
     message_queue: MessageQueueSettings
 
 
-def load_app_settings():
+def get_app_settings():
     return AppSettings(
         message_queue=MessageQueueSettings(
             queues=MessageQueues(),

@@ -7,10 +7,7 @@ from api_gateway.app.database.errors import (
     DBProjectAlreadyExistsError,
     DBProjectNotFoundError,
 )
-from api_gateway.app.database.orm import (
-    ORMProject,
-    ORMRevisionStatus,
-)
+from api_gateway.app.database.orm import ORMProject, ORMRevisionStatus
 from api_gateway.app.utils import (
     ObjectRemovalState,
     rfc3339_expired,
@@ -168,9 +165,7 @@ class DBProjects(DBBase, IProjects):
     # TODO: rewrite
     @maybe_unknown_error
     async def get_pool_load(
-        self,
-        paginator: Paginator,
-        pool_id: str
+        self, paginator: Paginator, pool_id: str
     ) -> List[ORMPoolLoad]:
 
         # fmt: off
@@ -256,9 +251,9 @@ class DBProjects(DBBase, IProjects):
         erasure_date: Optional[str] = None,
         no_backup: bool = False,
     ) -> ORMProject:
-        
+
         project = ORMProject(
-            id="", # filled from meta
+            id="",  # filled from meta
             name=name,
             description=description,
             owner_id=owner_id,
@@ -363,4 +358,3 @@ class DBProjects(DBBase, IProjects):
 
         cursor: Cursor = await self._db.aql.execute(query, bind_vars=variables)
         return cursor.pop()
-

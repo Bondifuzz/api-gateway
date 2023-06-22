@@ -1,14 +1,15 @@
 from dataclasses import dataclass
 from typing import Any, List, Optional
 
+from fastapi import APIRouter, Depends, Path, Query, Response
 from starlette.status import *
+
 from api_gateway.app.api.models.engines import (
     CreateEngineRequestModel,
     EngineResponseModel,
     ListEnginesResponseModel,
     UpdateEngineRequestModel,
 )
-
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.errors import (
     DBEngineAlreadyExistsError,
@@ -18,13 +19,12 @@ from api_gateway.app.database.errors import (
     DBLangsNotFoundError,
 )
 from api_gateway.app.database.orm import (
-    ORMEngineID,
     ORMEngine,
+    ORMEngineID,
     ORMLangID,
     ORMUser,
     Paginator,
 )
-from fastapi import APIRouter, Depends, Path, Query, Response
 
 from ...constants import *
 from ...depends import Operation, current_admin, get_db
@@ -92,7 +92,9 @@ async def create_engine(
     current_admin: ORMUser = Depends(current_admin),
     db: IDatabase = Depends(get_db),
 ):
-    def error_response(status_code: int, error_code: int, params: Optional[list] = None):
+    def error_response(
+        status_code: int, error_code: int, params: Optional[list] = None
+    ):
         kw = {"engine_id": engine.id, "caller": current_admin.name}
         rfail = error_model(error_code, params)
         log_operation_error(operation, rfail, **kw)
@@ -111,7 +113,7 @@ async def create_engine(
 
     except DBLangsNotFoundError as e:
         return error_response(HTTP_409_CONFLICT, E_LANGS_INVALID, e.langs)
-        
+
     response_data = EngineResponseModel(**created_engine.dict())
     log_operation_debug_info(operation, response_data)
 
@@ -252,7 +254,9 @@ async def set_engine_langs(
     engine_id: ORMEngineID = Path(...),
     db: IDatabase = Depends(get_db),
 ):
-    def error_response(status_code: int, error_code: int, params: Optional[list] = None):
+    def error_response(
+        status_code: int, error_code: int, params: Optional[list] = None
+    ):
         kw = {"caller": current_admin.name, "engine_id": engine_id}
         rfail = error_model(error_code, params)
         log_operation_error(operation, rfail, **kw)
@@ -410,7 +414,9 @@ async def delete_engine(
     engine_id: ORMEngineID = Path(...),
     db: IDatabase = Depends(get_db),
 ):
-    def error_response(status_code: int, error_code: int, params: Optional[list] = None):
+    def error_response(
+        status_code: int, error_code: int, params: Optional[list] = None
+    ):
         kw = {"caller": current_admin.name, "engine_id": engine_id}
         rfail = error_model(error_code, params)
         log_operation_error(operation, rfail, **kw)
@@ -426,7 +432,7 @@ async def delete_engine(
     affected_fuzzers = await db.fuzzers.list(
         engines={engine.id},
     )
-    
+
     if len(affected_fuzzers) > 0:
         return error_response(HTTP_409_CONFLICT, E_ENGINE_IN_USE_BY, affected_fuzzers)
 

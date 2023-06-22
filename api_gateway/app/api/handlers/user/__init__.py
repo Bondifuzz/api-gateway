@@ -6,11 +6,11 @@ from . import (
     fuzzers,
     images,
     integrations,
+    pools,
     projects,
     revisions,
     statistics,
     users,
-    pools,
 )
 
 router = APIRouter()

@@ -7,11 +7,11 @@ from pydantic import BaseModel, Field
 
 from api_gateway.app.database.errors import DBRevisionNotFoundError
 from api_gateway.app.database.orm import (
+    ORMEngineID,
     ORMEvent,
     ORMFeedback,
-    ORMEngineID,
-    ORMLangID,
     ORMHealth,
+    ORMLangID,
     ORMRevisionStatus,
     ORMStatisticsAFL,
     ORMStatisticsLibFuzzer,

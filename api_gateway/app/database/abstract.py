@@ -6,23 +6,23 @@ from typing import TYPE_CHECKING, AsyncIterator, Dict, Set, Tuple
 from api_gateway.app.database.orm import (
     ORMCrash,
     ORMDeviceCookie,
+    ORMEngine,
     ORMEngineID,
     ORMFeedback,
-    ORMIntegrationType,
-    ORMLang,
-    ORMLangID,
     ORMHealth,
     ORMImageStatus,
     ORMImageType,
     ORMIntegration,
     ORMIntegrationStatus,
+    ORMIntegrationType,
     ORMIntegrationTypeID,
+    ORMLang,
+    ORMLangID,
     ORMRevisionStatus,
     ORMStatisticsAFL,
     ORMStatisticsCrashes,
     ORMStatisticsGroupBy,
     ORMStatisticsLibFuzzer,
-    ORMEngine,
     ORMUploadStatus,
 )
 from api_gateway.app.utils import ObjectRemovalState, testing_only
@@ -173,7 +173,6 @@ class IUserLockout(metaclass=ABCMeta):
 
 
 class ILangs(metaclass=ABCMeta):
-
     @abstractmethod
     async def get_by_id(self, lang_id: ORMLangID) -> ORMLang:
         pass
@@ -207,7 +206,6 @@ class ILangs(metaclass=ABCMeta):
 
 
 class IEngines(metaclass=ABCMeta):
-
     @abstractmethod
     async def get_by_id(self, engine_id: ORMEngineID) -> ORMEngine:
         pass
@@ -297,7 +295,6 @@ class IImages(metaclass=ABCMeta):
         engines: Optional[Set[ORMEngineID]] = None,
     ) -> int:
         pass
-
 
     @abstractmethod
     async def create(
@@ -811,7 +808,6 @@ class ICrashes(metaclass=ABCMeta):
 
 
 class IIntegrationTypes(metaclass=ABCMeta):
-
     @abstractmethod
     async def get_by_id(
         self,

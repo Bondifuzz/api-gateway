@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import BaseModel
 
 from api_gateway.app.external_api.models import JiraIntegrationModel

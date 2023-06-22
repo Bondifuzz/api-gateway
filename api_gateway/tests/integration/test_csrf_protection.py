@@ -1,11 +1,11 @@
 from contextlib import contextmanager
 
+from fastapi.applications import FastAPI
+from fastapi.testclient import TestClient
 from starlette.status import *
 
 from api_gateway.app.api.error_codes import *
 from api_gateway.app.api.handlers.security.csrf import CSRFTokenManager
-from fastapi.applications import FastAPI
-from fastapi.testclient import TestClient
 
 from .conftest import NO_SUCH_ID, LoginModel
 

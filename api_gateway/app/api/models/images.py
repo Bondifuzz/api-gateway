@@ -1,12 +1,12 @@
+from typing import List, Optional
+
 from pydantic import BaseModel, Field
+
 from api_gateway.app.api.base import BasePaginatorResponseModel
 from api_gateway.app.api.constants import *
 from api_gateway.app.api.utils import max_length
 from api_gateway.app.database.orm import ORMEngineID
-from api_gateway.app.utils import (
-    BaseModelPartial,
-)
-from typing import Optional, List
+from api_gateway.app.utils import BaseModelPartial
 
 
 class CreateImageRequestModel(BaseModel):
@@ -31,4 +31,3 @@ class UpdateImageRequestModel(BaseModelPartial):
 
 class ListImagesResponseModel(BasePaginatorResponseModel):
     items: List[ImageResponseModel]
-

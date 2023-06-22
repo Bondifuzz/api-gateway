@@ -3,14 +3,15 @@ from dataclasses import dataclass
 from math import ceil
 from typing import Any, Optional, Set
 
+from fastapi import APIRouter, Depends, Path, Query, Response
 from starlette.status import *
+
 from api_gateway.app.api.models.images import (
     CreateImageRequestModel,
     ImageResponseModel,
     ListImagesResponseModel,
     UpdateImageRequestModel,
 )
-
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.errors import DBEnginesNotFoundError, DBImageNotFoundError
 from api_gateway.app.database.orm import (
@@ -21,11 +22,8 @@ from api_gateway.app.database.orm import (
     ORMUser,
     Paginator,
 )
-from fastapi import APIRouter, Depends, Path, Query, Response
 
-from ...base import (
-    ItemCountResponseModel,
-)
+from ...base import ItemCountResponseModel
 from ...constants import *
 from ...depends import Operation, current_admin, get_db
 from ...error_codes import *
@@ -92,7 +90,9 @@ async def create_builtin_image(
     current_admin: ORMUser = Depends(current_admin),
     db: IDatabase = Depends(get_db),
 ):
-    def error_response(status_code: int, error_code: int, params: Optional[list] = None):
+    def error_response(
+        status_code: int, error_code: int, params: Optional[list] = None
+    ):
         kw = {"image": image.name, "caller": current_admin.name}
         rfail = error_model(error_code, params)
         log_operation_error(operation, rfail, **kw)

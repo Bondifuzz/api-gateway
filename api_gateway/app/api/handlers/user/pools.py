@@ -1,23 +1,19 @@
 from typing import Any
 
+from fastapi import APIRouter, Depends, Path, Query, Response
 from starlette.status import *
+
 from api_gateway.app.api.models.pools import (
     AdminUpdatePoolInfoRequestModel,
-    UpdatePoolInfoRequestModel,
-    PoolResponseModel,
     ListPoolsResponseModel,
+    PoolResponseModel,
+    UpdatePoolInfoRequestModel,
 )
-
-from api_gateway.app.database.orm import (
-    ORMUser,
-)
+from api_gateway.app.database.orm import ORMUser
 from api_gateway.app.external_api import ExternalAPI
 from api_gateway.app.external_api.errors import EAPIServerError
-from fastapi import APIRouter, Depends, Path, Query, Response
 
-from ...base import (
-    ItemCountResponseModel,
-)
+from ...base import ItemCountResponseModel
 from ...constants import *
 from ...depends import (
     Operation,
@@ -82,7 +78,7 @@ async def get_available_pools_count(
     user_id: str = Path(..., regex=r"^\d+$"),
     external_api: ExternalAPI = Depends(get_external_api),
 ):
-    
+
     try:
         response_data = await external_api.pool_mgr.count_available_pools(
             pg_size=pg_size,
@@ -90,7 +86,7 @@ async def get_available_pools_count(
         )
 
         return response_data
-    
+
     except EAPIServerError as e:
         response.status_code = e.status_code
         return ErrorModel(
@@ -125,14 +121,14 @@ async def get_pool(
     operation: str = Depends(Operation("Get pool")),
     external_api: ExternalAPI = Depends(get_external_api),
 ):
-    
+
     try:
         response_data = await external_api.pool_mgr.get_pool_by_id(
             id=pool_id,
             user_id=user_id,
         )
         return response_data
-    
+
     except EAPIServerError as e:
         response.status_code = e.status_code
         return ErrorModel(
@@ -172,11 +168,9 @@ async def update_pool(
         await external_api.pool_mgr.update_pool_info(
             id=pool_id,
             user_id=user_id,
-            body=AdminUpdatePoolInfoRequestModel(
-                **request.dict(exclude_unset=True)
-            )
+            body=AdminUpdatePoolInfoRequestModel(**request.dict(exclude_unset=True)),
         )
-    
+
     except EAPIServerError as e:
         response.status_code = e.status_code
         return ErrorModel(
@@ -221,13 +215,13 @@ async def delete_pool(
 
     if not current_user.is_admin:
         return error_response(HTTP_403_FORBIDDEN, E_ADMIN_REQUIRED)
-    
+
     try:
         await external_api.pool_mgr.delete_pool(
             id=pool_id,
             user_id=user_id,
         )
-    
+
     except EAPIServerError as e:
         response.status_code = e.status_code
         return ErrorModel(
@@ -259,7 +253,7 @@ async def list_pools(
     pg_num: int = Query(**pg_num_settings()),
     external_api: ExternalAPI = Depends(get_external_api),
 ):
-    
+
     try:
         pools = await external_api.pool_mgr.list_available_pools(
             user_id=user_id,
@@ -271,7 +265,7 @@ async def list_pools(
         )
 
         return response_data
-    
+
     except EAPIServerError as e:
         response.status_code = e.status_code
         return ErrorModel(

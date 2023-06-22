@@ -1,11 +1,10 @@
 from contextlib import suppress
 from enum import Enum
-from functools import lru_cache
 from typing import Any, Dict, Optional
 
 from pydantic import AnyHttpUrl, AnyUrl, BaseModel
 from pydantic import BaseSettings as _BaseSettings
-from pydantic import EmailStr, Field, HttpUrl, root_validator
+from pydantic import EmailStr, Field, root_validator
 
 # fmt: off
 with suppress(ModuleNotFoundError):
@@ -254,21 +253,29 @@ class AppSettings(BaseModel):
     fuzzer: FuzzerSettings
 
 
-@lru_cache()
-def load_app_settings():
-    return AppSettings(
-        database=DatabaseSettings(),
-        collections=CollectionSettings(),
-        object_storage=ObjectStorageSettings(buckets=S3Buckets()),
-        message_queue=MessageQueueSettings(queues=MessageQueues()),
-        api=APISettings(endpoints=APIEndpointSettings()),
-        csrf_protection=CSRFProtectionSettings(),
-        bfp=BruteforceProtectionSettings(),
-        environment=EnvironmentSettings(),
-        trashbin=TrashBinSettings(),
-        default_user=DefaultUserSettings(),
-        revision=RevisionSettings(),
-        root=SystemAdminSettings(),
-        cookies=CookieSettings(),
-        fuzzer=FuzzerSettings(),
-    )
+_app_settings = None
+
+
+def get_app_settings() -> AppSettings:
+
+    global _app_settings
+
+    if _app_settings is None:
+        _app_settings = AppSettings(
+            database=DatabaseSettings(),
+            collections=CollectionSettings(),
+            object_storage=ObjectStorageSettings(buckets=S3Buckets()),
+            message_queue=MessageQueueSettings(queues=MessageQueues()),
+            api=APISettings(endpoints=APIEndpointSettings()),
+            csrf_protection=CSRFProtectionSettings(),
+            bfp=BruteforceProtectionSettings(),
+            environment=EnvironmentSettings(),
+            trashbin=TrashBinSettings(),
+            default_user=DefaultUserSettings(),
+            revision=RevisionSettings(),
+            root=SystemAdminSettings(),
+            cookies=CookieSettings(),
+            fuzzer=FuzzerSettings(),
+        )
+
+    return _app_settings

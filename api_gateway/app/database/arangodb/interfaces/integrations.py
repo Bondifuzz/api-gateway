@@ -218,9 +218,9 @@ class DBIntegrations(DBBase, IIntegrations):
         enabled: bool,
         num_undelivered: int,
     ) -> ORMIntegration:
-        
+
         integration = ORMIntegration(
-            id="", # filled from meta
+            id="",  # filled from meta
             name=name,
             project_id=project_id,
             config_id=config_id,
@@ -246,7 +246,9 @@ class DBIntegrations(DBBase, IIntegrations):
 
     @maybe_unknown_error
     async def delete(self, integration: ORMIntegration):
-        await self._col_integrations.delete(integration.id, silent=True, ignore_missing=True)
+        await self._col_integrations.delete(
+            integration.id, silent=True, ignore_missing=True
+        )
 
     @testing_only
     @maybe_unknown_error

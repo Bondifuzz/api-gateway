@@ -8,10 +8,10 @@ from api_gateway.app.database.errors import (
     DBFuzzerNotFoundError,
 )
 from api_gateway.app.database.orm import (
-    ORMFuzzer,
     ORMEngineID,
-    ORMLangID,
+    ORMFuzzer,
     ORMHealth,
+    ORMLangID,
     ORMRevision,
     ORMRevisionStatus,
 )
@@ -19,7 +19,6 @@ from api_gateway.app.utils import ObjectRemovalState, rfc3339_now, testing_only
 
 from .base import DBBase
 from .utils import (
-    dbkey_to_id,
     id_to_dbkey,
     maybe_already_exists,
     maybe_not_found,
@@ -332,9 +331,9 @@ class DBFuzzers(DBBase, IFuzzers):
         erasure_date: Optional[str] = None,
         no_backup: bool = False,
     ) -> ORMFuzzer:
-        
+
         fuzzer = ORMFuzzer(
-            id="", # filled from meta
+            id="",  # filled from meta
             name=name,
             description=description,
             project_id=project_id,
@@ -350,7 +349,7 @@ class DBFuzzers(DBBase, IFuzzers):
         doc = fuzzer.dict(exclude={"id", "active_revision"})
         if fuzzer.active_revision is not None:
             doc["active_revision"] = fuzzer.active_revision.id
-        
+
         meta = await self._col_fuzzers.insert(doc)
         fuzzer.id = meta["_key"]
 

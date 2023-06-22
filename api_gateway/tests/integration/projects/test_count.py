@@ -1,12 +1,12 @@
 from typing import List
 
+from fastapi.applications import FastAPI
+from fastapi.testclient import TestClient
 from starlette.status import *
 
 from api_gateway.app.api.base import DeleteActions, UserObjectRemovalState
 from api_gateway.app.api.error_codes import *
 from api_gateway.app.database.orm import ORMProject
-from fastapi.applications import FastAPI
-from fastapi.testclient import TestClient
 
 from ..conftest import LoginModel, UserModel
 

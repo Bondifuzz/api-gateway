@@ -3,24 +3,22 @@ from dataclasses import dataclass
 from math import ceil
 from typing import Any, Optional
 
+from fastapi import APIRouter, Depends, Path, Query, Response
+from fastapi.responses import StreamingResponse
 from starlette.status import *
+
 from api_gateway.app.api.models.crashes import (
     CrashResponseModel,
     ListCrashesResponseModel,
     PutArchivedCrashRequestModel,
 )
-
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.errors import DBCrashNotFoundError
 from api_gateway.app.database.orm import ORMUser, Paginator
 from api_gateway.app.object_storage import ObjectStorage
 from api_gateway.app.object_storage.errors import ObjectNotFoundError
-from fastapi import APIRouter, Depends, Path, Query, Response
-from fastapi.responses import StreamingResponse
 
-from ...base import (
-    ItemCountResponseModel,
-)
+from ...base import ItemCountResponseModel
 from ...constants import *
 from ...depends import (
     Operation,

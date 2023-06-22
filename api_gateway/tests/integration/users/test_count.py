@@ -2,14 +2,14 @@ from math import ceil
 from typing import List
 
 import pytest
+from fastapi.applications import FastAPI
+from fastapi.testclient import TestClient
 from requests import Response
 from starlette.status import *
 
 from api_gateway.app.api.base import UserObjectRemovalState
 from api_gateway.app.api.error_codes import *
 from api_gateway.app.database.orm import ORMUser
-from fastapi.applications import FastAPI
-from fastapi.testclient import TestClient
 
 from ..conftest import ITEM_COUNT_FIELDS, LoginModel
 

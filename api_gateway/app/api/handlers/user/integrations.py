@@ -3,7 +3,9 @@ from dataclasses import dataclass
 from math import ceil
 from typing import Any, Optional, Set, Union
 
+from fastapi import APIRouter, Depends, Path, Query, Response
 from starlette.status import *
+
 from api_gateway.app.api.models.integrations import (
     AnotherIntegrationConfigResponseModel,
     CreateIntegrationRequestModel,
@@ -14,7 +16,6 @@ from api_gateway.app.api.models.integrations import (
     UpdateIntegrationRequestModel,
     YoutrackIntegrationConfigResponseModel,
 )
-
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.errors import DBIntegrationNotFoundError
 from api_gateway.app.database.orm import (
@@ -30,11 +31,8 @@ from api_gateway.app.external_api.models import (
     YoutrackIntegrationModel,
 )
 from api_gateway.app.utils import gen_unique_identifier
-from fastapi import APIRouter, Depends, Path, Query, Response
 
-from ...base import (
-    ItemCountResponseModel,
-)
+from ...base import ItemCountResponseModel
 from ...constants import *
 from ...depends import (
     Operation,

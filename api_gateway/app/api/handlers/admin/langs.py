@@ -1,22 +1,20 @@
 from typing import Any
 
+from fastapi import APIRouter, Depends, Path, Query, Response
 from starlette.status import *
-from api_gateway.app.api.models.langs import(
+
+from api_gateway.app.api.models.langs import (
     CreateLangRequestModel,
     LangResponseModel,
     ListLangsResponseModel,
     UpdateLangRequestModel,
-) 
-
-from api_gateway.app.database.abstract import IDatabase
-from api_gateway.app.database.errors import DBLangAlreadyExistsError, DBLangNotFoundError
-from api_gateway.app.database.orm import (
-    ORMLang,
-    ORMLangID,
-    ORMUser,
-    Paginator,
 )
-from fastapi import APIRouter, Depends, Path, Query, Response
+from api_gateway.app.database.abstract import IDatabase
+from api_gateway.app.database.errors import (
+    DBLangAlreadyExistsError,
+    DBLangNotFoundError,
+)
+from api_gateway.app.database.orm import ORMLang, ORMLangID, ORMUser, Paginator
 
 from ...constants import *
 from ...depends import Operation, current_admin, get_db
@@ -293,9 +291,7 @@ async def list_langs(
         paginator=Paginator(pg_num, pg_size),
     )
 
-    response_data = ListLangsResponseModel(
-        pg_num=pg_num, pg_size=pg_size, items=langs
-    )
+    response_data = ListLangsResponseModel(pg_num=pg_num, pg_size=pg_size, items=langs)
 
     log_operation_success(operation, caller=current_admin.name)
 

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from enum import Enum
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -29,4 +28,3 @@ class YoutrackIntegrationModel(BaseModel):
     token: str
     project: str
     update_rev: str
-

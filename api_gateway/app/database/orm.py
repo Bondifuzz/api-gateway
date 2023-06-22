@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Optional, List
+from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -88,12 +88,12 @@ class ORMEngineID(str, Enum):
 
 
 class ORMLangID(str, Enum):
-    go = "go" # go-fuzz-libfuzzer
-    cpp = "cpp" # afl, libfuzzer
-    rust = "rust" # afl.rs, cargo-fuzz
-    java = "java" # jqf, jazzer
-    swift = "swift" # libfuzzer
-    python = "python" # atheris
+    go = "go"  # go-fuzz-libfuzzer
+    cpp = "cpp"  # afl, libfuzzer
+    rust = "rust"  # afl.rs, cargo-fuzz
+    java = "java"  # jqf, jazzer
+    swift = "swift"  # libfuzzer
+    python = "python"  # atheris
     # javascript = "javascript" # libfuzzer
 
 

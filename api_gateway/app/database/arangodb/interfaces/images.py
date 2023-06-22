@@ -12,7 +12,6 @@ from api_gateway.app.database.errors import (
 )
 from api_gateway.app.database.orm import (
     ORMEngineID,
-    ORMLangID,
     ORMImage,
     ORMImageStatus,
     ORMImageType,
@@ -20,7 +19,7 @@ from api_gateway.app.database.orm import (
 from api_gateway.app.utils import testing_only
 
 from .base import DBBase
-from .utils import dbkey_to_id, id_to_dbkey, maybe_already_exists, maybe_unknown_error, maybe_not_found
+from .utils import dbkey_to_id, id_to_dbkey, maybe_not_found, maybe_unknown_error
 
 if TYPE_CHECKING:
     from typing import List, Optional, Set
@@ -111,7 +110,7 @@ class DBImages(DBBase, IImages):
         elif image_type:
             if image_type == ORMImageType.builtin:
                 filters.append("FILTER image.project_id == null")
-            else: # elif image_type == ORMImageType.custom:
+            else:  # elif image_type == ORMImageType.custom:
                 filters.append("FILTER image.project_id != null")
 
         if statuses:
@@ -203,7 +202,9 @@ class DBImages(DBBase, IImages):
         cursor: Cursor = await self._db.aql.execute(query, bind_vars=variables)
         return cursor.pop()
 
-    async def _get_unknown_engines(self, engine_ids: List[ORMEngineID]) -> List[ORMEngineID]:
+    async def _get_unknown_engines(
+        self, engine_ids: List[ORMEngineID]
+    ) -> List[ORMEngineID]:
         # fmt: off
         query, variables = """
             FOR engine IN @@col_engines
@@ -229,7 +230,7 @@ class DBImages(DBBase, IImages):
         status: ORMImageStatus,
     ) -> ORMImage:
         image = ORMImage(
-            id="", # Filled from meta
+            id="",  # Filled from meta
             name=name,
             description=description,
             engines=engines,
@@ -258,7 +259,7 @@ class DBImages(DBBase, IImages):
         await self._col_images.delete(image.id, silent=True, ignore_missing=True)
 
     @maybe_unknown_error
-    @maybe_not_found(DBImageNotFoundError) # current image deleted
+    @maybe_not_found(DBImageNotFoundError)  # current image deleted
     async def enable_engine(self, image: ORMImage, engine_id: ORMEngineID):
 
         if engine_id in image.engines:
@@ -293,10 +294,12 @@ class DBImages(DBBase, IImages):
         new_engines = list(image.engines)
         new_engines.remove(engine_id)
 
-        await self._col_images.update({
-            "_key": image.id,
-            "engines": new_engines,
-        })
+        await self._col_images.update(
+            {
+                "_key": image.id,
+                "engines": new_engines,
+            }
+        )
 
         image.engines = new_engines
 
@@ -305,11 +308,13 @@ class DBImages(DBBase, IImages):
         unknown_engines = await self._get_unknown_engines(engine_ids)
         if len(unknown_engines) > 0:
             raise DBEnginesNotFoundError(langs=unknown_engines)
-        
-        await self._col_images.update({
-            "_key": image.id,
-            "engines": engine_ids,
-        })
+
+        await self._col_images.update(
+            {
+                "_key": image.id,
+                "engines": engine_ids,
+            }
+        )
 
         image.engines = engine_ids
 

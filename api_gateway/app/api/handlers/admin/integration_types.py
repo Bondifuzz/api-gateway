@@ -1,22 +1,25 @@
 from typing import Any, Optional
 
+from fastapi import APIRouter, Depends, Path, Query, Response
 from starlette.status import *
+
 from api_gateway.app.api.models.integration_types import (
     CreateIntegrationTypeRequestModel,
     IntegrationTypeResponseModel,
     ListIntegrationTypesResponseModel,
     UpdateIntegrationTypeRequestModel,
 )
-
 from api_gateway.app.database.abstract import IDatabase
-from api_gateway.app.database.errors import DBIntegrationTypeAlreadyExistsError, DBIntegrationTypeNotFoundError
+from api_gateway.app.database.errors import (
+    DBIntegrationTypeAlreadyExistsError,
+    DBIntegrationTypeNotFoundError,
+)
 from api_gateway.app.database.orm import (
     ORMIntegrationType,
     ORMIntegrationTypeID,
     ORMUser,
     Paginator,
 )
-from fastapi import APIRouter, Depends, Path, Query, Response
 
 from ...constants import *
 from ...depends import Operation, current_admin, get_db
@@ -239,7 +242,9 @@ async def delete_integration_type(
     integration_type_id: ORMIntegrationTypeID = Path(...),
     db: IDatabase = Depends(get_db),
 ):
-    def error_response(status_code: int, error_code: int, params: Optional[list] = None):
+    def error_response(
+        status_code: int, error_code: int, params: Optional[list] = None
+    ):
         kw = {"caller": current_admin.name, "integration_type_id": integration_type_id}
         rfail = error_model(error_code, params)
         log_operation_error(operation, rfail, **kw)
@@ -257,7 +262,9 @@ async def delete_integration_type(
     )
 
     if len(affected_integrations) > 0:
-        return error_response(HTTP_409_CONFLICT, E_INTEGRATION_TYPE_IN_USE_BY, affected_integrations)
+        return error_response(
+            HTTP_409_CONFLICT, E_INTEGRATION_TYPE_IN_USE_BY, affected_integrations
+        )
 
     await db.integration_types.delete(integration_type)
 

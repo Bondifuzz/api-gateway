@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from . import images, metrics, users, engines, langs, integration_types, pools
+from . import engines, images, integration_types, langs, metrics, pools, users
 
 router = APIRouter(prefix="/admin")
 router.include_router(metrics.router)

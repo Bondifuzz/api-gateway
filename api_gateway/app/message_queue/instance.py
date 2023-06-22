@@ -32,11 +32,11 @@ from .youtrack_reporter import (
 if TYPE_CHECKING:
     from asyncio import Queue
 
+    from fastapi import FastAPI
     from mqtransport.channel import ConsumingChannel, ProducingChannel
 
     from api_gateway.app.database import IDatabase
     from api_gateway.app.settings import AppSettings
-    from fastapi import FastAPI
 
 
 class Producers:

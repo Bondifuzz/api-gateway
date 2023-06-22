@@ -1,8 +1,7 @@
 from typing import Callable
 
-from starlette.middleware.base import BaseHTTPMiddleware
-
 from fastapi import FastAPI
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from api_gateway.app.settings import AppSettings
 

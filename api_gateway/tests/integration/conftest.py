@@ -7,8 +7,18 @@ from io import BytesIO
 from typing import Optional
 
 import pytest
-from api_gateway.app.api.models.engines import EngineResponseModel
+from fastapi.applications import FastAPI
+from fastapi.testclient import TestClient
 
+from api_gateway.app.api.base import BasePaginatorResponseModel, ItemCountResponseModel
+from api_gateway.app.api.handlers.auth import LoginRequestModel
+from api_gateway.app.api.handlers.security.csrf import CSRFTokenManager
+from api_gateway.app.api.models.engines import EngineResponseModel
+from api_gateway.app.api.models.fuzzers import (
+    CreateFuzzerRequestModel,
+    FuzzerResponseModel,
+    UpdateFuzzerRequestModel,
+)
 from api_gateway.app.api.models.images import (
     CreateImageRequestModel,
     ImageResponseModel,
@@ -16,19 +26,6 @@ from api_gateway.app.api.models.images import (
 )
 from api_gateway.app.api.models.integration_types import IntegrationTypeResponseModel
 from api_gateway.app.api.models.langs import LangResponseModel
-from api_gateway.app.api.models.users import (
-    CreateUserRequestModel,
-    UserResponseModel,
-    AdminUpdateUserRequestModel,
-)
-from api_gateway.app.api.handlers.auth import LoginRequestModel
-from api_gateway.app.api.base import BasePaginatorResponseModel, ItemCountResponseModel
-from api_gateway.app.api.handlers.security.csrf import CSRFTokenManager
-from api_gateway.app.api.models.fuzzers import (
-    CreateFuzzerRequestModel,
-    FuzzerResponseModel,
-    UpdateFuzzerRequestModel,
-)
 from api_gateway.app.api.models.projects import (
     CreateProjectRequestModel,
     ProjectResponseModel,
@@ -40,20 +37,25 @@ from api_gateway.app.api.models.revisions import (
     UpdateRevisionInfoRequestModel,
     UpdateRevisionResourcesRequestModel,
 )
+from api_gateway.app.api.models.users import (
+    AdminUpdateUserRequestModel,
+    CreateUserRequestModel,
+    UserResponseModel,
+)
 from api_gateway.app.database import db_init
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.orm import (
     ORMEngine,
-    ORMFuzzer,
     ORMEngineID,
-    ORMIntegrationType,
-    ORMIntegrationTypeID,
-    ORMLang,
-    ORMLangID,
+    ORMFuzzer,
     ORMHealth,
     ORMImage,
     ORMImageStatus,
     ORMImageType,
+    ORMIntegrationType,
+    ORMIntegrationTypeID,
+    ORMLang,
+    ORMLangID,
     ORMProject,
     ORMRevision,
     ORMRevisionStatus,
@@ -64,15 +66,13 @@ from api_gateway.app.database.orm import (
 from api_gateway.app.main import create_app
 from api_gateway.app.message_queue import mq_init
 from api_gateway.app.object_storage import ObjectStorage
-from api_gateway.app.settings import AppSettings, DefaultUserSettings, load_app_settings
+from api_gateway.app.settings import AppSettings, DefaultUserSettings, get_app_settings
 from api_gateway.app.utils import (
     ObjectRemovalState,
     datetime_utcnow,
     rfc3339_add,
     rfc3339_now,
 )
-from fastapi.applications import FastAPI
-from fastapi.testclient import TestClient
 
 USER_FIELDS = UserResponseModel.__fields__.keys()
 LANG_FIELDS = LangResponseModel.__fields__.keys()
@@ -112,7 +112,7 @@ def event_loop():
 
 @pytest.fixture(scope="session")
 def settings():
-    return load_app_settings()
+    return get_app_settings()
 
 
 @pytest.fixture(scope="session")
@@ -186,22 +186,20 @@ async def reset_database(settings: AppSettings, db: IDatabase):
 
     # default lang
     lang = await db.langs.create(
-        id=ORMLangID.cpp, 
+        id=ORMLangID.cpp,
         display_name="C++",
     )
 
     # default engine
     engine = await db.engines.create(
-        id=ORMEngineID.libfuzzer,
-        display_name="LibFuzzer",
-        lang_ids=[lang.id]
+        id=ORMEngineID.libfuzzer, display_name="LibFuzzer", lang_ids=[lang.id]
     )
 
     # default image
     image = await db.images.create(
         name="default",
         description="Default image",
-        project_id=None, # shared
+        project_id=None,  # shared
         engines=[engine.id],
         status=ORMImageStatus.ready,
     )

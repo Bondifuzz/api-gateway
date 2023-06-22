@@ -4,6 +4,7 @@ from typing import Any, Optional
 
 from argon2 import PasswordHasher
 from argon2.exceptions import VerificationError
+from fastapi import APIRouter, Depends, Response
 from pydantic import Field
 from starlette.status import *
 
@@ -14,7 +15,6 @@ from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.errors import DBCookieNotFoundError, DBUserNotFoundError
 from api_gateway.app.database.orm import ORMDeviceCookie
 from api_gateway.app.settings import AppSettings
-from fastapi import APIRouter, Depends, Response
 
 from ...base import BaseModel
 from ...constants import *

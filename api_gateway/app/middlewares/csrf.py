@@ -1,11 +1,10 @@
 from typing import Callable
 
-from starlette.status import *
-
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from starlette.status import *
 
-from ..api.depends import get_csrf_token_mgr, get_settings
+from ..api.depends import get_csrf_token_mgr
 from ..api.error_codes import *
 from ..api.error_model import error_body
 from ..api.handlers.security.csrf import CSRFTokenInvalid

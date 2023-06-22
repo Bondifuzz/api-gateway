@@ -1,7 +1,7 @@
 from typing import Callable
 
 from fastapi import Request, Response
-from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.responses import HTMLResponse
 
 
 async def react_middleware(request: Request, call_next: Callable):

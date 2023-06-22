@@ -3,8 +3,11 @@ from dataclasses import dataclass
 from math import ceil
 from typing import Any, Optional, Set
 
+from fastapi import APIRouter, Depends, Path, Query, Response
+from fastapi.responses import StreamingResponse
 from mqtransport import MQApp
 from starlette.status import *
+
 from api_gateway.app.api.models.fuzzers import (
     CreateFuzzerRequestModel,
     FuzzerResponseModel,
@@ -12,18 +15,11 @@ from api_gateway.app.api.models.fuzzers import (
     ProjectTrashbinEmptyResponseModel,
     UpdateFuzzerRequestModel,
 )
-
-from .revisions import (
-    restart_revision,
-    start_revision,
-    stop_revision,
-    stop_revision_internal,
-)
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.errors import DBEngineNotFoundError, DBFuzzerNotFoundError
 from api_gateway.app.database.orm import (
-    ORMFuzzer,
     ORMEngineID,
+    ORMFuzzer,
     ORMLangID,
     ORMProject,
     ORMUser,
@@ -32,19 +28,9 @@ from api_gateway.app.database.orm import (
 from api_gateway.app.object_storage import ObjectStorage
 from api_gateway.app.object_storage.errors import ObjectNotFoundError
 from api_gateway.app.settings import AppSettings
-from api_gateway.app.utils import (
-    datetime_utcnow,
-    rfc3339_add,
-    rfc3339_now,
-)
-from fastapi import APIRouter, Depends, Path, Query, Response
-from fastapi.responses import StreamingResponse
+from api_gateway.app.utils import datetime_utcnow, rfc3339_add, rfc3339_now
 
-from ...base import (
-    DeleteActions,
-    ItemCountResponseModel,
-    UserObjectRemovalState,
-)
+from ...base import DeleteActions, ItemCountResponseModel, UserObjectRemovalState
 from ...constants import *
 from ...depends import (
     Operation,
@@ -64,6 +50,12 @@ from ...utils import (
     log_operation_success_to,
     pg_num_settings,
     pg_size_settings,
+)
+from .revisions import (
+    restart_revision,
+    start_revision,
+    stop_revision,
+    stop_revision_internal,
 )
 
 router = APIRouter(
@@ -141,7 +133,7 @@ async def create_fuzzer(
         created=rfc3339_now(),
         active_revision=None,
     )
-    
+
     response_data = FuzzerResponseModel(**created_fuzzer.dict())
     log_operation_debug_info(operation, response_data)
 

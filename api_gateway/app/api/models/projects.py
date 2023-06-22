@@ -1,11 +1,11 @@
+from typing import List, Optional
+
 from pydantic import BaseModel, Field
+
 from api_gateway.app.api.base import BasePaginatorResponseModel
 from api_gateway.app.api.constants import *
 from api_gateway.app.api.utils import max_length
-from api_gateway.app.utils import (
-    BaseModelPartial,
-)
-from typing import Optional, List
+from api_gateway.app.utils import BaseModelPartial
 
 
 class CreateProjectRequestModel(BaseModel):
@@ -34,4 +34,3 @@ class UpdateProjectRequestModel(BaseModelPartial):
 
 class ListProjectsResponseModel(BasePaginatorResponseModel):
     items: List[ProjectResponseModel]
-

@@ -1,10 +1,10 @@
 from enum import Enum
-from typing import Any, List, Optional
+from typing import Any, List
 
-from pydantic import BaseModel, ValidationError, validator
+from fastapi.exceptions import RequestValidationError
+from pydantic import BaseModel, ValidationError
 
 from api_gateway.app.utils import ObjectRemovalState
-from fastapi.exceptions import RequestValidationError
 
 
 class QueryBaseModel(BaseModel):

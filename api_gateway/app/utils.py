@@ -9,7 +9,7 @@ from typing import Any, Dict, Set, TypeVar
 
 from pydantic import BaseModel, ValidationError, root_validator
 
-from .settings import AppSettings, load_app_settings
+from .settings import get_app_settings
 
 
 class BaseModelPartial(BaseModel):
@@ -20,18 +20,21 @@ class BaseModelPartial(BaseModel):
         for k, v in data.items():
             if v is None and k not in cls._nullable_values:
                 raise ValueError(f"{k} can't be null")
-        
+
         if len(data) == 0:
             raise ValueError("At least one field must be set")
-        
+
         return data
-    
+
 
 TBaseModelPartial = TypeVar("TBaseModelPartial", bound=BaseModelPartial)
+
+
 def nullable_values(*values: str):
     def decorator(cls: TBaseModelPartial):
         cls._nullable_values.update(list(values))
         return cls
+
     return decorator
 
 
@@ -59,7 +62,7 @@ def testing_only(func):
     calling dangerous functions in production"""
 
     try:
-        settings = load_app_settings()
+        settings = get_app_settings()
         is_danger = settings.environment.name == "prod"
 
     except ValidationError:
@@ -133,7 +136,6 @@ def _default(obj):
 
 try:
     import orjson  # type: ignore
-
     from fastapi.responses import ORJSONResponse as JSONResponse  # noqa
 
     json_dumps = lambda x: orjson.dumps(x, _default).decode()

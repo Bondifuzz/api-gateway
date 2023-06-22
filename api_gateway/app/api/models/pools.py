@@ -1,14 +1,13 @@
 from __future__ import annotations
+
 from enum import Enum
+from typing import List, Optional, Union
+
 from pydantic import BaseModel, Field, validator
+
 from api_gateway.app.api.base import BasePaginatorResponseModel
-from api_gateway.app.api.constants import *
 from api_gateway.app.api.utils import normalize_date
-from api_gateway.app.utils import (
-    BaseModelPartial,
-    nullable_values,
-)
-from typing import Optional, Union, List
+from api_gateway.app.utils import BaseModelPartial, nullable_values
 
 
 class CreatePoolRequestModel(BaseModel):
@@ -94,7 +93,7 @@ class PoolResources(BaseModel):
 
     cpu_avail: int
     ram_avail: int
-    nodes_avail: int # TODO:
+    nodes_avail: int  # TODO:
 
     fuzzer_max_cpu: int
     fuzzer_max_ram: int

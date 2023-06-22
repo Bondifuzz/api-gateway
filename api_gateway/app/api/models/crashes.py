@@ -1,7 +1,8 @@
-from pydantic import BaseModel
-from api_gateway.app.api.base import BasePaginatorResponseModel
-from api_gateway.app.api.constants import *
 from typing import List
+
+from pydantic import BaseModel
+
+from api_gateway.app.api.base import BasePaginatorResponseModel
 
 
 class CrashResponseModel(BaseModel):
@@ -40,4 +41,3 @@ class ListCrashesResponseModel(BasePaginatorResponseModel):
 
 class PutArchivedCrashRequestModel(BaseModel):
     archived: bool
-

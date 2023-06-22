@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 import re
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Optional
 
 from devtools import debug
 from starlette.status import *
@@ -12,8 +12,8 @@ from .error_codes import *
 
 if TYPE_CHECKING:
     from api_gateway.app.database.orm import ORMUser
-    from .error_model import ErrorModel
 
+    from .error_model import ErrorModel
 
 
 def filter_sensitive_data(output: str):

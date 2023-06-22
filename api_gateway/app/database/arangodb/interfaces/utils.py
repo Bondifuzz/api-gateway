@@ -1,12 +1,12 @@
 import functools
 from typing import Type
 
-from aioarangodb.errno import DOCUMENT_NOT_FOUND, UNIQUE_CONSTRAINT_VIOLATED, CONFLICT
+from aioarangodb.errno import CONFLICT, DOCUMENT_NOT_FOUND, UNIQUE_CONSTRAINT_VIOLATED
 from aioarangodb.exceptions import (
     ArangoError,
+    ArangoServerError,
     CursorEmptyError,
     DocumentDeleteError,
-    ArangoServerError,
 )
 from aiohttp.client_exceptions import ClientConnectionError
 
@@ -48,11 +48,11 @@ def retry_on_write_conflict(func):
             try:
                 res = await func(*args, **kwargs)
                 return res
-            
+
             except ArangoServerError as e:
                 if e.error_code != CONFLICT:
                     raise DatabaseError(e) from e
-        
+
         raise DatabaseError("Failed to do operation after 5 conflicts")
 
     return wrapper

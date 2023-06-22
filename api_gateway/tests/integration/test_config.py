@@ -1,12 +1,19 @@
 import pytest
+from fastapi.applications import FastAPI
+from fastapi.testclient import TestClient
 from starlette.status import *
 
 from api_gateway.app.api.error_codes import *
-from api_gateway.app.database.orm import ORMEngineID, ORMLangID, ORMImageType, ORMLang
-from fastapi.applications import FastAPI
-from fastapi.testclient import TestClient
+from api_gateway.app.database.orm import ORMEngineID, ORMImageType, ORMLangID
 
-from .conftest import ITEM_LIST_FIELDS, LANG_FIELDS, ENGINE_FIELDS, INTEGRATION_TYPE_FIELDS, LoginModel, create_custom_image
+from .conftest import (
+    ENGINE_FIELDS,
+    INTEGRATION_TYPE_FIELDS,
+    ITEM_LIST_FIELDS,
+    LANG_FIELDS,
+    LoginModel,
+    create_custom_image,
+)
 
 
 def test_list_platform_config_langs(
@@ -25,9 +32,8 @@ def test_list_platform_config_langs(
     assert resp.status_code == HTTP_200_OK
     json = resp.json()
 
-
     assert all(k in json for k in ITEM_LIST_FIELDS)
-    assert len(json["items"]) == 1 # default lang
+    assert len(json["items"]) == 1  # default lang
     assert all(k in json["items"][0] for k in LANG_FIELDS)
 
 
@@ -47,9 +53,8 @@ def test_list_platform_config_engines(
     assert resp.status_code == HTTP_200_OK
     json = resp.json()
 
-
     assert all(k in json for k in ITEM_LIST_FIELDS)
-    assert len(json["items"]) == 1 # default engine
+    assert len(json["items"]) == 1  # default engine
     assert all(k in json["items"][0] for k in ENGINE_FIELDS)
 
 
@@ -69,9 +74,8 @@ def test_list_platform_config_integration_types(
     assert resp.status_code == HTTP_200_OK
     json = resp.json()
 
-
     assert all(k in json for k in ITEM_LIST_FIELDS)
-    assert len(json["items"]) == 1 # default integration type
+    assert len(json["items"]) == 1  # default integration type
     assert all(k in json["items"][0] for k in INTEGRATION_TYPE_FIELDS)
 
 

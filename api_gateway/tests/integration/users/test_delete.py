@@ -1,5 +1,7 @@
 from asyncio import AbstractEventLoop
 
+from fastapi.applications import FastAPI
+from fastapi.testclient import TestClient
 from starlette.status import *
 
 from api_gateway.app.api.base import DeleteActions
@@ -7,8 +9,6 @@ from api_gateway.app.api.error_codes import *
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.orm import ORMUser
 from api_gateway.app.utils import rfc3339_expired
-from fastapi.applications import FastAPI
-from fastapi.testclient import TestClient
 
 from ..conftest import (
     NO_SUCH_ID,

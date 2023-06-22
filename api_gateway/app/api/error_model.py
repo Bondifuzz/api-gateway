@@ -1,4 +1,5 @@
 from typing import Optional
+
 from pydantic import BaseModel
 
 from .error_codes import *
@@ -127,7 +128,7 @@ class ErrorModel(BaseModel):
         if self.params is None:
             return f"ErrorModel[code={self.code}, message={self.message}]"
         else:
-            return f"ErrorModel[code={self.code}, message={self.message}, params={self.params}]" # fmt: skip
+            return f"ErrorModel[code={self.code}, message={self.message}, params={self.params}]"  # fmt: skip
 
 
 class DependencyException(Exception):

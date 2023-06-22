@@ -51,7 +51,7 @@ class DBUsers(DBBase, IUsers):
         no_backup: bool = False,
     ) -> ORMUser:
         user = ORMUser(
-            id="", # filled from meta
+            id="",  # filled from meta
             name=name,
             display_name=display_name,
             password_hash=password_hash,
@@ -190,10 +190,7 @@ class DBUsers(DBBase, IUsers):
         return [ORMUser(**doc) async for doc in cursor]
 
     @maybe_unknown_error
-    async def count(
-        self,
-        removal_state: Optional[ObjectRemovalState] = None
-    ) -> int:
+    async def count(self, removal_state: Optional[ObjectRemovalState] = None) -> int:
 
         # fmt: off
         query, variables = """

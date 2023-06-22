@@ -8,13 +8,19 @@ from api_gateway.app.database.errors import (
     DBIntegrationTypeNotFoundError,
 )
 from api_gateway.app.database.orm import (
-    ORMIntegrationTypeID,
     ORMIntegrationType,
+    ORMIntegrationTypeID,
     Paginator,
 )
 
 from .base import DBBase
-from .utils import id_to_dbkey, dbkey_to_id, maybe_already_exists, maybe_unknown_error, maybe_not_found
+from .utils import (
+    dbkey_to_id,
+    id_to_dbkey,
+    maybe_already_exists,
+    maybe_not_found,
+    maybe_unknown_error,
+)
 
 if TYPE_CHECKING:
     from typing import List, Optional
@@ -30,7 +36,6 @@ class DBIntegrationTypes(DBBase, IIntegrationTypes):
 
     _col_integrations: StandardCollection
     _col_integration_types: StandardCollection
-
 
     def __init__(
         self,
@@ -50,7 +55,7 @@ class DBIntegrationTypes(DBBase, IIntegrationTypes):
         doc: Optional[dict] = await self._col_integration_types.get(integration_type_id)
         if doc is None:
             raise DBIntegrationTypeNotFoundError()
-        
+
         return ORMIntegrationType(**dbkey_to_id(doc))
 
     @maybe_unknown_error
@@ -105,6 +110,5 @@ class DBIntegrationTypes(DBBase, IIntegrationTypes):
             silent=True,
             ignore_missing=True,
         )
-        filters = { "type": integration_type.id }
+        filters = {"type": integration_type.id}
         await self._col_integrations.delete_match(filters)
-

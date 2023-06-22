@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from mqtransport import MQApp
+
 from api_gateway.app.api.models.revisions import (
     CopyCorpusRequestModel,
     CreateRevisionRequestModel,
@@ -10,7 +11,6 @@ from api_gateway.app.api.models.revisions import (
     UpdateRevisionInfoRequestModel,
     UpdateRevisionResourcesRequestModel,
 )
-
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.errors import (
     DBEngineNotFoundError,
@@ -35,7 +35,7 @@ from api_gateway.app.external_api.errors import EAPIServerError
 from api_gateway.app.message_queue import MQAppState
 from api_gateway.app.object_storage import ObjectStorage
 from api_gateway.app.object_storage.errors import ObjectNotFoundError, UploadLimitError
-from api_gateway.app.settings import AppSettings, load_app_settings
+from api_gateway.app.settings import AppSettings, get_app_settings
 from api_gateway.app.utils import (
     datetime_utcnow,
     gen_unique_identifier,
@@ -43,11 +43,7 @@ from api_gateway.app.utils import (
     rfc3339_now,
 )
 
-from ...base import (
-    DeleteActions,
-    ItemCountResponseModel,
-    UserObjectRemovalState,
-)
+from ...base import DeleteActions, ItemCountResponseModel, UserObjectRemovalState
 from ...constants import *
 from ...depends import (
     Operation,
@@ -83,11 +79,10 @@ from io import BytesIO
 from math import ceil
 from typing import Any, AsyncIterator, Optional, Set
 
-from pydantic import ValidationError
-from starlette.status import *
-
 from fastapi import APIRouter, Depends, Header, Path, Query, Request, Response
 from fastapi.responses import StreamingResponse
+from pydantic import ValidationError
+from starlette.status import *
 
 router = APIRouter(
     tags=["revisions"],
@@ -117,7 +112,7 @@ def config_upload_settings():
     }
 
     try:
-        settings = load_app_settings()
+        settings = get_app_settings()
         result["le"] = settings.revision.config_upload_limit
 
     except ValidationError:
@@ -174,7 +169,7 @@ async def create_revision(
 
     if project.pool_id is None:
         return error_response(HTTP_409_CONFLICT, E_NO_POOL_TO_USE)
-    
+
     try:
         pool = await external_api.pool_mgr.get_pool_by_id(
             id=project.pool_id,
@@ -186,7 +181,7 @@ async def create_revision(
             code=e.error_code,
             message=e.message,
         )
-    
+
     if (
         request.cpu_usage < settings.fuzzer.min_cpu_usage
         or request.cpu_usage > pool.resources.fuzzer_max_cpu
@@ -1664,7 +1659,7 @@ async def update_revision_resources(
 
     if project.pool_id is None:
         return error_response(HTTP_409_CONFLICT, E_NO_POOL_TO_USE)
-    
+
     try:
         pool = await external_api.pool_mgr.get_pool_by_id(
             id=project.pool_id,
@@ -1676,7 +1671,7 @@ async def update_revision_resources(
             code=e.error_code,
             message=e.message,
         )
-    
+
     if request.cpu_usage:
         if (
             request.cpu_usage < settings.fuzzer.min_cpu_usage

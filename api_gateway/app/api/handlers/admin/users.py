@@ -4,16 +4,17 @@ from math import ceil
 from typing import Any, Optional
 
 from argon2 import PasswordHasher
+from fastapi import APIRouter, Depends, Path, Query, Response
 from mqtransport import MQApp
 from starlette.status import *
+
+from api_gateway.app.api.handlers.user.projects import stop_all_revisions_internal
 from api_gateway.app.api.models.users import (
     AdminUpdateUserRequestModel,
     CreateUserRequestModel,
     ListUsersResponseModel,
     UserResponseModel,
 )
-
-from api_gateway.app.api.handlers.user.projects import stop_all_revisions_internal
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.errors import DBUserNotFoundError
 from api_gateway.app.database.orm import ORMUser, Paginator
@@ -24,21 +25,10 @@ from api_gateway.app.utils import (
     rfc3339_expired,
     rfc3339_now,
 )
-from fastapi import APIRouter, Depends, Path, Query, Response
 
-from ...base import (
-    DeleteActions,
-    ItemCountResponseModel,
-    UserObjectRemovalState,
-)
+from ...base import DeleteActions, ItemCountResponseModel, UserObjectRemovalState
 from ...constants import *
-from ...depends import (
-    Operation,
-    current_admin,
-    get_db,
-    get_mq,
-    get_settings,
-)
+from ...depends import Operation, current_admin, get_db, get_mq, get_settings
 from ...error_codes import *
 from ...error_model import ErrorModel, error_model, error_msg
 from ...utils import (

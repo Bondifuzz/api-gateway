@@ -1,13 +1,13 @@
 from typing import List
 
 import pytest
+from fastapi.applications import FastAPI
+from fastapi.testclient import TestClient
 from starlette.status import *
 
 from api_gateway.app.api.base import DeleteActions, UserObjectRemovalState
 from api_gateway.app.api.error_codes import *
 from api_gateway.app.database.orm import ORMFuzzer, ORMProject, ORMUser
-from fastapi.applications import FastAPI
-from fastapi.testclient import TestClient
 
 from .conftest import (
     FUZZER_FIELDS,

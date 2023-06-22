@@ -1,12 +1,12 @@
 from typing import List, Optional, Union
-from api_gateway.app.api.base import ItemCountResponseModel
 
+from api_gateway.app.api.base import ItemCountResponseModel
 from api_gateway.app.api.models.pools import (
+    AdminUpdatePoolInfoRequestModel,
     CloudNodeGroupModel,
+    CreatePoolRequestModel,
     LocalNodeGroupModel,
     PoolResponseModel,
-    AdminUpdatePoolInfoRequestModel,
-    CreatePoolRequestModel,
 )
 from api_gateway.app.settings import AppSettings
 from api_gateway.app.utils import PrefixedLogger
@@ -35,7 +35,7 @@ class PoolManagerAPI(ExternalAPIBase):
             json=body.dict(),
         )
         return await self.parse_response(response, PoolResponseModel)
-    
+
     @wrap_aiohttp_errors
     async def get_pool_by_id(
         self,
@@ -49,7 +49,7 @@ class PoolManagerAPI(ExternalAPIBase):
         url = f"{self._base_path}/{id}"
         response = await self._session.get(url, params=params)
         return await self.parse_response(response, PoolResponseModel)
-    
+
     @wrap_aiohttp_errors
     async def get_pool_by_name(
         self,
@@ -83,7 +83,7 @@ class PoolManagerAPI(ExternalAPIBase):
             json=body.dict(exclude_unset=True),
         )
         await self.parse_response_no_model(response)
-    
+
     @wrap_aiohttp_errors
     async def update_pool_node_group(
         self,
@@ -127,7 +127,7 @@ class PoolManagerAPI(ExternalAPIBase):
 
         if user_id is not None:
             params["user_id"] = user_id
-        
+
         url = f"{self._base_path}/count"
         response = await self._session.get(url, params=params)
         return await self.parse_response(response, ItemCountResponseModel)
@@ -149,11 +149,13 @@ class PoolManagerAPI(ExternalAPIBase):
 
         # TODO: yield?
         pools: List[PoolResponseModel] = list()
-        async for pool in self.paginate(self._base_path, PoolResponseModel, params=params):
+        async for pool in self.paginate(
+            self._base_path, PoolResponseModel, params=params
+        ):
             pools.append(pool)
-        
+
         return pools
-    
+
     @wrap_aiohttp_errors
     async def count_available_pools(
         self,
@@ -164,11 +166,11 @@ class PoolManagerAPI(ExternalAPIBase):
             "pg_size": pg_size,
             "user_id": user_id,
         }
-        
+
         url = f"{self._base_path}/available/count"
         response = await self._session.get(url, params=params)
         return await self.parse_response(response, ItemCountResponseModel)
-    
+
     @wrap_aiohttp_errors
     async def list_available_pools(
         self,
@@ -187,6 +189,5 @@ class PoolManagerAPI(ExternalAPIBase):
         pools: List[PoolResponseModel] = list()
         async for pool in self.paginate(url, PoolResponseModel, params=params):
             pools.append(pool)
-        
-        return pools
 
+        return pools

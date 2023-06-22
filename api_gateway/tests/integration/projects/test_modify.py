@@ -1,10 +1,10 @@
+from fastapi.applications import FastAPI
+from fastapi.testclient import TestClient
 from starlette.status import *
 
 from api_gateway.app.api.base import DeleteActions
 from api_gateway.app.api.error_codes import *
 from api_gateway.app.database.orm import ORMProject
-from fastapi.applications import FastAPI
-from fastapi.testclient import TestClient
 
 from ..conftest import (
     NO_SUCH_ID,

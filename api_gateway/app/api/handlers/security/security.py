@@ -1,10 +1,10 @@
 from typing import Any
 
+from fastapi import APIRouter, Depends, Response
 from starlette.status import *
 
 from api_gateway.app.database.orm import ORMUser
 from api_gateway.app.settings import AppSettings
-from fastapi import APIRouter, Depends, Response
 
 from ...constants import *
 from ...depends import Operation, current_user, get_csrf_token_mgr, get_settings

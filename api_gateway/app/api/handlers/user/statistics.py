@@ -1,25 +1,22 @@
 from math import ceil
 from typing import Any, Optional
 
+from fastapi import APIRouter, Depends, Query
 from pydantic import validator
 from starlette.status import *
-from api_gateway.app.api.models.statistics import ListStatisticsResponseModel
 
+from api_gateway.app.api.models.statistics import ListStatisticsResponseModel
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.orm import (
-    ORMFuzzer,
     ORMEngineID,
+    ORMFuzzer,
     ORMRevision,
     ORMStatisticsGroupBy,
     ORMUser,
     Paginator,
 )
-from fastapi import APIRouter, Depends, Query
 
-from ...base import (
-    ItemCountResponseModel,
-    QueryBaseModel,
-)
+from ...base import ItemCountResponseModel, QueryBaseModel
 from ...constants import *
 from ...depends import (
     Operation,
@@ -183,7 +180,7 @@ async def list_fuzzer_statistics(
 
     else:
         raise NotImplementedError(f"Unknown engine id: {fuzzer.engine}")
-    
+
     response_data = ListStatisticsResponseModel(
         pg_num=pg_num, pg_size=pg_size, items=statistics
     )
@@ -320,7 +317,7 @@ async def list_revision_statistics(
 
     else:
         raise NotImplementedError(f"Unknown engine id: {fuzzer.engine}")
-    
+
     response_data = ListStatisticsResponseModel(
         pg_num=pg_num, pg_size=pg_size, items=statistics
     )

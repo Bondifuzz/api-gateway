@@ -1,12 +1,18 @@
 from typing import Any, List, Optional
 
-from starlette.status import *
 from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel
-from api_gateway.app.api.models.engines import EngineResponseModel, ListEnginesResponseModel
-from api_gateway.app.api.models.integration_types import IntegrationTypeResponseModel, ListIntegrationTypesResponseModel
-from api_gateway.app.api.models.langs import LangResponseModel, ListLangsResponseModel
+from starlette.status import *
 
+from api_gateway.app.api.models.engines import (
+    EngineResponseModel,
+    ListEnginesResponseModel,
+)
+from api_gateway.app.api.models.integration_types import (
+    IntegrationTypeResponseModel,
+    ListIntegrationTypesResponseModel,
+)
+from api_gateway.app.api.models.langs import LangResponseModel, ListLangsResponseModel
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.orm import ORMLangID, Paginator
 from api_gateway.app.settings import AppSettings, PlatformType
@@ -64,9 +70,7 @@ async def list_platform_langs(
         paginator=Paginator(pg_num, pg_size),
     )
 
-    response_data = ListLangsResponseModel(
-        pg_num=pg_num, pg_size=pg_size, items=langs
-    )
+    response_data = ListLangsResponseModel(pg_num=pg_num, pg_size=pg_size, items=langs)
 
     log_operation_success(operation)
 

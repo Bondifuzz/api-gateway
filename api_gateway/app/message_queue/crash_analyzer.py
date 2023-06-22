@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Optional
 
+from fastapi import FastAPI
 from mqtransport.errors import ConsumeMessageError
 from pydantic import BaseModel, validator
 
@@ -13,12 +14,7 @@ from api_gateway.app.database.errors import (
     DBRevisionNotFoundError,
     DBUserNotFoundError,
 )
-from api_gateway.app.database.orm import (
-    ORMCrash,
-    ORMIntegrationStatus,
-    ORMIntegrationTypeID,
-)
-from fastapi import FastAPI
+from api_gateway.app.database.orm import ORMIntegrationStatus, ORMIntegrationTypeID
 
 from .utils import Consumer, Producer
 

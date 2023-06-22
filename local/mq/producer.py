@@ -8,7 +8,7 @@ import asyncio
 from pydantic import BaseModel
 from mqtransport import MQApp, SQSApp
 from mqtransport.participants import Producer
-from settings import AppSettings, load_app_settings
+from settings import AppSettings, get_app_settings
 
 USER_ID = "46709"
 PROJECT_ID = "62131"
@@ -278,7 +278,7 @@ class MQAppProduceInitializer:
 
 
 async def create_mq_instance():
-    settings = load_app_settings()
+    settings = get_app_settings()
     initializer = MQAppProduceInitializer(settings)
     await initializer.do_init()
     return initializer.app

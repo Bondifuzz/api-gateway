@@ -1,9 +1,9 @@
 import prometheus_client
+from fastapi import APIRouter, Depends
+from fastapi.responses import PlainTextResponse
 from starlette.status import *
 
 from api_gateway.app.database.orm import ORMUser
-from fastapi import APIRouter, Depends
-from fastapi.responses import PlainTextResponse
 
 from ...depends import Operation, current_admin
 from ...error_codes import *

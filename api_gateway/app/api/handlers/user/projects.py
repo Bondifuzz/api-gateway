@@ -3,8 +3,10 @@ from dataclasses import dataclass
 from math import ceil
 from typing import Any, Optional
 
+from fastapi import APIRouter, Depends, Path, Query, Response
 from mqtransport import MQApp
 from starlette.status import *
+
 from api_gateway.app.api.models.projects import (
     CreateProjectRequestModel,
     ListProjectsResponseModel,
@@ -12,30 +14,16 @@ from api_gateway.app.api.models.projects import (
     UpdateProjectRequestModel,
     UserTrashbinEmptyResponseModel,
 )
-
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.errors import DBProjectNotFoundError
-from api_gateway.app.database.orm import (
-    ORMProject,
-    ORMUser,
-    Paginator,
-)
+from api_gateway.app.database.orm import ORMProject, ORMUser, Paginator
 from api_gateway.app.external_api import ExternalAPI
 from api_gateway.app.external_api.errors import EAPIServerError
 from api_gateway.app.message_queue.instance import MQAppState
 from api_gateway.app.settings import AppSettings
-from api_gateway.app.utils import (
-    datetime_utcnow,
-    rfc3339_add,
-    rfc3339_now,
-)
-from fastapi import APIRouter, Depends, Path, Query, Response
+from api_gateway.app.utils import datetime_utcnow, rfc3339_add, rfc3339_now
 
-from ...base import (
-    DeleteActions,
-    ItemCountResponseModel,
-    UserObjectRemovalState,
-)
+from ...base import DeleteActions, ItemCountResponseModel, UserObjectRemovalState
 from ...constants import *
 from ...depends import (
     Operation,
@@ -438,7 +426,6 @@ async def update_project(
     merged = {**old_project.dict(), **new_fields}
     await db.projects.update(ORMProject(**merged))
 
-
     log_operation_success(
         operation=operation,
         project_id=project_id,
@@ -521,7 +508,6 @@ async def delete_project(
             #
 
             await stop_all_revisions_internal(project, db, mq)
-
 
         #
         # Delete/erase logic there

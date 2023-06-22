@@ -1,11 +1,11 @@
 from time import sleep
 
+from fastapi.applications import FastAPI
+from fastapi.testclient import TestClient
 from starlette.status import *
 
 from api_gateway.app.api.error_codes import *
 from api_gateway.app.settings import AppSettings
-from fastapi.applications import FastAPI
-from fastapi.testclient import TestClient
 
 from .conftest import LoginModel, UserModel
 

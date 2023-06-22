@@ -44,9 +44,9 @@ class DBCrashes(DBBase, ICrashes):
         archived: bool,
         duplicate_count: int,
     ) -> ORMCrash:
-        
+
         crash = ORMCrash(
-            id="", # filled from meta
+            id="",  # filled from meta
             created=created,
             fuzzer_id=fuzzer_id,
             revision_id=revision_id,

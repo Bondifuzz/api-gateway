@@ -2,6 +2,8 @@ import hashlib
 from typing import List
 
 import pytest
+from fastapi.applications import FastAPI
+from fastapi.testclient import TestClient
 from starlette.status import *
 
 from api_gateway.app.api.base import DeleteActions, UserObjectRemovalState
@@ -17,8 +19,6 @@ from api_gateway.app.database.orm import (
     ORMUser,
 )
 from api_gateway.app.settings import AppSettings
-from fastapi.applications import FastAPI
-from fastapi.testclient import TestClient
 
 from .conftest import (
     ITEM_LIST_FIELDS,

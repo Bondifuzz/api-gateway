@@ -1,11 +1,11 @@
 from typing import List
 
+from fastapi.applications import FastAPI
+from fastapi.testclient import TestClient
 from starlette.status import *
 
 from api_gateway.app.api.error_codes import *
 from api_gateway.app.database.orm import ORMImage, ORMUser
-from fastapi.applications import FastAPI
-from fastapi.testclient import TestClient
 
 from .conftest import (
     IMAGE_FIELDS,

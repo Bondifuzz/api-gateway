@@ -3,6 +3,11 @@ from __future__ import annotations
 from contextlib import suppress
 from typing import TYPE_CHECKING, Any
 
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import HTMLResponse
+from fastapi.routing import APIRoute
+from fastapi.staticfiles import StaticFiles
 from mqtransport.errors import MQTransportError
 from pydantic import ValidationError
 
@@ -15,11 +20,6 @@ from api_gateway.app.background.tasks.user_lockout import (
 )
 from api_gateway.app.external_api.external_api import ExternalAPI
 from api_gateway.app.middlewares import register_middlewares
-from fastapi import FastAPI, HTTPException, Request
-from fastapi.exceptions import RequestValidationError
-from fastapi.responses import HTMLResponse
-from fastapi.routing import APIRoute
-from fastapi.staticfiles import StaticFiles
 
 try:
     import orjson  # type: ignore
@@ -52,7 +52,7 @@ from .api import handlers as api_handlers
 from .database.instance import db_init
 from .message_queue.instance import mq_init
 from .object_storage import ObjectStorage
-from .settings import AppSettings, load_app_settings
+from .settings import AppSettings, get_app_settings
 
 if TYPE_CHECKING:
     from mqtransport import MQApp
@@ -61,6 +61,7 @@ if TYPE_CHECKING:
 
 # override fastapi 422 schema
 import fastapi.openapi.utils as fu
+
 fu.validation_error_response_definition = ErrorModel.schema()
 
 
@@ -323,7 +324,7 @@ class EmptyJSONResponse(JSONResponse):
 
 def create_app():
 
-    settings = load_app_settings()
+    settings = get_app_settings()
 
     swagger_url = "/docs"
     if settings.environment.name == "prod":

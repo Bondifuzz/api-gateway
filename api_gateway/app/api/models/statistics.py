@@ -1,7 +1,8 @@
-from pydantic import BaseModel
-from api_gateway.app.api.base import BasePaginatorResponseModel
-from api_gateway.app.api.constants import *
 from typing import List, Union
+
+from pydantic import BaseModel
+
+from api_gateway.app.api.base import BasePaginatorResponseModel
 
 
 class GetGrpStatBaseModel(BaseModel):

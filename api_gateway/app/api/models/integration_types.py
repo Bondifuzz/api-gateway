@@ -1,11 +1,10 @@
+from typing import List, Optional
+
 from pydantic import BaseModel
+
 from api_gateway.app.api.base import BasePaginatorResponseModel
-from api_gateway.app.api.constants import *
 from api_gateway.app.database.orm import ORMIntegrationTypeID
-from api_gateway.app.utils import (
-    BaseModelPartial,
-)
-from typing import Optional, List
+from api_gateway.app.utils import BaseModelPartial
 
 
 class CreateIntegrationTypeRequestModel(BaseModel):
@@ -27,4 +26,3 @@ class UpdateIntegrationTypeRequestModel(BaseModelPartial):
 
 class ListIntegrationTypesResponseModel(BasePaginatorResponseModel):
     items: List[IntegrationTypeResponseModel]
-

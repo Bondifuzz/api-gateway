@@ -1,12 +1,12 @@
+from typing import List, Optional, Union
+
 from pydantic import AnyHttpUrl, BaseModel, Field, validator
+
 from api_gateway.app.api.base import BasePaginatorResponseModel
 from api_gateway.app.api.constants import *
 from api_gateway.app.api.utils import max_length
 from api_gateway.app.database.orm import ORMIntegrationStatus, ORMIntegrationTypeID
-from api_gateway.app.utils import (
-    BaseModelPartial,
-)
-from typing import Optional, List, Union
+from api_gateway.app.utils import BaseModelPartial
 
 
 class JiraIntegrationConfigRequestModel(BaseModel):
@@ -131,8 +131,7 @@ class UpdateIntegrationConfigRequestModel(BaseModel):
     @validator("config", pre=True)
     def check_config(cls, value, values: dict):
         return check_integration_config(values.get("type"), value)
-    
-    
+
+
 class ListIntegrationsResponseModel(BasePaginatorResponseModel):
     items: List[IntegrationResponseModel]
-

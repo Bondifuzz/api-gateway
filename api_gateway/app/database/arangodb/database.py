@@ -15,38 +15,38 @@ from api_gateway.app.database.errors import DBUserAlreadyExistsError
 from api_gateway.app.utils import testing_only
 
 from ..abstract import (
-    IImages,
-    IIntegrations,
     ICookies,
     ICrashes,
     IDatabase,
-    IRevisions,
+    IEngines,
     IFuzzers,
+    IImages,
+    IIntegrations,
+    IIntegrationTypes,
+    ILangs,
     IProjects,
+    IRevisions,
     IStatistics,
     IStatisticsAFL,
     IStatisticsCrashes,
     IStatisticsLibFuzzer,
     IUnsentMessages,
     IUsers,
-    IEngines,
-    ILangs,
-    IIntegrationTypes,
 )
 from .initializer import ArangoDBInitializer
 from .interfaces.cookies import DBCookies
 from .interfaces.crashes import DBCrashes
+from .interfaces.engines import DBEngines
 from .interfaces.fuzzers import DBFuzzers
 from .interfaces.images import DBImages
+from .interfaces.integration_types import DBIntegrationTypes
+from .interfaces.langs import DBLangs
 from .interfaces.projects import DBProjects
 from .interfaces.revisions import DBRevisions
 from .interfaces.statistics.afl import DBStatisticsAFL
 from .interfaces.statistics.libfuzzer import DBStatisticsLibFuzzer
 from .interfaces.unsent_mq import DBUnsentMessages
 from .interfaces.users import DBUsers
-from .interfaces.engines import DBEngines
-from .interfaces.langs import DBLangs
-from .interfaces.integration_types import DBIntegrationTypes
 
 if TYPE_CHECKING:
     from api_gateway.app.settings import AppSettings, CollectionSettings

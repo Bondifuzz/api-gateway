@@ -246,9 +246,9 @@ class DBRevisions(DBBase, IRevisions):
         erasure_date: Optional[str] = None,
         no_backup: bool = False,
     ) -> ORMRevision:
-        
+
         revision = ORMRevision(
-            id="", # filled from meta
+            id="",  # filled from meta
             name=name,
             description=description,
             binaries=binaries,

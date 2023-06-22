@@ -1,11 +1,11 @@
-from pydantic import BaseModel, Field, EmailStr
+from typing import List, Optional
+
+from pydantic import BaseModel, EmailStr, Field
+
 from api_gateway.app.api.base import BasePaginatorResponseModel
 from api_gateway.app.api.constants import *
 from api_gateway.app.api.utils import max_length
-from api_gateway.app.utils import (
-    BaseModelPartial,
-)
-from typing import Optional, List
+from api_gateway.app.utils import BaseModelPartial
 
 
 class CreateUserRequestModel(BaseModel):
@@ -48,4 +48,3 @@ class UpdateUserRequestModel(BaseModelPartial):
 
     current_password: Optional[str] = Field(**max_length(C_MAX_PASSWORD_LENGTH))
     new_password: Optional[str] = Field(**max_length(C_MAX_PASSWORD_LENGTH))
-

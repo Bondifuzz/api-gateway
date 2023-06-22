@@ -1,27 +1,25 @@
 from dataclasses import dataclass
 from typing import Any, Optional, Union
 
+from fastapi import APIRouter, Depends, Path, Query, Response
 from starlette.status import *
+
 from api_gateway.app.api.models.pools import (
     AdminUpdatePoolInfoRequestModel,
+    CloudNodeGroupModel,
     CreatePoolRequestModel,
     ListPoolsResponseModel,
-    PoolResponseModel,
-    CloudNodeGroupModel,
     LocalNodeGroupModel,
+    PoolResponseModel,
 )
-
 from api_gateway.app.database.orm import ORMUser
 from api_gateway.app.external_api.errors import EAPIServerError
 from api_gateway.app.external_api.external_api import ExternalAPI
 from api_gateway.app.settings import AppSettings, PlatformType
-from fastapi import APIRouter, Depends, Path, Query, Response
 
-from ...base import (
-    ItemCountResponseModel,
-)
+from ...base import ItemCountResponseModel
 from ...constants import *
-from ...depends import Operation, current_admin, current_user, get_db, get_external_api, get_settings
+from ...depends import Operation, current_user, get_external_api, get_settings
 from ...error_codes import *
 from ...error_model import ErrorModel, error_model, error_msg
 from ...utils import (
@@ -66,7 +64,7 @@ def is_valid_node_group(settings: AppSettings, node_group) -> bool:
         return isinstance(node_group, CloudNodeGroupModel)
     elif platform_type in {PlatformType.demo, PlatformType.onprem}:
         return isinstance(node_group, LocalNodeGroupModel)
-    
+
     raise NotImplementedError(f"Unknown platform_type: {platform_type}")
 
 
@@ -102,13 +100,13 @@ async def admin_create_pool(
         log_operation_error(operation, rfail, caller=current_user.name)
         response.status_code = status_code
         return rfail
-    
+
     if not is_valid_node_group(settings, request.node_group):
         return error_response(HTTP_422_UNPROCESSABLE_ENTITY, E_INVALID_NODE_GROUP)
 
     try:
         response_data = await external_api.pool_mgr.create_pool(request)
-        
+
         return response_data
 
     except EAPIServerError as e:
@@ -117,7 +115,7 @@ async def admin_create_pool(
             code=e.error_code,
             message=e.message,
         )
-    
+
 
 ########################################
 # Count pools
@@ -146,7 +144,7 @@ async def admin_get_pools_count(
     pg_size: int = Query(**pg_size_settings()),
     external_api: ExternalAPI = Depends(get_external_api),
 ):
-    
+
     try:
         response_data = await external_api.pool_mgr.count_pools(
             pg_size=pg_size,
@@ -154,14 +152,14 @@ async def admin_get_pools_count(
         )
 
         return response_data
-    
+
     except EAPIServerError as e:
         response.status_code = e.status_code
         return ErrorModel(
             code=e.error_code,
             message=e.message,
         )
-    
+
 
 ########################################
 # Get pool
@@ -188,20 +186,20 @@ async def admin_get_pool(
     operation: str = Depends(Operation("[admin] Get pool")),
     external_api: ExternalAPI = Depends(get_external_api),
 ):
-    
+
     try:
         response_data = await external_api.pool_mgr.get_pool_by_id(
             id=pool_id,
         )
         return response_data
-    
+
     except EAPIServerError as e:
         response.status_code = e.status_code
         return ErrorModel(
             code=e.error_code,
             message=e.message,
         )
-    
+
 
 ########################################
 # Update pool
@@ -234,14 +232,14 @@ async def admin_update_pool_info(
             id=pool_id,
             body=request,
         )
-    
+
     except EAPIServerError as e:
         response.status_code = e.status_code
         return ErrorModel(
             code=e.error_code,
             message=e.message,
         )
-    
+
 
 ########################################
 # Update pool node group
@@ -285,7 +283,7 @@ async def admin_update_pool_node_group(
             id=pool_id,
             node_group=node_group,
         )
-    
+
     except EAPIServerError as e:
         response.status_code = e.status_code
         return ErrorModel(
@@ -319,19 +317,19 @@ async def admin_delete_pool(
     external_api: ExternalAPI = Depends(get_external_api),
     pool_id: str = Path(...),
 ):
-    
+
     try:
         await external_api.pool_mgr.delete_pool(
             id=pool_id,
         )
-    
+
     except EAPIServerError as e:
         response.status_code = e.status_code
         return ErrorModel(
             code=e.error_code,
             message=e.message,
         )
-    
+
 
 ########################################
 # List pools
@@ -356,7 +354,7 @@ async def admin_list_pools(
     filters: FilterPoolsRequestModel = Depends(),
     external_api: ExternalAPI = Depends(get_external_api),
 ):
-    
+
     try:
         pools = await external_api.pool_mgr.list_pools(
             pg_size=pg_size,
@@ -368,7 +366,7 @@ async def admin_list_pools(
         )
 
         return response_data
-    
+
     except EAPIServerError as e:
         response.status_code = e.status_code
         return ErrorModel(

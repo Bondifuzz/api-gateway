@@ -1,13 +1,13 @@
+from typing import List, Optional
+
 from pydantic import BaseModel, Field
+
 from api_gateway.app.api.base import BasePaginatorResponseModel
 from api_gateway.app.api.constants import *
 from api_gateway.app.api.models.revisions import RevisionResponseModel
 from api_gateway.app.api.utils import max_length
 from api_gateway.app.database.orm import ORMEngineID, ORMLangID
-from api_gateway.app.utils import (
-    BaseModelPartial,
-)
-from typing import Optional, List
+from api_gateway.app.utils import BaseModelPartial
 
 
 class CreateFuzzerRequestModel(BaseModel):
@@ -41,4 +41,3 @@ class ProjectTrashbinEmptyResponseModel(BaseModel):
 class UpdateFuzzerRequestModel(BaseModelPartial):
     name: Optional[str] = Field(**max_length(C_MAX_FUZZER_NAME_LENGTH))
     description: Optional[str] = Field(max_length=C_MAX_DESCRIPTION_LENGTH)
-

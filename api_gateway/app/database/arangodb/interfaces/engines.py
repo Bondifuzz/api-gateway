@@ -11,20 +11,15 @@ from api_gateway.app.database.errors import (
     DBLangNotFoundError,
     DBLangsNotFoundError,
 )
-from api_gateway.app.database.orm import (
-    ORMEngineID,
-    ORMLangID,
-    ORMEngine,
-    Paginator,
-)
+from api_gateway.app.database.orm import ORMEngine, ORMEngineID, ORMLangID, Paginator
 
 from .base import DBBase
 from .utils import (
     dbkey_to_id,
     id_to_dbkey,
     maybe_already_exists,
-    maybe_unknown_error,
     maybe_not_found,
+    maybe_unknown_error,
 )
 
 if TYPE_CHECKING:
@@ -178,12 +173,12 @@ class DBEngines(DBBase, IEngines):
         await self._db.aql.execute(query, bind_vars=variables)
 
     @maybe_unknown_error
-    @maybe_not_found(DBEngineNotFoundError) # current engine deleted
+    @maybe_not_found(DBEngineNotFoundError)  # current engine deleted
     async def enable_lang(self, engine: ORMEngine, lang_id: ORMLangID):
-        
+
         if lang_id in engine.langs:
             raise DBLangAlreadyEnabledError()
-        
+
         # fmt: off
         query, variables = """
             FOR lang IN @@col_langs
@@ -205,38 +200,41 @@ class DBEngines(DBBase, IEngines):
         cursor: Cursor = await self._db.aql.execute(query, bind_vars=variables)
         if cursor.empty():
             raise DBLangNotFoundError()
-        
+
         engine.langs.append(lang_id)
 
     @maybe_unknown_error
-    @maybe_not_found(DBEngineNotFoundError) # current engine deleted
+    @maybe_not_found(DBEngineNotFoundError)  # current engine deleted
     async def disable_lang(self, engine: ORMEngine, lang_id: ORMLangID):
-        
+
         if lang_id not in engine.langs:
             raise DBLangNotEnabledError()
 
         new_langs = list(engine.langs)
         new_langs.remove(lang_id)
 
-        await self._col_engines.update({
-            "_key": engine.id,
-            "langs": new_langs,
-        })
+        await self._col_engines.update(
+            {
+                "_key": engine.id,
+                "langs": new_langs,
+            }
+        )
 
         engine.langs = new_langs
 
     @maybe_unknown_error
-    @maybe_not_found(DBEngineNotFoundError) # current engine deleted
+    @maybe_not_found(DBEngineNotFoundError)  # current engine deleted
     async def set_langs(self, engine: ORMEngine, lang_ids: List[ORMLangID]):
 
         unknown_langs = await self._get_unknown_langs(lang_ids)
         if len(unknown_langs) > 0:
             raise DBLangsNotFoundError(langs=unknown_langs)
-        
-        await self._col_engines.update({
-            "_key": engine.id,
-            "langs": lang_ids,
-        })
+
+        await self._col_engines.update(
+            {
+                "_key": engine.id,
+                "langs": lang_ids,
+            }
+        )
 
         engine.langs = lang_ids
-

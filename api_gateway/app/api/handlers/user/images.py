@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from math import ceil
 from typing import Any, Optional, Set
 
+from fastapi import APIRouter, Depends, Path, Query, Response
 from starlette.status import *
 
 from api_gateway.app.api.models.images import (
@@ -10,13 +11,7 @@ from api_gateway.app.api.models.images import (
 )
 from api_gateway.app.database.abstract import IDatabase
 from api_gateway.app.database.errors import DBImageNotFoundError
-from api_gateway.app.database.orm import (
-    ORMEngineID,
-    ORMImageType,
-    ORMUser,
-    Paginator,
-)
-from fastapi import APIRouter, Depends, Query, Path, Response
+from api_gateway.app.database.orm import ORMEngineID, ORMImageType, ORMUser, Paginator
 
 from ...base import ItemCountResponseModel
 from ...constants import *
@@ -83,7 +78,7 @@ async def count_project_images(
     total_cnt = await db.images.count(
         # TODO: change to project_id=project_id, when images added
         image_type=ORMImageType.builtin,
-        #statuses=filters.statuses, # TODO:
+        # statuses=filters.statuses, # TODO:
         engines=filters.engines,
     )
 
@@ -133,7 +128,7 @@ async def list_project_images(
         paginator=pgn,
         # TODO: change to project_id=project_id, when images added
         image_type=ORMImageType.builtin,
-        #statuses=filters.statuses, # TODO:
+        # statuses=filters.statuses, # TODO:
         engines=filters.engines,
     )
 

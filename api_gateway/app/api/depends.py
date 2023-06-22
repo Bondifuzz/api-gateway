@@ -21,6 +21,7 @@ else:
     FailedLoginCounter = object
     CSRFTokenManager = object
 
+from fastapi import Cookie, Depends, Path, Request
 from starlette.status import *
 
 from api_gateway.app.api.constants import C_MAX_COOKIE_LENGTH
@@ -32,7 +33,6 @@ from api_gateway.app.database.errors import (
     DBUserNotFoundError,
 )
 from api_gateway.app.database.orm import ORMUser
-from fastapi import Cookie, Depends, Path, Request
 
 from .error_codes import *
 from .error_model import DependencyException

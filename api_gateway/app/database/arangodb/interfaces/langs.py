@@ -4,17 +4,19 @@ from typing import TYPE_CHECKING
 
 from api_gateway.app.database.abstract import ILangs
 from api_gateway.app.database.errors import (
-    DBLangNotFoundError,
     DBLangAlreadyExistsError,
+    DBLangNotFoundError,
 )
-from api_gateway.app.database.orm import (
-    ORMLangID,
-    ORMLang,
-    Paginator,
-)
+from api_gateway.app.database.orm import ORMLang, ORMLangID, Paginator
 
 from .base import DBBase
-from .utils import id_to_dbkey, dbkey_to_id, maybe_already_exists, maybe_unknown_error, maybe_not_found
+from .utils import (
+    dbkey_to_id,
+    id_to_dbkey,
+    maybe_already_exists,
+    maybe_not_found,
+    maybe_unknown_error,
+)
 
 if TYPE_CHECKING:
     from typing import List, Optional
@@ -47,7 +49,7 @@ class DBLangs(DBBase, ILangs):
         lang_dict: Optional[dict] = await self._col_langs.get(lang_id)
         if lang_dict is None:
             raise DBLangNotFoundError()
-        
+
         return ORMLang(**dbkey_to_id(lang_dict))
 
     @maybe_unknown_error
@@ -109,4 +111,3 @@ class DBLangs(DBBase, ILangs):
         }
         # fmt: on
         await self._db.aql.execute(query, bind_vars=variables)
-

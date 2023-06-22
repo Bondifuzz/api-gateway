@@ -2,15 +2,12 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from mqtransport.errors import ConsumeMessageError
 from pydantic import BaseModel
 
 from .utils import Consumer
 
 if TYPE_CHECKING:
     from mqtransport import MQApp
-
-    from .instance import MQAppState
 
 
 ########################################
@@ -31,11 +28,10 @@ class MC_PoolDeleted(Consumer):
 
         # TODO:
         """
-            FOR project IN @@col_projects
-                FILTER project.pool_id == @pool_id
-                UPDATE project WITH {
-                    pool_id: null
-                } IN @@col_projects
+        FOR project IN @@col_projects
+            FILTER project.pool_id == @pool_id
+            UPDATE project WITH {
+                pool_id: null
+            } IN @@col_projects
         """
         raise NotImplementedError()
-
