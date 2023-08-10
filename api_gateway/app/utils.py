@@ -90,11 +90,11 @@ def datetime_utcnow() -> datetime:
 
 
 def rfc3339_now() -> str:
-    return datetime_utcnow().replace(microsecond=0).isoformat() + "Z"
+    return datetime_utcnow().strftime(r"%Y-%m-%dT%H:%M:%SZ")
 
 
 def rfc3339_add(date: datetime, seconds: int) -> str:
-    return (date.replace(microsecond=0) + timedelta(seconds=seconds)).isoformat() + "Z"
+    return (date.replace(microsecond=0) + timedelta(seconds=seconds)).strftime(r"%Y-%m-%dT%H:%M:%SZ")
 
 
 def future_seconds(seconds: int) -> int:
@@ -104,7 +104,7 @@ def future_seconds(seconds: int) -> int:
 
 def rfc3339_fut(seconds: int) -> str:
     utcnow = datetime_utcnow().replace(microsecond=0)
-    return (utcnow + timedelta(seconds=seconds)).isoformat() + "Z"
+    return (utcnow + timedelta(seconds=seconds)).strftime(r"%Y-%m-%dT%H:%M:%SZ")
 
 
 # returns True if date in past or now else - False
