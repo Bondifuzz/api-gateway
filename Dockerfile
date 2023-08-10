@@ -1,14 +1,3 @@
-########################################
-# BUILD ARGS
-########################################
-
-ARG ENVIRONMENT=prod
-ARG SERVICE_NAME=api-gateway
-ARG SERVICE_VERSION=None
-ARG COMMIT_ID=None
-ARG COMMIT_DATE=None
-ARG BUILD_DATE=None
-ARG GIT_BRANCH=None
 
 ########################################
 # BACKEND SERVICE
@@ -39,7 +28,7 @@ SHELL ["/bin/bash", "-c"]
 WORKDIR /service
 USER root
 
-RUN git clone https://github.com/Bondifuzz/webui-client.git
+RUN git clone https://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@github.com/Bondifuzz/webui-client.git
 RUN cd webui-client && rm package-lock.json && npm install && npm run build
 
 ########################################
@@ -51,6 +40,14 @@ SHELL ["/bin/bash", "-c"]
 ENV PYTHONUNBUFFERED=1
 WORKDIR /service
 USER root
+
+ARG ENVIRONMENT=prod
+ARG SERVICE_NAME=api-gateway
+ARG SERVICE_VERSION=None
+ARG COMMIT_ID=None
+ARG COMMIT_DATE=None
+ARG BUILD_DATE=None
+ARG GIT_BRANCH=None
 
 ENV ENVIRONMENT=$ENVIRONMENT
 ENV SERVICE_NAME=$SERVICE_NAME
