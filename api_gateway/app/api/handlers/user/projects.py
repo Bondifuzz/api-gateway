@@ -117,9 +117,6 @@ async def create_project(
         response.status_code = status_code
         return rfail
 
-    if not current_user.is_system or not current_user.is_admin:
-        return error_response(HTTP_403_FORBIDDEN, E_SYSTEM_ADMIN_REQUIRED)
-
     with suppress(DBProjectNotFoundError):
         await db.projects.get_by_name(project.name, user_id)
         return error_response(HTTP_409_CONFLICT, E_PROJECT_EXISTS)
@@ -472,9 +469,6 @@ async def delete_project(
         log_operation_error(operation, rfail, caller=current_user.name, **kw)
         response.status_code = status_code
         return rfail
-
-    if not current_user.is_system or not current_user.is_admin:
-        return error_response(HTTP_403_FORBIDDEN, E_SYSTEM_ADMIN_REQUIRED)
 
     try:
         project = await db.projects.get_by_id(project_id, user_id)
