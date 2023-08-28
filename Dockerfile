@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-c"]
 WORKDIR /service
 USER root
 
-RUN git clone https://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@github.com/Bondifuzz/webui-client.git
+RUN git clone https://github.com/Bondifuzz/webui-client.git
 RUN cd webui-client && rm package-lock.json && npm install && npm run build
 
 ########################################
